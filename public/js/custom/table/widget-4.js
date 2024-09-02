@@ -23,7 +23,7 @@ var KTTablesWidget4 = function () {
             "lengthChange": false,
             'pageLength': 6,
             'ordering': false,
-            'paging': true,
+            'paging': false,
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
                 { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)
@@ -47,11 +47,11 @@ var KTTablesWidget4 = function () {
 
     // Handle status filter
     const handleStatusFilter = () => {
-        const select = document.querySelector('[data-kt-table-widget-4="filter_status"]');
+        const select = document.querySelector('[data-kt-table-widget-4="filter_kategori"]');
 
         $(select).on('select2:select', function (e) {
             const value = $(this).val();
-            if (value === 'Show All') {
+            if (value === 'Lihat Semua') {
                 datatable.search('').draw();
             } else {
                 datatable.search(value).draw();

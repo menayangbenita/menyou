@@ -22,7 +22,8 @@ class Kategori extends Controller
             $this->auth('user', 'Owner|Manager|Sales');
             csrf_validate('/kategori');
 
-            $this->model($this->model_name)->insert($_POST);
+            $res = $this->model($this->model_name)->insert($_POST);
+            if (!$res) throw new Exception('Haha eror');
 
             Flasher::setFlash('Insert&nbsp<b>SUCCESS</b>', 'success');
         } catch (Exception $e) {

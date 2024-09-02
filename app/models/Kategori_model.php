@@ -6,13 +6,14 @@ class Kategori_model extends Model
 {
 	protected $table = "kategori";
 	protected $fields = [
-        'nama'
-    ];
+		'nama',
+		'deskripsi'
+	];
 
 	public function getAllData()
 	{
 		$this->db->query("SELECT * FROM {$this->table} WHERE `status` = 1");
-	return $this->db->fetchAll();
+		return $this->db->fetchAll();
 	}
 
 	public function getLatestData()
@@ -30,7 +31,18 @@ class Kategori_model extends Model
 
 	public function insert($data)
 	{
-		$fields_query = ":nama";
+		if (
+			!$this->validateFiles([
+				'foto' => [
+					'mime:image/jpeg,image/png,image/gif',
+					'type:png,jpg,jpeg,gif',
+					'size:2*MB',
+				],
+			])
+		)
+			return 0;
+
+		$fields_query = ":foto, :nama, :deskripsi";
 
 		$this->db->query(
 			"INSERT INTO {$this->table} 
@@ -38,7 +50,9 @@ class Kategori_model extends Model
       		(null, :uuid, {$fields_query}, '', CURRENT_TIMESTAMP, :created_by, null, '', null, '', null, '', 0, 0, DEFAULT)"
 		);
 
-		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		foreach ($this->fields as $field)
+			$this->db->bind($field, $data[$field]);
+		$this->db->bind('foto', $this->storeFile('foto', 'upload/kategori'));
 		$this->db->bind('uuid', Uuid::uuid4()->toString());
 		$this->db->bind('created_by', $this->user);
 
@@ -48,7 +62,24 @@ class Kategori_model extends Model
 
 	public function update($id, $data)
 	{
-		$fields_query = "nama= :nama,";
+		if (
+			!$this->validateFiles([
+				'foto' => [
+					'mime:image/jpeg,image/png,image/gif',
+					'type:png,jpg,jpeg,gif',
+					'size:2*MB',
+				],
+			])
+		)
+			return 0;
+
+		$old = $this->getDataById($id);
+
+		$fields_query = "
+			foto= :foto
+			nama= :nama, 
+			deskripsi= :deskripsi
+		";
 
 		$this->db->query(
 			"UPDATE {$this->table}
@@ -59,7 +90,8 @@ class Kategori_model extends Model
 			WHERE id = :id"
 		);
 
-		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		foreach ($this->fields as $field)
+			$this->db->bind($field, $data[$field]);
 		$this->db->bind('id', $id);
 		$this->db->bind('modified_by', $this->user);
 

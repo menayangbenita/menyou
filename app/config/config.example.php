@@ -8,7 +8,7 @@ define('BASEURL', 'http://sposerp.test');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'sposerp');
+define('DB_NAME', 'menhyou');
 
 // Development Environtment (Local/Production)
 define('ENV', 'Local');

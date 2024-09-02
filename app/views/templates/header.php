@@ -19,6 +19,10 @@
     <link href="<?= BASEURL ?>/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
     <link href="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Vendor Stylesheets-->
+    <!-- css datatables start -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.0/css/buttons.bootstrap5.css">
+    <!-- css datatables end -->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="<?= BASEURL ?>/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="<?= BASEURL ?>/css/style.bundle.css" rel="stylesheet" type="text/css" />
@@ -35,8 +39,8 @@
 
 <body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true"
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
-    data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-aside-enabled="true"
-    data-kt-app-aside-fixed="true" data-kt-app-aside-push-toolbar="true" data-kt-app-aside-push-footer="true"
+    data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-aside-enabled="false"
+    data-kt-app-aside-fixed="false" data-kt-app-aside-push-toolbar="false" data-kt-app-aside-push-footer="false"
     class="app-default">
     <!--begin::Theme mode setup on page load-->
     <script>var defaultThemeMode = "light"; var themeMode; if (document.documentElement) { if (document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if (localStorage.getItem("data-bs-theme") !== null) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
@@ -610,7 +614,7 @@
                             <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-lg-45px"
                                 data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                 data-kt-menu-placement="bottom-end">
-                                <img src="<?= BASEURL ?>/media/avatars/300-2.jpg" alt="user" />
+                                <img src="<?= BASEURL ?>/media/avatars/blank.png" alt="user" />
                             </div>
                             <!--begin::User account menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -620,17 +624,18 @@
                                     <div class="menu-content d-flex align-items-center px-3">
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-50px me-5">
-                                            <img alt="Logo" src="<?= BASEURL ?>/media/avatars/300-2.jpg" />
+                                            <img alt="Logo" src="<?= BASEURL ?>/media/avatars/blank.png" />
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Username-->
                                         <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">Max Smith
+                                            <div class="fw-bold d-flex align-items-center fs-5">
+                                                <?= $data['user']['username'] ?>
                                                 <span
-                                                    class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+                                                    class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"><?= $data['user']['role'] ?></span>
                                             </div>
                                             <a href="#"
-                                                class="fw-semibold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                                class="fw-semibold text-muted text-hover-primary fs-7"><?= $data['user']['email'] ?></a>
                                         </div>
                                         <!--end::Username-->
                                     </div>
@@ -641,75 +646,7 @@
                                 <!--end::Menu separator-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="account/overview.html" class="menu-link px-5">My Profile</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="apps/projects/list.html" class="menu-link px-5">
-                                        <span class="menu-text">My Projects</span>
-                                        <span class="menu-badge">
-                                            <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-                                        </span>
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                                    data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-                                    <a href="#" class="menu-link px-5">
-                                        <span class="menu-title">My Subscription</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="account/referrals.html" class="menu-link px-5">Referrals</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="account/billing.html" class="menu-link px-5">Billing</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="account/statements.html" class="menu-link px-5">Payments</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="account/statements.html"
-                                                class="menu-link d-flex flex-stack px-5">Statements
-                                                <span class="ms-2 lh-0" data-bs-toggle="tooltip"
-                                                    title="View your statements">
-                                                    <i class="ki-outline ki-information-5 fs-5"></i>
-                                                </span></a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content px-3">
-                                                <label
-                                                    class="form-check form-switch form-check-custom form-check-solid">
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox"
-                                                        value="1" checked="checked" name="notifications" />
-                                                    <span class="form-check-label text-muted fs-7">Notifications</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-5">
-                                    <a href="account/statements.html" class="menu-link px-5">My Statements</a>
+                                    <a href="<?= BASEURL ?>/profile" class="menu-link px-5">My Profile</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu separator-->
@@ -828,13 +765,8 @@
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
-                                <div class="menu-item px-5 my-1">
-                                    <a href="account/settings.html" class="menu-link px-5">Account Settings</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign
+                                    <a href="<?= BASEURL ?>/logout" class="menu-link px-5">Sign
                                         Out</a>
                                 </div>
                                 <!--end::Menu item-->
@@ -846,7 +778,7 @@
                         <!--begin::Action-->
                         <div class="app-navbar-item ms-2 ms-lg-6 me-lg-6">
                             <!--begin::Link-->
-                            <a href="authentication/layouts/corporate/sign-in.html"
+                            <a href="<?= BASEURL ?>/logout"
                                 class="btn btn-icon btn-custom btn-color-gray-600 btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
                                 <i class="ki-outline ki-exit-right fs-1"></i>
                             </a>
@@ -1004,7 +936,7 @@
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/pengeluaran" class="menu-link">
+                                            <a href="<?= BASEURL ?>/stok/pengeluaran" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -1049,7 +981,7 @@
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/noakun" class="menu-link">
+                                            <a href="<?= BASEURL ?>/akuntansi" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
@@ -1160,7 +1092,6 @@
                                             <i class="ki-outline ki-shop fs-2"></i>
                                         </span>
                                         <span class="menu-title">Outlet</span>
-                                        <span class="menu-arrow"></span>
                                     </a>
                                     <!--end:Menu link-->
                                 </div>
@@ -1210,12 +1141,4 @@
                     <!--end::Wrapper-->
                 </div>
                 <!--end::Sidebar-->
-                <!--begin::Main-->
-                <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                    <!--begin::Content wrapper-->
-                    <div class="d-flex flex-column flex-column-fluid">
-                        <!--begin::Content-->
-                        <div id="kt_app_content" class="app-content flex-column-fluid">
-                            <!--begin::Content container-->
-                            <div id="kt_app_content_container" class="app-container container-fluid">
-                                <?php Flasher::flash() ?>
+                <?php Flasher::flash() ?>
