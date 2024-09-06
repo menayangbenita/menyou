@@ -29,6 +29,8 @@ class Finance extends Controller
         try {
             $this->auth('user', 'Owner|Manager|Analyzer');
             csrf_validate('/finance');
+
+            var_dump($_POST);
             
             $_POST['outlet_uuid'] = $this->user['outlet_uuid'];
             $this->model($this->model_name)->insert($_POST);
@@ -62,7 +64,10 @@ class Finance extends Controller
             $this->auth('user', 'Owner|Manager|Analyzer');
             csrf_validate('/finance');
 
+            error_log(print_r($_POST, true));
+
             $this->model($this->model_name)->update($_POST['id'], $_POST);
+            
 
             Flasher::setFlash('Update&nbsp<b>SUCCESS</b>','success');
         } catch (Exception $e) {

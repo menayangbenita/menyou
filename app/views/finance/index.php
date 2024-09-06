@@ -372,7 +372,7 @@ foreach ($data['finance'] as $finance) {
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">No. Akun</label>
                                     <input class="form-control form-control-solid" placeholder="Pilih nomor akuntansi"
-                                        name="target_assign" id="no_akun" list="akuntansi">
+                                        name="no_akun" id="no_akun" list="akuntansi">
                                     <datalist id="akuntansi">
                                         <?php foreach ($data['akuntansi'] as $nomor): ?>
                                             <option value="<?= $nomor['akun'] ?>">
@@ -450,7 +450,7 @@ foreach ($data['finance'] as $finance) {
                                     <!--begin:Input-->
                                     <span class="form-check form-check-custom form-check-solid">
                                         <input class="form-check-input" type="radio" name="kategori" id="keluar"
-                                            value="masuk" />
+                                            value="keluar" />
                                     </span>
                                     <!--end:Input-->
                                 </label>

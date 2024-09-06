@@ -157,7 +157,7 @@
                                             <!--end::Menu-->
                                         </td>
                                     <?php endforeach; ?>
-                                </tr>
+                                    </tr>
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -191,6 +191,7 @@
                         <!--end::Heading-->
                         <form action="<?= BASEURL ?>/rewardpunishment/insert" method="post">
                             <?= csrf() ?>
+                            <input type="hidden" id="id" name="id">
                             <div class="row g-9 mb-8">
                                 <!--begin::Col-->
                                 <div class="col-md-6 fv-row">
@@ -232,14 +233,29 @@
                                 </div>
                                 <!--end::Col-->
                             </div>
-                            <!--begin::Input group-->
+                            <!-- Form untuk input tanggal -->
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="required fs-6 fw-semibold mb-2">Tanggal</label>
+                                <input type="date" class="form-control form-control-solid" id="tanggal" name="tanggal"
+                                    value="<?= date('Y-m-d') ?>" required>
+                            </div>
+
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="required fs-6 fw-semibold mb-2">Jenis</label>
+                                <select class="form-select form-select-solid" id="jenis" name="jenis" required>
+                                    <option value="">--Pilih Jenis--</option>
+                                    <option value="reward">Reward</option>
+                                    <option value="punishment">Punishment</option>
+                                </select>
+                            </div>
+
                             <div class="d-flex flex-column mb-8 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                     <span class="required">Keterangan</span>
                                 </label>
                                 <!--end::Label-->
-                                <textarea name="keterangan" class="form-control form-control-solid" id="keterangan"
+                                <textarea name="keterangan" class="form-control form-control-solid" id="keterangan" 
                                     rows="2" placeholder="Cth: Terlambat" required></textarea>
                             </div>
                             <!--end::Input group-->
@@ -261,7 +277,7 @@
                                 <!--begin::Col-->
                                 <div class="col-md-4 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Total</label>
-                                    <input type="number" class="form-control form-control-solid" id="total" value="0"
+                                    <input type="number" class="form-control form-control-solid" id="total" name="total" value="0"
                                         disabled>
                                 </div>
                                 <!--end::Col-->
@@ -277,7 +293,9 @@
         </div>
 
         <!--begin::Javascript-->
-        <script>var hostUrl = "assets/";</script>
+        <script>
+            var hostUrl = "assets/";
+        </script>
         <!--begin::Global Javascript Bundle(mandatory for all pages)-->
         <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
         <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
@@ -293,62 +311,72 @@
         <script src="<?= BASEURL ?>/js/datatables.js"></script>
 
         <script>
-            $(function () {
-                const BASEURL = window.location.href;
+    $(function() {
+        const BASEURL = window.location.href;
 
-                $('.tombolTambahData').on('click', function () {
-                    $('#exampleModalLabel').html('Tambah Data');
-                    $('.modal-footer button[type=submit]').html('Tambah Data');
-                    $('.modal-body form').attr('action', `${BASEURL}/insert`);
-                    $('.modal-body form')[0].reset();
-                });
+        $('.tombolTambahData').on('click', function() {
+            $('#exampleModalLabel').html('Tambah Data');
+            $('.modal-footer button[type=submit]').html('Tambah Data');
+            $('.modal-body form').attr('action', `${BASEURL}/insert`);
+            $('.modal-body form')[0].reset();
+        });
 
-                $('.tampilModalUbah').on('click', function () {
-                    $('#exampleModalLabel').html('Ubah Data Reward & Punishment');
-                    $('.modal-footer button[type=submit]').html('Ubah Data');
-                    $('.modal-body form').attr('action', `${BASEURL}/update`);
+        $('.tampilModalUbah').on('click', function() {
+            $('#exampleModalLabel').html('Ubah Data Reward & Punishment');
+            $('.modal-footer button[type=submit]').html('Ubah Data');
+            $('.modal-body form').attr('action', `${BASEURL}/update`);
 
-                    const id = $(this).data('id');
+            const id = $(this).data('id');
 
-                    $.ajax({
-                        url: `${BASEURL}/getubah`,
-                        data: { id: id },
-                        method: 'post',
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data);
-                            $('#id').val(data.id);
-                            $('#karyawan_id').val(data.karyawan_id);
-                            $('#jenis').val(data.jenis);
-                            $('#jumlah').val(data.jumlah);
-                            $('#besaran').val(data.besaran);
-                            $('#total').val(data.total);
-                            $('#keterangan').val(data.keterangan);
-                            $('#tanggal').val(data.tanggal);
-                            updateDataKaryawan();
-                        }
-                    });
-                });
-
-                $('#karyawan_id').change(updateDataKaryawan);
-
-                function updateDataKaryawan() {
-                    // Get the selected employee's information
-                    let selectedEmployee = $('#karyawan_id').find(':selected');
-
-                    // Set the values for Email, Jabatan, and Alamat
-                    $('#email').val(selectedEmployee.data('email'));
-                    $('#posisi').val(selectedEmployee.data('posisi'));
-                    $('#alamat').val(selectedEmployee.data('alamat'));
-                }
-
-                $('#besaran').on('input', countTotal);
-                $('#jumlah').on('input', countTotal);
-
-                function countTotal() {
-                    $('#total').val(($('#besaran').val() || 0) * ($('#jumlah').val() || 0));
+            $.ajax({
+                url: `${BASEURL}/getubah`,
+                data: {
+                    id: id
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    $('#id').val(data.id);
+                    $('#karyawan_id').val(data.karyawan_id).change(); // Ensure the change event is triggered
+                    $('#jenis').val(data.jenis);
+                    $('#jumlah').val(data.jumlah);
+                    $('#besaran').val(data.besaran);
+                    $('#total').val(data.total);
+                    $('#keterangan').val(data.keterangan);
+                    $('#tanggal').val(data.tanggal);
+                    updateDataKaryawan();
                 }
             });
+        });
+
+        $('#karyawan_id').change(updateDataKaryawan);
+
+        function updateDataKaryawan() {
+            // Get the selected employee's information
+            let selectedEmployee = $('#karyawan_id').find(':selected');
+
+            // Set the values for Email, Jabatan, and Alamat
+            $('#email').val(selectedEmployee.data('email'));
+            $('#posisi').val(selectedEmployee.data('posisi'));
+            $('#alamat').val(selectedEmployee.data('alamat'));
+        }
+    });
+</script>
+
+        <script>
+            // Function to calculate total automatically
+            const calculateTotal = () => {
+                const besaran = document.getElementById('besaran').value;
+                const jumlah = document.getElementById('jumlah').value;
+                const totalField = document.getElementById('total');
+                const total = besaran * jumlah;
+                totalField.value = total;
+            }
+
+            document.getElementById('besaran').addEventListener('input', calculateTotal);
+            document.getElementById('jumlah').addEventListener('input', calculateTotal);
         </script>
+
 
         <?php Get::view('templates/footer', $data) ?>
