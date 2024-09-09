@@ -247,7 +247,7 @@
                                                         value="1" />
                                                 </div>
                                             </th>
-                                            <th class="min-w-100px align-middle">Tanggal</th>
+                                            <th class="min-w-175px align-middle">Tanggal</th>
                                             <th class="min-w-150px align-middle">Kode</th>
                                             <th class="text-center min-w-75px align-middle">No. Akun</th>
                                             <th class="min-w-250px align-middle">Deskripsi</th>
