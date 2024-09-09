@@ -43,12 +43,6 @@
                         </div>
                     </div>
                     <!--end::Page title-->
-                    <!--begin::Actions-->
-                    <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        <a href="#" class="btn btn-flex btn-primary h-40px fs-7 fw-bold" data-bs-toggle="modal"
-                            data-bs-target="#formModal">Tambah No Akun</a>
-                    </div>
-                    <!--end::Actions-->
                 </div>
                 <!--end::Toolbar wrapper-->
             </div>
@@ -69,14 +63,20 @@
                             <div class="d-flex align-items-center position-relative my-1">
                                 <i class="ki-outline ki-magnifier fs-2 position-absolute ms-4"></i>
                                 <input type="text" data-kt-ecommerce-order-filter="search"
-                                    class="form-control form-control-solid w-250px ps-12" placeholder="Cari Nomor Akuntansi" />
+                                    class="form-control form-control-solid w-250px ps-12"
+                                    placeholder="Cari Nomor Akuntansi" />
                             </div>
                             <!--end::Search-->
-                            <!--begin::Export buttons-->
-                            <div id="kt_ecommerce_report_views_export" class="d-none"></div>
-                            <!--end::Export buttons-->
                         </div>
                         <!--end::Card title-->
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                            <!--begin::Add product-->
+                            <a href="#" class="btn btn-flex btn-primary h-40px fs-7 fw-bold" data-bs-toggle="modal"
+                                data-bs-target="#formModal">Tambah No Akun</a>
+                            <!--end::Add product-->
+                        </div>
+                        <!--end::Card toolbar-->
                     </div>
                     <!--end::Card header-->
                     <!--begin::Card body-->
@@ -158,10 +158,6 @@
                     <!--end::Card body-->
                 </div>
                 <!--end::Products-->
-            </div>
-            <!--end::Content container-->
-        </div>
-        <!--end::Content-->
 
         <!-- modal -->
         <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -209,7 +205,8 @@
                                     placeholder="Cth: Pendapatan penjualan" name="deskripsi" id="deskripsi"></textarea>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-secondary mb-0" data-bs-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-secondary mb-0"
+                                    data-bs-dismiss="modal">Tutup</button>
                                 <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
                                     <span class="indicator-label">Simpan</span>
                                     <span class="indicator-progress">Please wait...

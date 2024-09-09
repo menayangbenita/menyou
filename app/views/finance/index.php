@@ -338,202 +338,204 @@ foreach ($data['finance'] as $finance) {
                 </div>
                 <!--end::Products-->
             </div>
-            <!--end::Content container-->
-        </div>
-        <!--end::Content-->
 
-        <script src="<?= BASEURL ?>/js/datatables.js"></script>
+            <script src="<?= BASEURL ?>/js/datatables.js"></script>
 
-        <!-- modal -->
-        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px" role="document">
-                <div class="modal-content rounded">
-                    <div class="modal-header pb-0 border-0 justify-content-end">
-                        <!--begin::Close-->
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <i class="ki-outline ki-cross fs-1"></i>
+            <!-- modal -->
+            <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered mw-650px" role="document">
+                    <div class="modal-content rounded">
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
+                            </div>
+                            <!--end::Close-->
                         </div>
-                        <!--end::Close-->
-                    </div>
-                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                        <!--begin::Heading-->
-                        <div class="mb-13 mt-0 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Tambah Data Finance</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <form action="<?= BASEURL ?>/finance/insert" method="post" enctype="multipart/form-data">
-                            <?= csrf() ?>
-                            <input type="hidden" name="id" id="id">
-                            <div class="row g-9 mb-8">
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">No. Akun</label>
-                                    <input class="form-control form-control-solid" placeholder="Pilih nomor akuntansi"
-                                        name="target_assign" id="no_akun" list="akuntansi">
-                                    <datalist id="akuntansi">
-                                        <?php foreach ($data['akuntansi'] as $nomor): ?>
-                                            <option value="<?= $nomor['akun'] ?>">
-                                            <?php endforeach; ?>
-                                    </datalist>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal</label>
-                                    <!--begin::Input-->
-                                    <div class="position-relative d-flex align-items-center">
-                                        <!--begin::Icon-->
-                                        <i class="ki-outline ki-calendar-8 fs-2 position-absolute mx-4"></i>
-                                        <!--end::Icon-->
-                                        <!--begin::Datepicker-->
-                                        <input type="date" class="form-control form-control-solid ps-12"
-                                            placeholder="Pilih tanggal" name="tanggal" id="tanggal"
-                                            value="<?= date('Y-m-d') ?>" />
-                                        <!--end::Datepicker-->
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <!--begin::Heading-->
+                            <div class="mb-13 mt-0 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Tambah Data Finance</h1>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <form action="<?= BASEURL ?>/finance/insert" method="post" enctype="multipart/form-data">
+                                <?= csrf() ?>
+                                <input type="hidden" name="id" id="id">
+                                <div class="row g-9 mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-semibold mb-2">No. Akun</label>
+                                        <input class="form-control form-control-solid"
+                                            placeholder="Pilih nomor akuntansi" name="target_assign" id="no_akun"
+                                            list="akuntansi">
+                                        <datalist id="akuntansi">
+                                            <?php foreach ($data['akuntansi'] as $nomor): ?>
+                                                <option value="<?= $nomor['akun'] ?>">
+                                                <?php endforeach; ?>
+                                        </datalist>
                                     </div>
-                                    <!--end::Input-->
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-semibold mb-2">Tanggal</label>
+                                        <!--begin::Input-->
+                                        <div class="position-relative d-flex align-items-center">
+                                            <!--begin::Icon-->
+                                            <i class="ki-outline ki-calendar-8 fs-2 position-absolute mx-4"></i>
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <input type="date" class="form-control form-control-solid ps-12"
+                                                placeholder="Pilih tanggal" name="tanggal" id="tanggal"
+                                                value="<?= date('Y-m-d') ?>" />
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <label class="required fs-6 fw-semibold mb-2">Kategori</label>
-                                <!--begin:Option-->
-                                <label class="d-flex flex-stack mb-5 cursor-pointer">
-                                    <!--begin:Label-->
-                                    <span class="d-flex align-items-center me-2">
-                                        <!--begin::Icon-->
-                                        <span class="symbol symbol-50px me-6">
-                                            <span class="symbol-label">
-                                                <i class="ki-outline ki-chart-simple-2 fs-1 text-gray-600"></i>
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Kategori</label>
+                                    <!--begin:Option-->
+                                    <label class="d-flex flex-stack mb-5 cursor-pointer">
+                                        <!--begin:Label-->
+                                        <span class="d-flex align-items-center me-2">
+                                            <!--begin::Icon-->
+                                            <span class="symbol symbol-50px me-6">
+                                                <span class="symbol-label">
+                                                    <i class="ki-outline ki-chart-simple-2 fs-1 text-gray-600"></i>
+                                                </span>
                                             </span>
-                                        </span>
-                                        <!--end::Icon-->
-                                        <!--begin::Description-->
-                                        <span class="d-flex flex-column">
-                                            <span class="fw-bold text-gray-800 text-hover-primary fs-5">Pemasukan</span>
-                                            <span class="fs-6 fw-semibold text-muted">Semua pendapatan yang diterima yang mendukung operasional restoran</span>
-                                        </span>
-                                        <!--end:Description-->
-                                    </span>
-                                    <!--end:Label-->
-                                    <!--begin:Input-->
-                                    <span class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="radio" name="kategori" id="masuk"
-                                            value="masuk" />
-                                    </span>
-                                    <!--end:Input-->
-                                </label>
-                                <!--end::Option-->
-                                <!--begin:Option-->
-                                <label class="d-flex flex-stack mb-5 cursor-pointer">
-                                    <!--begin:Label-->
-                                    <span class="d-flex align-items-center me-2">
-                                        <!--begin::Icon-->
-                                        <span class="symbol symbol-50px me-6">
-                                            <span class="symbol-label">
-                                                <i class="ki-outline ki-chart-simple-3 fs-1 text-gray-600"></i>
+                                            <!--end::Icon-->
+                                            <!--begin::Description-->
+                                            <span class="d-flex flex-column">
+                                                <span
+                                                    class="fw-bold text-gray-800 text-hover-primary fs-5">Pemasukan</span>
+                                                <span class="fs-6 fw-semibold text-muted">Semua pendapatan yang diterima
+                                                    yang mendukung operasional restoran</span>
                                             </span>
+                                            <!--end:Description-->
                                         </span>
-                                        <!--end::Icon-->
-                                        <!--begin::Description-->
-                                        <span class="d-flex flex-column">
-                                            <span
-                                                class="fw-bold text-gray-800 text-hover-primary fs-5">Pengeluaran</span>
-                                            <span class="fs-6 fw-semibold text-muted">Semua biaya yang dikeluarkan untuk kebutuhan restoran</span>
+                                        <!--end:Label-->
+                                        <!--begin:Input-->
+                                        <span class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="radio" name="kategori" id="masuk"
+                                                value="masuk" />
                                         </span>
-                                        <!--end:Description-->
-                                    </span>
-                                    <!--end:Label-->
-                                    <!--begin:Input-->
-                                    <span class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="radio" name="kategori" id="keluar"
-                                            value="masuk" />
-                                    </span>
-                                    <!--end:Input-->
-                                </label>
-                                <!--end::Option-->
-                            </div>
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
-                                <textarea class="form-control form-control-solid" name="deskripsi" id="deskripsi"
-                                    placeholder="Cth: Biaya shipment"></textarea>
-                            </div>
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <label class="required fs-6 fw-semibold mb-2">Nominal / Jumlah</label>
-                                <input type="number" class="form-control form-control-solid" name="jumlah" id="jumlah"
-                                    placeholder="Cth: 20000">
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </div>
-                        </form>
+                                        <!--end:Input-->
+                                    </label>
+                                    <!--end::Option-->
+                                    <!--begin:Option-->
+                                    <label class="d-flex flex-stack mb-5 cursor-pointer">
+                                        <!--begin:Label-->
+                                        <span class="d-flex align-items-center me-2">
+                                            <!--begin::Icon-->
+                                            <span class="symbol symbol-50px me-6">
+                                                <span class="symbol-label">
+                                                    <i class="ki-outline ki-chart-simple-3 fs-1 text-gray-600"></i>
+                                                </span>
+                                            </span>
+                                            <!--end::Icon-->
+                                            <!--begin::Description-->
+                                            <span class="d-flex flex-column">
+                                                <span
+                                                    class="fw-bold text-gray-800 text-hover-primary fs-5">Pengeluaran</span>
+                                                <span class="fs-6 fw-semibold text-muted">Semua biaya yang dikeluarkan
+                                                    untuk kebutuhan restoran</span>
+                                            </span>
+                                            <!--end:Description-->
+                                        </span>
+                                        <!--end:Label-->
+                                        <!--begin:Input-->
+                                        <span class="form-check form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="radio" name="kategori" id="keluar"
+                                                value="masuk" />
+                                        </span>
+                                        <!--end:Input-->
+                                    </label>
+                                    <!--end::Option-->
+                                </div>
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
+                                    <textarea class="form-control form-control-solid" name="deskripsi" id="deskripsi"
+                                        placeholder="Cth: Biaya shipment"></textarea>
+                                </div>
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Nominal / Jumlah</label>
+                                    <input type="number" class="form-control form-control-solid" name="jumlah"
+                                        id="jumlah" placeholder="Cth: 20000">
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--begin::Javascript-->
-            <script>var hostUrl = "assets/";</script>
-            <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-            <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-            <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-            <!--end::Global Javascript Bundle-->
-            <!--begin::Vendors Javascript(used for this page only)-->
-            <script src="assets/js/widgets.bundle.js"></script>
-            <script src="assets/js/custom/widgets.js"></script>
-            <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>\
-            <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-            <!--end::Custom Javascript-->
-            <!--end::Javascript-->
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="assets/js/widgets.bundle.js"></script>
+                <script src="assets/js/custom/widgets.js"></script>
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>\
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <!--end::Custom Javascript-->
+                <!--end::Javascript-->
 
 
-            <script>
-                $(function () {
-                    const BASEURL = window.location.href;
-                    const no_akun = Array.from(document.getElementById('akuntansi').options).map(opt => opt.value);
+                <script>
+                    $(function () {
+                        const BASEURL = window.location.href;
+                        const no_akun = Array.from(document.getElementById('akuntansi').options).map(opt => opt.value);
 
-                    $('#no_akun').on('change', function () {
-                        let val = $(this).val();
-                        let find = no_akun.find(no => no == val);
-                        if (!find) {
-                            alert('No akun tidak ada dalam daftar!');
-                            $(this).val('');
-                        }
-                    });
+                        $('#no_akun').on('change', function () {
+                            let val = $(this).val();
+                            let find = no_akun.find(no => no == val);
+                            if (!find) {
+                                alert('No akun tidak ada dalam daftar!');
+                                $(this).val('');
+                            }
+                        });
 
-                    $('.tombolTambahData').on('click', function () {
-                        $('#modalLabel').html('Tambah Data')
-                        $('.modal-footer button[type=submit]').html('Tambah Data Finance');
-                        $(".modal-body form")[0].reset();
-                        $(".modal-body form").attr("action", `${BASEURL}/insert`);
-                    });
+                        $('.tombolTambahData').on('click', function () {
+                            $('#modalLabel').html('Tambah Data')
+                            $('.modal-footer button[type=submit]').html('Tambah Data Finance');
+                            $(".modal-body form")[0].reset();
+                            $(".modal-body form").attr("action", `${BASEURL}/insert`);
+                        });
 
-                    $(".tampilModalUbah").click(function () {
-                        $("#modalLabel").html("Ubah Data Finance");
-                        $(".modal-footer button[type=submit]").html("Ubah Data");
-                        $(".modal-body form").attr("action", `${BASEURL}/update`);
+                        $(".tampilModalUbah").click(function () {
+                            $("#modalLabel").html("Ubah Data Finance");
+                            $(".modal-footer button[type=submit]").html("Ubah Data");
+                            $(".modal-body form").attr("action", `${BASEURL}/update`);
 
-                        const id = $(this).data("id");
+                            const id = $(this).data("id");
 
-                        $.ajax({
-                            url: `${BASEURL}/getubah`,
-                            data: { id: id },
-                            method: "post",
-                            dataType: "json",
-                            success: function (data) {
-                                console.log(data);
-                                $('#tanggal').val(data.tanggal);
-                                $('#no_akun').val(data.no_akun);
-                                $(`#${data.kategori}`).prop('checked', true);
-                                $('#deskripsi').val(data.deskripsi);
-                                $('#jumlah').val(data.jumlah);
-                            },
+                            $.ajax({
+                                url: `${BASEURL}/getubah`,
+                                data: { id: id },
+                                method: "post",
+                                dataType: "json",
+                                success: function (data) {
+                                    console.log(data);
+                                    $('#tanggal').val(data.tanggal);
+                                    $('#no_akun').val(data.no_akun);
+                                    $(`#${data.kategori}`).prop('checked', true);
+                                    $('#deskripsi').val(data.deskripsi);
+                                    $('#jumlah').val(data.jumlah);
+                                },
+                            })
                         })
-                    })
-                });
-            </script>
+                    });
+                </script>
 
-            <?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>

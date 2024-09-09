@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'Merchant Copy';
+    src: url('../fonts/fake receipt.otf');
+}
+
+.ukuran {
+    width: 80mm;
+    height: 297mm;
+}
+
+table,
+td,
+th {
+    font-size: 12px;
+    font-family: 'Merchant Copy', Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+page[size="A4"] {
+    background: white;
+    width: 21cm;
+    height: 29.7cm;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    color: black;
+}
+
+page[size="thermal"] {
+    background: white;
+    width: 58mm;
+    max-width: 58mm;
+    height: fit-content;
+    display: block;
+    margin: 0;
+}
+/* 
+html,
+body {
+    width: 210mm;
+    height: 297mm;
+} */
+
+@media print {
+    @page {
+        margin: 0 !important; 
+        padding: 0 !important;
+      }
+
+    * {
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+    }
+
+    body * {
+        visibility: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #printable,
+    #printable * {
+        visibility: visible;
+    }
+
+    #printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        size: auto;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0;
+    }
+
+    page[size="A4"] {
+        margin: 0;
+        size: auto;
+        box-shadow: 0;
+    }
+
+    page[size="thermal"] {
+        padding: 0;
+        margin: 0;
+        width: 58mm;
+        max-width: 58mm;
+        size: auto;
+        box-shadow: 0;
+        font-family: 'Merchant Copy';
+        font-size: 16px;
+        color: #000;
+    }
+
+    .table-responsive {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+    }
+
+    td,
+    .float-start,
+    .float-end {
+        word-wrap: break-word;
+        overflow: hidden;
+        max-width: 58mm;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+    }
+
+    td .float-start,
+    td .float-end {
+        word-wrap: break-word;
+        overflow: hidden;
+        max-width: 58mm;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+    }
+
+    .page-break {
+        display: block;
+        page-break-before: always;
+    }
+
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+}

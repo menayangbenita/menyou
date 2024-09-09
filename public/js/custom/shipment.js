@@ -20,18 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let biaya = document.createElement('div');
         biaya.setAttribute('class', 'row');
         biaya.innerHTML = `
-            <div class="col-sm-6 fv-row">
+            <div class="col-sm-6">
                 <div class="input-group">
                     <button class="btn btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
                         <i class="fa fa-xmark"></i>
                     </button>
-                    <input type="text" class="form-control form-control-solid ps-2" name="nama_biaya_lainnya[]" placeholder="Nama biaya">
+                    <input type="text" class="form-control ps-2" name="nama_biaya_lainnya[]" placeholder="Nama biaya">
                 </div>
             </div>
-            <div class="col-sm-6 ps-0 fv-row">
+            <div class="col-sm-6 ps-0">
                 <div class="input-group">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control form-control-solid ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
+                    <input type="number" class="form-control ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
                 </div>
             </div>
         `;
@@ -45,16 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
         barang.innerHTML = `
             <td class="text-center align-middle">1</td>
             <td class="px-1">
-                <input type="text" class="form-control form-control-solid nama" name="nama[]" list="barang" autocomplete="off" placeholder="Nama Barang" required>
+                <input type="text" class="form-control nama" name="nama[]" list="barang" autocomplete="off" placeholder="Nama Barang" required>
             </td>
             <td class="px-1">
-                <select class="form-select form-select-solid jenis" name="jenis[]" required disabled>
+                <select class="form-select jenis" name="jenis[]" required disabled>
                     <option value="bahan">Bahan</option>
                     <option value="kemasan">Kemasan</option>
                 </select>
             </td>
             <td class="px-1">
-                <input type="number" class="form-control form-control-solid count-sub" name="jumlah[]" placeholder="0" min="0" required>
+                <input type="number" class="form-control count-sub" name="jumlah[]" placeholder="0" min="0" required>
             </td>
             <td class="px-1">
                 <select class="form-select satuan" name="satuan[]" required disabled>
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
             <td class="px-1">
                 <div class="input-group">
-                    <span class="input-group-text border-0">Rp</span>
-                    <input type="number" class="form-control form-control-solid count-sub" name="harga_satuan[]" placeholder="0" min="0" required>
+                    <span class="input-group-text">Rp</span>
+                    <input type="number" class="form-control count-sub" name="harga_satuan[]" placeholder="0" min="0" required>
                 </div>
             </td>
             <td class="px-1">
                 <div class="input-group bg-light">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control form-control-solid" name="subtotal[]" value="0" readonly required>
+                    <input type="number" class="form-control" name="subtotal[]" value="0" readonly required>
                 </div>
             </td>
             <td class="px-1 align-middle text-center">

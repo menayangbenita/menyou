@@ -166,10 +166,6 @@
                     <!--end::Card body-->
                 </div>
                 <!--end::Products-->
-            </div>
-            <!--end::Content-->
-        </div>
-        <!--end::Content wrapper-->
 
         <!-- modal -->
         <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

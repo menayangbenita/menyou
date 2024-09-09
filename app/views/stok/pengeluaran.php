@@ -14,19 +14,19 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="symbol symbol-55px me-5">
                                 <span class="symbol-label bg-light-primary">
-                                    <i class="ki-solid ki-setting-3 text-primary fs-1"></i>
+                                    <i class="ki-solid ki-parcel text-primary fs-1"></i>
                                 </span>
                             </div>
                             <div class="card-title align-items-start flex-column">
                                 <!--begin::Title-->
                                 <h1
                                     class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                                    Manage User</h1>
+                                    Pengeluaran</h1>
                                 <!--end::Title-->
                                 <!--begin::Breadcrumb-->
                                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                                     <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">Admin</li>
+                                    <li class="breadcrumb-item text-muted">Stok</li>
                                     <!--end::Item-->
                                     <!--begin::Item-->
                                     <li class="breadcrumb-item">
@@ -34,7 +34,7 @@
                                     </li>
                                     <!--end::Item-->
                                     <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">Manage User</li>
+                                    <li class="breadcrumb-item text-muted">Pengeluaran</li>
                                     <!--end::Item-->
                                 </ul>
                                 <!--end::Breadcrumb-->
@@ -128,7 +128,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn bg-gradient-primary float-end m-2"
+                            <button type="submit" class="btn btn-primary float-end m-2"
                                 onclick="return confirm('Apakah anda yakin ingin mengubah data?')">
                                 <i class="fa fa-save me-2" aria-hidden="true"></i>
                                 Simpan
@@ -137,8 +137,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
     <!-- End Tabel -->
 
     <script src="<?= BASEURL ?>/js/custom/pengeluaran.js"></script>

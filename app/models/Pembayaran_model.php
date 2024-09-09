@@ -13,10 +13,6 @@ class Pembayaran_model extends Model
 		'subtotal',
 		'pajak',
 		'total',
-		'metode_pembayaran',
-		'kode_transaksi',
-		'bayar',
-		'kembali',
 	];
 
 	public function getAllData($outlet_uuid = false)
@@ -34,7 +30,19 @@ class Pembayaran_model extends Model
 
 	public function getLatestData()
 	{
-		$this->db->query("SELECT * FROM {$this->table} ORDER BY `created_at` DESC LIMIT 1");
+		$this->db->query(
+			"SELECT 
+				outlet.uuid AS `outlet_uuid`,
+				outlet.nama AS `nama_outlet`, 
+				outlet.alamat AS `alamat_outlet`, 
+				outlet.nomor_telp AS `telp_outlet`, 
+				outlet.pajak AS `pajak_outlet`, 
+				outlet.manager_id AS `manager_id`, 
+				{$this->table}.* FROM {$this->table}
+			LEFT JOIN `outlet` ON outlet.uuid = {$this->table}.outlet_uuid
+			WHERE {$this->table}.`status` = 1
+			ORDER BY `created_at` DESC LIMIT 1"
+		);
 		return $this->db->fetch();
 	}
 
@@ -57,7 +65,7 @@ class Pembayaran_model extends Model
 				outlet.manager_id AS `manager_id`, 
 				{$this->table}.* FROM {$this->table}
 			LEFT JOIN `outlet` ON outlet.uuid = {$this->table}.outlet_uuid
-				WHERE {$this->table}.uuid = :uuid"
+			WHERE {$this->table}.uuid = :uuid"
 		);
 		$this->db->bind('uuid', $uuid);
 		return $this->db->fetch();
@@ -113,10 +121,10 @@ class Pembayaran_model extends Model
 			:subtotal, 
 			:pajak, 
 			:total, 
-			:metode_pembayaran, 
-			:kode_transaksi, 
-			:bayar, 
-			:kembali, 
+			NULL, 
+			NULL, 
+			NULL, 
+			NULL, 
 			:tanggal,
 			0,
 			:outlet_uuid,
@@ -151,17 +159,13 @@ class Pembayaran_model extends Model
 			subtotal = :subtotal,
 			pajak = :pajak,
 			total = :total,
-			metode_pembayaran = :metode_pembayaran,
-			kode_transaksi = :kode_transaksi,
-			bayar = :bayar,
-			kembali = :kembali,
+			note = :note,
 		";
 
 		$this->db->query(
 			"UPDATE {$this->table}
 				SET
 				{$fields_query}
-				note = :note,
 				modified_at = CURRENT_TIMESTAMP,
 				modified_by = :modified_by
 			WHERE id = :id"
@@ -173,7 +177,36 @@ class Pembayaran_model extends Model
 		$this->db->bind('modified_by', $this->user);
 
 		$this->db->execute();
+		return $this->db->rowCount();
+	}
 
+	public function updatePembayaran($id, $data) 
+	{
+		$fields_query = "
+			metode_pembayaran = :metode_pembayaran,
+			kode_transaksi = :kode_transaksi,
+			bayar = :bayar,
+			kembali = :kembali,
+		";
+
+		$this->db->query(
+			"UPDATE {$this->table}
+				SET
+				{$fields_query}
+				modified_at = CURRENT_TIMESTAMP,
+				modified_by = :modified_by
+			WHERE id = :id"
+		);
+
+		
+		$this->db->bind('metode_pembayaran', $data['metode_pembayaran']);
+		$this->db->bind('kode_transaksi', $data['kode_transaksi']);
+		$this->db->bind('bayar', $data['bayar']);
+		$this->db->bind('kembali', $data['kembali']);
+		$this->db->bind('id', $id);
+		$this->db->bind('modified_by', $this->user);
+
+		$this->db->execute();
 		return $this->db->rowCount();
 	}
 
