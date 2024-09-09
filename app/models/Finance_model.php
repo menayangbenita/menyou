@@ -195,7 +195,7 @@ class Finance_model extends Model
 			kategori = :kategori,
 			deskripsi = :deskripsi,
 			jumlah = :jumlah,
-			tanggal = :tanggal,
+			tanggal = :tanggal
 		";
 
 		$this->db->query(
@@ -207,6 +207,7 @@ class Finance_model extends Model
 			WHERE id = :id"
 		);
 
+		
 		foreach ($this->fields as $field)
 			$this->db->bind($field, $data[$field]);
 		$this->db->bind('modified_by', $this->user);
@@ -220,7 +221,7 @@ class Finance_model extends Model
 	{
 		$fields_query = "
 			jumlah = :jumlah,
-			tanggal = :tanggal,
+			tanggal = :tanggal
 		";
 
 		$this->db->query(

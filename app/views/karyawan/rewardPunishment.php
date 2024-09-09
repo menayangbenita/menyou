@@ -162,7 +162,7 @@
                                             <!--end::Menu-->
                                         </td>
                                     <?php endforeach; ?>
-                                </tr>
+                                    </tr>
                             </tbody>
                         </table>
                         <!--end::Table-->

@@ -353,29 +353,45 @@ foreach ($data['finance'] as $finance) {
                             </div>
                             <!--end::Close-->
                         </div>
-                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                            <!--begin::Heading-->
-                            <div class="mb-13 mt-0 text-center">
-                                <!--begin::Title-->
-                                <h1 class="mb-3" id="modalLabel">Tambah Data Finance</h1>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Heading-->
-                            <form action="<?= BASEURL ?>/finance/insert" method="post" enctype="multipart/form-data">
-                                <?= csrf() ?>
-                                <input type="hidden" name="id" id="id">
-                                <div class="row g-9 mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">No. Akun</label>
-                                        <input class="form-control form-control-solid"
-                                            placeholder="Pilih nomor akuntansi" name="target_assign" id="no_akun"
-                                            list="akuntansi">
-                                        <datalist id="akuntansi">
-                                            <?php foreach ($data['akuntansi'] as $nomor): ?>
-                                                <option value="<?= $nomor['akun'] ?>">
-                                                <?php endforeach; ?>
-                                        </datalist>
+                        <!--end::Close-->
+                    </div>
+                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                        <!--begin::Heading-->
+                        <div class="mb-13 mt-0 text-center">
+                            <!--begin::Title-->
+                            <h1 class="mb-3" id="modalLabel">Tambah Data Finance</h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <form action="<?= BASEURL ?>/finance/insert" method="post" enctype="multipart/form-data">
+                            <?= csrf() ?>
+                            <input type="hidden" name="id" id="id">
+                            <div class="row g-9 mb-8">
+                                <!--begin::Col-->
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">No. Akun</label>
+                                    <input class="form-control form-control-solid" placeholder="Pilih nomor akuntansi"
+                                        name="no_akun" id="no_akun" list="akuntansi">
+                                    <datalist id="akuntansi">
+                                        <?php foreach ($data['akuntansi'] as $nomor): ?>
+                                            <option value="<?= $nomor['akun'] ?>">
+                                            <?php endforeach; ?>
+                                    </datalist>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal</label>
+                                    <!--begin::Input-->
+                                    <div class="position-relative d-flex align-items-center">
+                                        <!--begin::Icon-->
+                                        <i class="ki-outline ki-calendar-8 fs-2 position-absolute mx-4"></i>
+                                        <!--end::Icon-->
+                                        <!--begin::Datepicker-->
+                                        <input type="date" class="form-control form-control-solid ps-12"
+                                            placeholder="Pilih tanggal" name="tanggal" id="tanggal"
+                                            value="<?= date('Y-m-d') ?>" />
+                                        <!--end::Datepicker-->
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
@@ -424,56 +440,33 @@ foreach ($data['finance'] as $finance) {
                                             <input class="form-check-input" type="radio" name="kategori" id="masuk"
                                                 value="masuk" />
                                         </span>
-                                        <!--end:Input-->
-                                    </label>
-                                    <!--end::Option-->
-                                    <!--begin:Option-->
-                                    <label class="d-flex flex-stack mb-5 cursor-pointer">
-                                        <!--begin:Label-->
-                                        <span class="d-flex align-items-center me-2">
-                                            <!--begin::Icon-->
-                                            <span class="symbol symbol-50px me-6">
-                                                <span class="symbol-label">
-                                                    <i class="ki-outline ki-chart-simple-3 fs-1 text-gray-600"></i>
-                                                </span>
-                                            </span>
-                                            <!--end::Icon-->
-                                            <!--begin::Description-->
-                                            <span class="d-flex flex-column">
-                                                <span
-                                                    class="fw-bold text-gray-800 text-hover-primary fs-5">Pengeluaran</span>
-                                                <span class="fs-6 fw-semibold text-muted">Semua biaya yang dikeluarkan
-                                                    untuk kebutuhan restoran</span>
-                                            </span>
-                                            <!--end:Description-->
-                                        </span>
-                                        <!--end:Label-->
-                                        <!--begin:Input-->
-                                        <span class="form-check form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="radio" name="kategori" id="keluar"
-                                                value="masuk" />
-                                        </span>
-                                        <!--end:Input-->
-                                    </label>
-                                    <!--end::Option-->
-                                </div>
-                                <div class="d-flex flex-column mb-8 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
-                                    <textarea class="form-control form-control-solid" name="deskripsi" id="deskripsi"
-                                        placeholder="Cth: Biaya shipment"></textarea>
-                                </div>
-                                <div class="d-flex flex-column mb-8 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Nominal / Jumlah</label>
-                                    <input type="number" class="form-control form-control-solid" name="jumlah"
-                                        id="jumlah" placeholder="Cth: 20000">
-                                </div>
-                                <div class="text-center">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
+                                        <!--end:Description-->
+                                    </span>
+                                    <!--end:Label-->
+                                    <!--begin:Input-->
+                                    <span class="form-check form-check-custom form-check-solid">
+                                        <input class="form-check-input" type="radio" name="kategori" id="keluar"
+                                            value="keluar" />
+                                    </span>
+                                    <!--end:Input-->
+                                </label>
+                                <!--end::Option-->
+                            </div>
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
+                                <textarea class="form-control form-control-solid" name="deskripsi" id="deskripsi"
+                                    placeholder="Cth: Biaya shipment"></textarea>
+                            </div>
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="required fs-6 fw-semibold mb-2">Nominal / Jumlah</label>
+                                <input type="number" class="form-control form-control-solid" name="jumlah" id="jumlah"
+                                    placeholder="Cth: 20000">
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
