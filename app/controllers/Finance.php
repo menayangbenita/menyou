@@ -59,23 +59,35 @@ class Finance extends Controller
     }
 
     public function update()
-	{
+    {
         try {
             $this->auth('user', 'Owner|Manager|Analyzer');
             csrf_validate('/finance');
-
+    
+            // Log data POST untuk memastikan input dikirim dengan benar
             error_log(print_r($_POST, true));
-
-            $this->model($this->model_name)->update($_POST['id'], $_POST);
+    
+            // Pastikan ID ada dan valid
+            if (empty($_POST['id'])) {
+                throw new Exception("ID tidak boleh kosong");
+            }
+    
+            // Panggil model untuk melakukan update
+            $affectedRows = $this->model($this->model_name)->update($_POST['id'], $_POST);
             
-
-            Flasher::setFlash('Update&nbsp<b>SUCCESS</b>','success');
+            if ($affectedRows > 0) {
+                Flasher::setFlash('Update&nbsp<b>SUCCESS</b>','success');
+            } else {
+                throw new Exception("Tidak ada data yang diupdate");
+            }
+    
         } catch (Exception $e) {
-            // dd($e->getMessage());
-            Flasher::setFlash('Update&nbsp<b>FAILED</b>', 'danger');
+            // Tangkap error yang lebih detail
+            Flasher::setFlash('Update&nbsp<b>FAILED</b>: ' . $e->getMessage(), 'danger');
         }
         redirectTo('/finance');
-	}
+    }
+    
 
     public function getUbah()
     {
