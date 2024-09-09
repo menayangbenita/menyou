@@ -84,3 +84,10 @@ function csrf_validate($redirect_url) {
         redirectTo($redirect_url);
     }
 }
+
+function stripAndSanitize($string) {
+    $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string); // remove unnecessary characters
+    $string = trim($string); // strip leading and trailing
+    $string = preg_replace('/\s+/', ' ', $string); // Replace double spaces with singgle space
+    return $string;
+}

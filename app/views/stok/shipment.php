@@ -83,20 +83,6 @@
                             <input class="form-control form-control-solid w-100 mw-250px"
                                 placeholder="Pilih rentang tanggal" id="kt_ecommerce_report_views_daterangepicker" />
                             <!--end::Daterangepicker-->
-                            <!--begin::Filter-->
-                            <div class="w-150px">
-                                <!--begin::Select2-->
-                                <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Jenis"
-                                    data-kt-ecommerce-order-filter="rating">
-                                    <option></option>
-                                    <option value="all">Semua</option>
-                                    <option value="Bahan">Bahan</option>
-                                    <option value="Kemasan">Kemasan</option>
-                                </select>
-                                <!--end::Select2-->
-                            </div>
-                            <!--end::Filter-->
                             <!--begin::Export dropdown-->
                             <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
                                 data-kt-menu-placement="bottom-end">
@@ -379,7 +365,7 @@
                                                     <th class="min-w-1500px">
                                                         Subtotal</th>
                                                     <th class="text-center align-middle">
-                                                        <button class="btn btn-success btn-sm m-0 px-3"
+                                                        <button class="btn btn-icon btn-success btn-sm m-0 px-3"
                                                             id="add-detail-barang" type="button">
                                                             <i class="ki-solid ki-abstract-10 pe-0 me-0"></i>
                                                         </button>
@@ -649,19 +635,19 @@
                 <tr>
                     <td class="text-center align-middle">1</td>
                     <td class="px-1">
-                        <input type="text" class="form-control nama" name="nama[]" list="barang" autocomplete="off" placeholder="Nama Barang" required>
+                        <input type="text" class="form-control form-control-solid nama" name="nama[]" list="barang" autocomplete="off" placeholder="Nama Barang" required>
                     </td>
                     <td class="px-1">
-                        <select class="form-select jenis" name="jenis[]" required disabled>
+                        <select class="form-select form-select-solid jenis" name="jenis[]" required disabled>
                             <option value="bahan">Bahan</option>
                             <option value="kemasan">Kemasan</option>
                         </select>
                     </td>
                     <td class="px-1">
-                        <input type="number" class="form-control count-sub" name="jumlah[]" placeholder="0" min="0" required>
+                        <input type="number" class="form-control form-control-solid count-sub" name="jumlah[]" placeholder="0" min="0" required>
                     </td>
                     <td class="px-1">
-                        <select class="form-select satuan" name="satuan[]" required disabled>
+                        <select class="form-select form-select-solid satuan" name="satuan[]" required disabled>
                             <option value="Kg" selected>Kg</option>
                             <option value="Ons">Ons</option>
                             <option value="Box">Box</option>
@@ -677,18 +663,18 @@
                     </td>
                     <td class="px-1">
                         <div class="input-group">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control count-sub" name="harga_satuan[]" placeholder="0" min="0" required>
+                            <span class="input-group-text border-0">Rp</span>
+                            <input type="number" class="form-control form-control-solid count-sub" name="harga_satuan[]" placeholder="0" min="0" required>
                         </div>
                     </td>
                     <td class="px-1">
                         <div class="input-group bg-light">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control" name="subtotal[]" value="0" readonly required>
+                            <span class="input-group-text border-0">Rp</span>
+                            <input type="number" class="form-control form-control-solid" name="subtotal[]" value="0" readonly required>
                         </div>
                     </td>
                     <td class="px-1 align-middle text-center">
-                        <button class="btn btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
+                        <button class="btn btn-icon btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
                             <i class="fa fa-xmark text-sm"></i>
                         </button>
                     </td>
@@ -699,7 +685,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="input-group">
-                            <button class="btn btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
+                            <button class="btn btn-icon btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
                                 <i class="fa fa-xmark"></i>
                             </button>
                             <input type="text" class="form-control ps-2" name="nama_biaya_lainnya[]" placeholder="Nama biaya">
@@ -707,8 +693,8 @@
                     </div>
                     <div class="col-sm-6 ps-0">
                         <div class="input-group">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
+                            <span class="input-group-text border-0">Rp</span>
+                            <input type="number" class="form-control form-control-solid ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
                         </div>
                     </div>
                 </div>
@@ -752,19 +738,19 @@
                                         row.innerHTML = `
                             <td class="text-center align-middle">${i + 1}</td>
                             <td class="px-1">
-                                <input type="text" class="form-control nama" name="nama[]" value="${barang.nama}" list="barang" autocomplete="off" placeholder="Nama Barang" required>
+                                <input type="text" class="form-control form-control-solid nama" name="nama[]" value="${barang.nama}" list="barang" autocomplete="off" placeholder="Nama Barang" required>
                             </td>
                             <td class="px-1">
-                                <select class="form-select jenis" name="jenis[]" required disabled>
+                                <select class="form-select form-select-solid jenis" name="jenis[]" required disabled>
                                     <option value="bahan"${jenis == 'bahan' ? ' selected' : ''}>Bahan</option>
                                     <option value="kemasan"${jenis == 'kemasan' ? ' selected' : ''}>Kemasan</option>
                                 </select>
                             </td>
                             <td class="px-1">
-                                <input type="number" class="form-control count-sub" name="jumlah[]" value="${barang.jumlah}" placeholder="0" min="0" required>
+                                <input type="number" class="form-control form-control-solid count-sub" name="jumlah[]" value="${barang.jumlah}" placeholder="0" min="0" required>
                             </td>
                             <td class="px-1">
-                                <select class="form-select satuan" name="satuan[]" required disabled>
+                                <select class="form-select form-select-solid satuan" name="satuan[]" required disabled>
                                     <option value="Kg"${satuan == 'Kg' ? ' selected' : ''}>Kg</option>
                                     <option value="Ons"${satuan == 'Ons' ? ' selected' : ''}>Ons</option>
                                     <option value="Box"${satuan == 'Box' ? ' selected' : ''}>Box</option>
@@ -780,18 +766,18 @@
                             </td>
                             <td class="px-1">
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control count-sub" name="harga_satuan[]" value="${barang.harga_satuan}" placeholder="0" min="0" required>
+                                    <span class="input-group-text border-0">Rp</span>
+                                    <input type="number" class="form-control form-control-solid count-sub" name="harga_satuan[]" value="${barang.harga_satuan}" placeholder="0" min="0" required>
                                 </div>
                             </td>
                             <td class="px-1">
                                 <div class="input-group bg-light">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" name="subtotal[]" value="${barang.subtotal}" readonly required>
+                                    <span class="input-group-text border-0">Rp</span>
+                                    <input type="number" class="form-control form-control-solid" name="subtotal[]" value="${barang.subtotal}" readonly required>
                                 </div>
                             </td>
                             <td class="px-1 align-middle text-center">
-                                <button class="btn btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
+                                <button class="btn btn-icon btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
                                     <i class="fa fa-xmark text-sm"></i>
                                 </button>
                             </td>
@@ -810,16 +796,16 @@
                                         biaya.innerHTML = `
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                    <button class="btn btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
+                                    <button class="btn btn-icon btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
                                         <i class="fa fa-xmark"></i>
                                     </button>
-                                    <input type="text" class="form-control ps-2" name="nama_biaya_lainnya[]" value=${key} placeholder="Nama biaya">
+                                    <input type="text" class="form-control form-control-solid ps-2" name="nama_biaya_lainnya[]" value=${key} placeholder="Nama biaya">
                                 </div>
                             </div>
                             <div class="col-sm-6 ps-0">
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control ps-2 biaya-lainnya" name="biaya_lainnya[]" value=${biaya_lainnya[key]} placeholder="0" min="0">
+                                    <span class="input-group-text border-0">Rp</span>
+                                    <input type="number" class="form-control form-control-solid ps-2 biaya-lainnya" name="biaya_lainnya[]" value=${biaya_lainnya[key]} placeholder="0" min="0">
                                 </div>
                             </div>
                         `;

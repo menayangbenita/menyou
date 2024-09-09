@@ -101,7 +101,7 @@
                                             Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="fw-semibold text-gray-600">
                                     <?php $i = 1; ?>
                                     <?php foreach ($data["supplier"] as $supplier): ?>
                                         <tr>
