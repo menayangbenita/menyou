@@ -69,7 +69,7 @@ class Absensi extends Controller
         $data['result'] = $arr;
         $data['hari'] = $hari;
         if (in_array($data['user']['role'], explode('|', 'Owner|Manager|HR'))) {
-            $this->view('karyawan/absensi', $data);
+            $this->view('karyawan/absensiExcel', $data);
         } elseif (in_array($data['user']['role'], explode('|', 'Sales|karyawan')))
             $this->view('karyawan/absensiUser', $data);
     }

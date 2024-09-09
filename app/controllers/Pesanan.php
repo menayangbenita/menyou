@@ -7,17 +7,37 @@ class Pesanan extends Controller
 	public function index()
 	{
 		$this->auth('user', 'Owner|Manager|Sales');
+        csrf_generate();
 
 		$data['title'] = 'Pesanan';
 		$data['user'] = $this->user;
-        $data['pembayaran'] = $this->model($this->model_name)->getAllData($this->user['outlet_uuid']);
 
-		$this->view('penjualan/pesanan', $data);
+        $data['menu'] = $this->model('Menu_model')->getAllData();
+        $data['pembayaran'] = $this->model($this->model_name)->getAllData($this->user['outlet_uuid']);
+        $data['pajak'] = $this->user['pajak_outlet'];
+
+		$this->view('pesanan/index', $data);
 	}
 
-    public function kasir($id = null)
+    public function add()
     {
 		$this->auth('user', 'Owner|Manager|Sales');
+        csrf_generate();
+
+		$data['title'] = 'Tambah Pesanan';
+		$data['user'] = $this->user;
+        
+        $this->model('Menu_model')->countAvailableAll($this->user['outlet_uuid']);
+        $data['menu'] = $this->model('Menu_model')->getAllData($this->user['outlet_uuid']);
+        $data['kategori'] = $this->model('Kategori_model')->getAllData();
+        $data['pajak'] = $this->user['pajak_outlet'];
+		
+        $this->view('pesanan/add', $data);
+	}
+
+    public function edit($id) 
+    {
+        $this->auth('user', 'Owner|Manager|Sales');
         csrf_generate();
 
 		$data['title'] = 'Kasir';
@@ -28,13 +48,9 @@ class Pesanan extends Controller
         $data['kategori'] = $this->model('Kategori_model')->getAllData();
         $data['pajak'] = $this->user['pajak_outlet'];
 		
-        if (!$id) {
-            $this->view('penjualan/kasir', $data);
-        } else {
-            $data['pesanan'] = $this->model($this->model_name)->getDataById($id);
-            $this->view('penjualan/edit', $data);
-        }
-	}
+        $data['pesanan'] = $this->model($this->model_name)->getDataById($id);
+        $this->view('pesanan/edit', $data);
+    }
 
     public function invoice($uuid = null)
 	{
@@ -47,55 +63,37 @@ class Pesanan extends Controller
             $this->model($this->model_name)->getDataByUuid($uuid) :
             $this->model($this->model_name)->getLatestData();
 
-		$this->view('penjualan/invoice', $data);
+		$this->view('pesanan/invoice', $data);
 	}
 
     public function insert()
     {
         try {
+            httpPOST();
             $this->auth('user', 'Owner|Manager|Sales');
-            csrf_validate('/kasir');
+            csrf_validate('/pesanan/add');
 
-            $_POST['outlet_uuid'] = $this->user['outlet_uuid'];
-            $_POST['tanggal'] = date('Y-m-d');
+            // Prepare data
+            $data = posts();
+            $data->outlet_uuid = $this->user['outlet_uuid'];
+            $data->tanggal = date('Y-m-d');
 
             // Proses detail pembayaran untuk invoice
             $detail_pembayaran = [];
             foreach ($_POST['id'] as $i => $item_id) {
                 array_push($detail_pembayaran, [
                     'id' => $item_id,
-                    'item' => $_POST['item'][$i],
-                    'amount' => $_POST['amount'][$i],
-                    'subtotal' => $_POST['item_subtotal'][$i],
-                    'take_away' => json_decode($_POST['take_away'][$i]),
+                    'item' => $data->item[$i],
+                    'amount' => $data->amount[$i],
+                    'subtotal' => $data->item_subtotal[$i],
+                    'take_away' => json_decode($data->take_away[$i]),
                 ]);
             }
-            $_POST['detail_pembayaran'] = json_encode($detail_pembayaran);
-            unset($_POST['item']); unset($_POST['amount']); unset($_POST['item_subtotal']); unset($_POST['take_away']); unset($_POST['id']);
-            
-            // Set data finance
-            $finance = $this->model('Finance_model')->getDataByRelation('penjualan|' . $_POST['tanggal']);
-            if ($finance) {
-                // Update if data on that date is available
-                $res = $this->model('Finance_model')->updateFrom(
-                    $finance['relation'],
-                    $finance['jumlah'] + $_POST['total'],
-                    $finance['tanggal'],
-                );
-            } else {
-                // If not, then add new record
-                $res = $this->model('Finance_model')->insertFrom(
-                    'penjualan|' . $_POST['tanggal'],
-                    $_POST['total'],
-                    'Pendapatan Penjualan Harian',
-                    $_POST['tanggal'],
-                    $_POST['outlet_uuid']
-                );
-            }
-            if (!$res) new Exception('Haha eror');
+            $data->detail_pembayaran = json_encode($detail_pembayaran);
+            unset($data->item); unset($data->amount); unset($data->item_subtotal); unset($data->take_away); unset($data->id);
 
             // Insert data pembayaran
-            $res = $this->model($this->model_name)->insert($_POST);
+            $res = $this->model($this->model_name)->insert((array)$data);
             if (!$res) new Exception('Haha eror');
             
             Flasher::setFlash('Insert&nbsp<b>SUCCESS</b>','success');
@@ -103,43 +101,35 @@ class Pesanan extends Controller
             // dd($e->getMessage());
             Flasher::setFlash('Insert&nbsp<b>FAILED</b>', 'danger');
         }
-        redirectTo('/pesanan/kasir');
+        redirectTo('/pesanan/add');
     }
 
     public function update($id)
     {
         try {
+            httpPOST();
             $this->auth('user', 'Owner|Manager|Sales');
-            csrf_validate("/pesanan");
+            csrf_validate("/pesanan/edit");
 
-            $old = $this->model($this->model_name)->getDataById($id);
+            // Prepare data
+            $data = posts();
 
             // Proses detail pembayaran untuk invoice
             $detail_pembayaran = [];
-            foreach ($_POST['id'] as $i => $item_id) {
+            foreach ($data->id as $i => $item_id) {
                 array_push($detail_pembayaran, [
                     'id' => $item_id,
-                    'item' => $_POST['item'][$i],
-                    'amount' => $_POST['amount'][$i],
-                    'subtotal' => $_POST['item_subtotal'][$i],
-                    'take_away' => json_decode($_POST['take_away'][$i]),
+                    'item' => $data->item[$i],
+                    'amount' => $data->amount[$i],
+                    'subtotal' => $data->item_subtotal[$i],
+                    'take_away' => json_decode($data->take_away[$i]),
                 ]);
             }
-            $_POST['detail_pembayaran'] = json_encode($detail_pembayaran);
-            unset($_POST['item']); unset($_POST['amount']); unset($_POST['item_subtotal']); unset($_POST['take_away']); unset($_POST['id']);
-
-            // Update finance by difference
-            $finance = $this->model('Finance_model')->getDataByRelation('penjualan|' . $old['tanggal']);
-            $diff = $_POST['total'] - $old['total'];
-            $res = $this->model('Finance_model')->updateFrom(
-                $finance['relation'],
-                $finance['jumlah'] + $diff,
-                $finance['tanggal'],
-            );
-            if (!$res) new Exception('Haha eror');
+            $data->detail_pembayaran = json_encode($detail_pembayaran);
+            unset($data->item); unset($data->amount); unset($data->item_subtotal); unset($data->take_away); unset($data->id);
 
             // Update data pembayaran
-            $res = $this->model($this->model_name)->update($id, $_POST);
+            $res = $this->model($this->model_name)->update($id, (array)$data);
             if (!$res) new Exception('Haha eror');
 
             Flasher::setFlash('Update&nbsp<b>SUCCESS</b>','success');
@@ -150,24 +140,26 @@ class Pesanan extends Controller
         redirectTo('/pesanan');
     }
 
-	public function updateStatusPesanan($id)
+	public function updateStatusPesanan()
 	{
         try {
+            httpPOST();
             $this->auth('user', 'Owner|Manager|Sales');
+            csrf_validate('/pesanan');
 
             // Get common information
             $outlet_uuid = $this->user['outlet_uuid'];
-            $pesanan = $this->model($this->model_name)->getDataById($id);
             $kemasan = $this->model('Stok_model')->getAllKemasan();
-            $detail_pembayaran = json_decode($pesanan['detail_pembayaran'], true);
+            $pesanan = $this->model($this->model_name)->getDataById(posts()->id);
+            $detail = json_decode($pesanan['detail_pembayaran'], true);
 
             // Dapatkan data tiap menu
-            $selected_menu = $this->model("Menu_model")->getMultipleBy('id', array_unique(array_column($detail_pembayaran, 'id')));
+            $selected_menu = $this->model("Menu_model")->getMultipleBy('id', array_unique(array_column($detail, 'id')));
             $tersedia = true;
             $all_bahan = [];
             
             // Cek apakah item tersedia atau tidak
-            foreach ($detail_pembayaran as $item) {
+            foreach ($detail as $item) {
                 $menu = $selected_menu[array_search($item['id'], array_column($selected_menu, 'id'))];
                 $data_tersedia = json_decode($menu['tersedia'], true)[$outlet_uuid];
                 if ($data_tersedia != "infinite" && ($data_tersedia < $item['amount'])) {
@@ -178,7 +170,7 @@ class Pesanan extends Controller
                 // Tambahkan dan kalikan data bahan berdasarkan amount
                 $bahan = json_decode($menu['bahan'], true);
 
-                // Cek apakah item take away atau tidak, jika tidak hilangkan bahan kemasan dalam list.
+                // Cek apakah item take away atau tidak, jika tidak hilangkan bahan kemasan dalam list. (jika order)
                 if (!$item['take_away']) array_diff($bahan, $kemasan);
 
                 foreach ($bahan as $key => $val) {
@@ -205,7 +197,7 @@ class Pesanan extends Controller
                             $item['id'],
                             $outlet_uuid,
                             date('Y-m-d'), 
-                            ['keluar' => ($current_pengeluaran + $all_bahan[$item['nama']])]
+                            ['keluar' => $current_pengeluaran + $all_bahan[$item['nama']]]
                         );
                     }
                 }
@@ -213,13 +205,11 @@ class Pesanan extends Controller
                 // Cek ketersediaan semua menu setelah stok berkurang
                 $this->model('Menu_model')->countAvailableAll($outlet_uuid);
                 
-                // Update status pesanan
-                if ($this->model($this->model_name)->updateField($id, 'status_order', 1) > 0) {
-                    Flasher::setFlash('Update&nbsp<b>SUCCESS</b>', 'success');
-                    redirectTo('/pesanan/invoice/' . $pesanan['uuid']);
-                } else {
-                    throw new Exception('Haha error');
-                }
+                // Update status pesanan/prepare
+                $res = $this->model($this->model_name)->updateField(posts()->id, 'status_order', 1);
+                if (!$res) throw new Exception('Haha error');
+
+                Flasher::setFlash('Update&nbsp<b>SUCCESS</b>', 'success');
             } else {
                 Flasher::setFlash("Menu&nbsp<b>{$tersedia}</b>&nbsptelah habis!", 'danger');
             }
@@ -230,6 +220,54 @@ class Pesanan extends Controller
         redirectTo('/pesanan');
 	}
 
+    public function submitPembayaran() 
+    {
+        try {
+            httpPOST();
+            $this->auth('user', 'Owner|Manager|Sales');
+            csrf_validate('/pesanan');
+
+            // Get common information
+            $outlet_uuid = $this->user['outlet_uuid'];
+            $pesanan = $this->model($this->model_name)->getDataById(posts()->id);
+
+            // Set data finance
+            $finance = $this->model('Finance_model')->getDataByRelation('pesanan|' . $pesanan['tanggal']);
+            if ($finance) {
+                // Update if data on that date is available
+                $res = $this->model('Finance_model')->updateFrom(
+                    $finance['relation'],
+                    $finance['jumlah'] + $pesanan['total'],
+                    $finance['tanggal'],
+                );
+            } else {
+                // If not, then add new record
+                $res = $this->model('Finance_model')->insertFrom(
+                    'pesanan|' . $pesanan['tanggal'],
+                    $pesanan['total'],
+                    'Pendapatan pesanan Harian',
+                    $pesanan['tanggal'],
+                    $outlet_uuid
+                );
+            }
+            if (!$res) new Exception('Haha eror');
+
+            // Update data pembayaran
+            $res = $this->model($this->model_name)->updatePembayaran(posts()->id, (array)posts());
+            if (!$res) throw new Exception('Haha error');
+
+            // Update status pesanan/prepare
+            $res = $this->model($this->model_name)->updateField(posts()->id, 'status_order', 2);
+            if (!$res) throw new Exception('Haha error');
+
+            Flasher::setFlash('Update&nbsp<b>SUCCESS</b>', 'success');
+        } catch(Exception $e) {
+            dd($e->getMessage());
+            Flasher::setFlash('Update&nbsp<b>FAILED</b>', 'danger');
+        }
+        redirectTo('/pesanan');
+    }
+
     public function delete($id)
     {
         try {
@@ -237,12 +275,8 @@ class Pesanan extends Controller
 
             $old = $this->model($this->model_name)->getDataById($id);
 
-            // Update pengeluaran
-            $res = $this->model($this->model_name)->delete($id);
-            if (!$res) new Exception('Haha eror');
-
             // Update finance by difference and total
-            $finance = $this->model('Finance_model')->getDataByRelation('penjualan|' . $old['tanggal']);
+            $finance = $this->model('Finance_model')->getDataByRelation('pesanan|' . $old['tanggal']);
             $diff = $_POST['total'] - $old['total'];
             $total = $finance['jumlah'] + $diff;
             if ($total > 0) {
@@ -256,6 +290,10 @@ class Pesanan extends Controller
             }
             if (!$res) new Exception('Haha eror');
 
+            // Update pengeluaran
+            $res = $this->model($this->model_name)->delete($id);
+            if (!$res) new Exception('Haha eror');
+
             Flasher::setFlash('Delete&nbsp<b>SUCCESS</b>', 'success');
         } catch(Exception $e) {
             // dd($e->getMessage());
@@ -266,8 +304,9 @@ class Pesanan extends Controller
 
     public function getUbah()
     {
+        httpPOST();
         $this->auth('user', 'Owner|Manager|Sales');
-        returnJson($this->model($this->model_name)->getDataById($_POST['id']));
+        returnJson($this->model($this->model_name)->getDataById(posts()->id));
     }
 
 	public function destroy()

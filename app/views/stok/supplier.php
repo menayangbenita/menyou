@@ -101,7 +101,7 @@
                                             Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="fw-semibold text-gray-600">
                                     <?php $i = 1; ?>
                                     <?php foreach ($data["supplier"] as $supplier): ?>
                                         <tr>
@@ -167,9 +167,6 @@
                     <!--end::Products-->
                 </div>
                 <!--end::Content container-->
-            </div>
-            <!--end::Content-->
-        </div>
         <!--end::Content wrapper-->
         <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">

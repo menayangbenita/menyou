@@ -150,8 +150,7 @@
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3" data-id="<?= $kategori['id']; ?>"
-                                                        data-kt-ecommerce-product-filter="delete_row">Hapus</a>
+                                                    <a href="<?= BASEURL; ?>/kategori/delete/<?= $kategori['id'] ?>" onclick="return confirm ('Hapus data?')" class="menu-link px-3">Hapus</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -166,10 +165,6 @@
                     <!--end::Card body-->
                 </div>
                 <!--end::Products-->
-            </div>
-            <!--end::Content-->
-        </div>
-        <!--end::Content wrapper-->
 
         <!-- modal -->
         <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

@@ -62,10 +62,10 @@
                             <?php foreach ($data['preferences'] as $preference): ?>
                                 <?php if ($preference['category'] != $category)
                                     continue; ?>
-                                <div class="mb-1">
+                                <div class="mb-8 fv-row">
                                     <label for="<?= $preference['setting'] ?>"
-                                        class="form-label"><?= str_replace('_', ' ', $preference['setting']) ?></label>
-                                    <input type="text" class="form-control" id="<?= $preference['setting'] ?>"
+                                        class="required form-label fs-6 fw-semibold mb-2"><?= str_replace('_', ' ', $preference['setting']) ?></label>
+                                    <input type="text" class="form-control form-control-solid" id="<?= $preference['setting'] ?>"
                                         name="<?= $preference['setting'] ?>" value="<?= $preference['value'] ?>">
                                 </div>
                             <?php endforeach; ?>

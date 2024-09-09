@@ -22,7 +22,7 @@
                                 <!--begin::Title-->
                                 <h1
                                     class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                                    Reward & Punishment</h1>
+                                    Absensi Excel 1</h1>
                                 <!--end::Title-->
                                 <!--begin::Breadcrumb-->
                                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
@@ -35,7 +35,7 @@
                                     </li>
                                     <!--end::Item-->
                                     <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">Reward & Punishsment</li>
+                                    <li class="breadcrumb-item text-muted">Absensi Excel 1</li>
                                     <!--end::Item-->
                                 </ul>
                                 <!--end::Breadcrumb-->
@@ -45,8 +45,8 @@
                     <!--end::Page title-->
                     <!--begin::Actions-->
                     <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">Tambah
-                            Data</a>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">Impor
+                            Data dari Excel</a>
                     </div>
                     <!--end::Actions-->
                 </div>
@@ -63,21 +63,55 @@
                 <div class="card card-flush">
                     <!--begin::Card header-->
                     <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-                        <!--begin::Card title-->
-                        <div class="card-title">
-                            <!--begin::Search-->
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <i class="ki-outline ki-magnifier fs-2 position-absolute ms-4"></i>
-                                <input type="text" data-kt-ecommerce-order-filter="search"
-                                    class="form-control form-control-solid w-250px ps-12"
-                                    placeholder="Cari Reward/Punishment" />
-                            </div>
-                            <!--end::Search-->
-                            <!--begin::Export buttons-->
-                            <div id="kt_ecommerce_report_views_export" class="d-none"></div>
-                            <!--end::Export buttons-->
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span
+                                    class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0 mb-2 me-3">Rekap
+                                    Kehadiran Karyawan</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">September 2024</span>
+                            </h3>
                         </div>
-                        <!--end::Card title-->
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                            <!--begin::Daterangepicker-->
+                            <input class="form-control form-control-solid w-100 mw-250px"
+                                placeholder="Pilih rentang tanggal" id="kt_ecommerce_report_views_daterangepicker" />
+                            <!--end::Daterangepicker-->
+                            <!--begin::Export dropdown-->
+                            <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
+                                data-kt-menu-placement="bottom-end">
+                                <i class="ki-outline ki-exit-up fs-2"></i>Ekspor Laporan</button>
+                            <!--begin::Menu-->
+                            <div id="kt_ecommerce_report_views_export_menu"
+                                class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4"
+                                data-kt-menu="true">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3" data-kt-ecommerce-export="copy">Copy to
+                                        clipboard</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3" data-kt-ecommerce-export="excel">Export as
+                                        Excel</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3" data-kt-ecommerce-export="csv">Export as
+                                        CSV</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3" data-kt-ecommerce-export="pdf">Export as
+                                        PDF</a>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu-->
+                            <!--end::Export dropdown-->
+                        </div>
                     </div>
                     <!--end::Card header-->
                     <!--begin::Card body-->
@@ -87,82 +121,45 @@
                             id="kt_ecommerce_report_views_table">
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                    <th class="w-10px pe-2">
+                                <th rowspan="2" class="w-10px pe-2 align-middle">
                                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                             <input class="form-check-input" type="checkbox" data-kt-check="true"
                                                 data-kt-check-target="#kt_ecommerce_products_table .form-check-input"
                                                 value="1" />
                                         </div>
                                     </th>
-                                    <th class="min-w-50px align-middle">Nama Karyawan</th>
-                                    <th class="min-w-75px align-middle">Jenis</th>
-                                    <th class="min-w-100px align-middle">Total Besaran</th>
-                                    <th class="min-w-100px align-middle">Keterangan</th>
-                                    <th class="min-w-100px align-middle">Tanggal</th>
-                                    <th class="text-end min-w-70px align-middle">Aksi</th>
+                                    <th rowspan="2" class="min-w-150px align-middle">Nama Karyawan</th>
+                                    <th colspan="<?= $data['hari'] ?>" class="text-center min-w-75px align-middle">
+                                        Tanggal</th>
+                                    <th rowspan="2" class="text-center min-w-75px align-middle">Total Hadir</th>
+                                    <th rowspan="2" class="text-center min-w-100px align-middle">Total Terlambat</th>
+                                    <th rowspan="2" class="text-center min-w-100px align-middle">Total Menit Terlambat
+                                    </th>
+                                    <th rowspan="2" class="text-center min-w-100px align-middle">Total Jam Kerja</th>
+                                    <th rowspan="2" class="text-end min-w-70px align-middle">Aksi</th>
+                                </tr>
+                                <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                    <?php for ($i = 1; $i <= $data['hari']; $i++) { ?>
+                                        <th
+                                            class="text-center min-w-50px">
+                                            <?= $i; ?></th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
-                                <?php foreach ($data['reward_punishment'] as $reward_punishment): ?>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox"
-                                                    value="<?= $reward_punishment['id']; ?>" />
-                                            </div>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <span class="fw-bold"><?= $reward_punishment['nama'] ?></span>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <h6
-                                                class='mb-0 badge badge-light-<?= ($reward_punishment['jenis'] == 'reward' ? 'success' : 'danger') ?> copy-badge'>
-                                                <?= ucfirst($reward_punishment['jenis']) ?>
-                                            </h6>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <span class="fw-bold"><b><?= $reward_punishment['jumlah'] ?></b> x Rp
-                                                <?= number_format($reward_punishment['besaran'], 0, '.', '.') ?>
-                                                <br>= <b>Rp
-                                                    <?= number_format($reward_punishment['total'], 0, '.', '.') ?></b></span>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <span class="fw-bold"><?= $reward_punishment['keterangan'] ?></span>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <span
-                                                class="fw-bold"><?= date('d-m-Y', strtotime($reward_punishment['tanggal'])) ?></span>
-                                        </td>
-                                        <td class="text-end">
-                                            <a href="#"
-                                                class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
-                                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Aksi
-                                                <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-                                            <!--begin::Menu-->
-                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
-                                                data-kt-menu="true">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="<?= BASEURL; ?>/rewardpunishment/print/<?= $reward_punishment['uuid'] ?>"
-                                                        class="menu-link px-3">
-                                                        Cetak Surat</a>
-                                                </div>
-                                                <div class="menu-item px-3">
-                                                    <a class="menu-link px-3 tampilModalUbah" data-bs-toggle="modal"
-                                                        data-bs-target="#formModal"
-                                                        data-id="<?= $reward_punishment['id']; ?>">Edit</a>
-                                                </div>
-                                                <div class="menu-item px-3">
-                                                    <a href="<?= BASEURL; ?>/rewardpunishment/delete/<?= $reward_punishment['id'] ?>"
-                                                        class="menu-link px-3" data-id="<?= $reward_punishment['id']; ?>"
-                                                        data-kt-ecommerce-product-filter="delete_row">Hapus</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
-                                            <!--end::Menu-->
-                                        </td>
-                                    <?php endforeach; ?>
-                                    </tr>
+                                <tr class="fw-bold align-middle">
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="<?= $reward_punishment['id']; ?>" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Ale
+                                    </td>
+                                    <td>
+                                        Hadir
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -174,8 +171,8 @@
 
             <!-- Modal -->
             <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog modal-dialog-centered mw-650px">
-                   <div class="modal-content rounded">
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content rounded">
                         <div class="modal-header pb-0 border-0 justify-content-end">
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">

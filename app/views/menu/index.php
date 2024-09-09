@@ -258,10 +258,6 @@
                 <!--end::Products-->
             </div>
             <!--end::Content container-->
-        </div>
-        <!--end::Content-->
-    </div>
-    <!--end::Content wrapper-->
     <!-- Form Modal -->
     <div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">

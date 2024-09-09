@@ -170,7 +170,7 @@
                                             <div class="text-muted fs-7 me-2">Kategori</div>
                                             <!--end::Label-->
                                             <!--begin::Select-->
-                                            
+
                                             <select
                                                 class="form-select form-select-transparent text-gray-900 fs-7 lh-1 fw-bold py-0 ps-3 w-auto"
                                                 data-control="select2" data-hide-search="true"
@@ -179,7 +179,8 @@
                                                 <option></option>
                                                 <option value="lihat" selected="selected">Lihat Semua</option>
                                                 <?php foreach ($data['kategori'] as $kategori): ?>
-                                                    <option value="<?= $kategori['nama'] ?>"> <?= $kategori['nama'] ?></option>
+                                                    <option value="<?= $kategori['nama'] ?>"> <?= $kategori['nama'] ?>
+                                                    </option>
                                                 <?php endforeach ?>
                                             </select>
 
@@ -232,7 +233,8 @@
                                                         <?php endif; ?></a></td>
                                                 <!--end::Product ID-->
                                                 <!--begin::Date added-->
-                                                <td class="text-start" data-order="<?= $menu['kategori'] ?>" data-value="<?= $menu['kategori'] ?>">
+                                                <td class="text-start" data-order="<?= $menu['kategori'] ?>"
+                                                    data-value="<?= $menu['kategori'] ?>">
                                                     <?= $menu['kategori'] ?>
                                                 </td>
                                                 <!--end::Date added-->
@@ -267,12 +269,22 @@
                                             makanan</span>
                                     </h3>
                                 </div>
+                                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                                    <!--begin::Search-->
+                                    <div class="d-flex align-items-center position-relative my-1 me-2">
+                                        <i class="ki-outline ki-magnifier fs-2 position-absolute ms-4"></i>
+                                        <input type="text" data-kt-ecommerce-order-filter="search"
+                                            class="form-control form-control-solid w-250px ps-12"
+                                            placeholder="Cari Stok" />
+                                    </div>
+                                    <!--end::Search-->
+                                </div>
                             </div>
                             <div class="card-body pt-5">
                                 <!--begin::Table-->
                                 <div class="table-responsive">
-                                    <table id="example" class="table align-middle table-row-dashed fs-6 gy-3"
-                                        style="width:100%">
+                                    <table id="kt_ecommerce_report_views_table"
+                                        class="table align-middle table-row-dashed fs-6 gy-3" style="width:100%">
                                         <thead>
                                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                                 <th class="text-start min-w-100px">Nama</th>
@@ -345,6 +357,7 @@
 <script src="<?= BASEURL ?>/js/custom/utilities/modals/upgrade-plan.js"></script>
 <script src="<?= BASEURL ?>/js/custom/utilities/modals/create-campaign.js"></script>
 <script src="<?= BASEURL ?>/js/custom/utilities/modals/users-search.js"></script>
+<script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
 <script src="<?= BASEURL ?>/js\widgets.bundle.js"></script>
 <!-- js datatable start-->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

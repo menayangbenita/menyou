@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- icon -->
     <link rel="apple-touch-icon" sizes="76x76" href="<?= BASEURL ?>/img/apple-icon.png">
-    <link rel="shortcut icon" href="<?= BASEURL ?>/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="<?= BASEURL ?>/media/logos/icon logo.png" />
     <!-- stylesheet -->
     <link rel="stylesheet" <link rel="stylesheet"
         href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
@@ -33,6 +33,66 @@
 
     <!-- title -->
     <title>POS - <?= $data['title'] ?></title>
+    <script>
+        // Init function for DataTable
+        function initDataTables(id, with_export = true, with_info = true, fixed_column = {left: 1, right: 1}) {
+            let table = $(id);
+
+            if (table.length == 0) {
+                // console.error("element not found: " + id);
+                return false;
+            }
+
+            const buttons_detail = (with_export) ? 
+            [
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                'colvis'
+            ] : [];
+
+            let init = table.DataTable({
+                lengthChange: false,
+                buttons: buttons_detail,
+                fixedColumns: fixed_column,
+                paging: true,
+                scrollX: true,
+                info: with_info,
+                responsive: false,
+                language: {
+                    paginate: {
+                        previous: '<i class="bi bi-chevron-left"></i>',
+                        next: '<i class="bi bi-chevron-right"></i>'
+                    }
+                }
+            });
+
+            if (with_export) init.buttons().container().appendTo(`${id}_wrapper .col-md-6:eq(0)`);
+
+            return init;
+        }
+    </script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -70,10 +130,10 @@
                         <!--end::Sidebar mobile toggle-->
                         <!--begin::Logo-->
                         <a href="index.html" class="app-sidebar-logo">
-                            <img alt="Logo" src="<?= Get::model('Preferences')->getPreference('Direktori_Logo') ?>"
-                                class="h-25px theme-light-show" />
-                            <img alt="Logo" src="<?= Get::model('Preferences')->getPreference('Direktori_Logo') ?>"
-                                class="h-25px theme-dark-show" />
+                            <img alt="Logo" src="<?= BASEURL ?>/media/logos/text logo.png"
+                                class="h-50px theme-light-show" />
+                            <img alt="Logo" src="<?= BASEURL ?>/media/logos/text logo white.png"
+                                class="h-50px theme-dark-show" />
                         </a>
                         <!--end::Logo-->
                     </div>
@@ -785,14 +845,6 @@
                             <!--end::Link-->
                         </div>
                         <!--end::Action-->
-                        <!--begin::Header menu toggle-->
-                        <div class="app-navbar-item ms-2 ms-lg-6 ms-n2 me-3 d-flex d-lg-none">
-                            <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
-                                id="kt_app_aside_mobile_toggle">
-                                <i class="ki-outline ki-burger-menu-2 fs-2"></i>
-                            </div>
-                        </div>
-                        <!--end::Header menu toggle-->
                     </div>
                     <!--end::Navbar-->
                 </div>
@@ -846,19 +898,19 @@
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/pesanan/kasir" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Kasir</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu link-->
                                             <a href="<?= BASEURL ?>/pesanan" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">Pesanan</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/pesanan/add" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Tambah Pesanan</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -895,7 +947,23 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Kategori</span>
+                                                <span class="menu-title">Kategori Menu</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/prepare" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Menu Prepare</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/prepare/request" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Request Prepare</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>

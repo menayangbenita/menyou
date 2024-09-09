@@ -184,7 +184,7 @@
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
                                                     <a href="<?= BASEURL ?>/penggajian/print/<?= $data['filter']['bulan'] ?>/<?= $data['filter']['tahun'] ?>/<?= $karyawan['uuid'] ?>"
-                                                        class="menu-link px-3" data-id="<?= $menu['id']; ?>">Print</a>
+                                                        class="menu-link px-3" data-id="<?= $menu['id']; ?>">Cetak Surat</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -199,10 +199,6 @@
                     <!--end::Card body-->
                 </div>
                 <!--end::Products-->
-            </div>
-            <!--end::Content container-->
-        </div>
-        <!--end::Content-->
 
 <!--begin::Javascript-->
 <script>var hostUrl = "assets/";</script>

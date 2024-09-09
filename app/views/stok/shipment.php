@@ -83,20 +83,6 @@
                             <input class="form-control form-control-solid w-100 mw-250px"
                                 placeholder="Pilih rentang tanggal" id="kt_ecommerce_report_views_daterangepicker" />
                             <!--end::Daterangepicker-->
-                            <!--begin::Filter-->
-                            <div class="w-150px">
-                                <!--begin::Select2-->
-                                <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Jenis"
-                                    data-kt-ecommerce-order-filter="rating">
-                                    <option></option>
-                                    <option value="all">Semua</option>
-                                    <option value="Bahan">Bahan</option>
-                                    <option value="Kemasan">Kemasan</option>
-                                </select>
-                                <!--end::Select2-->
-                            </div>
-                            <!--end::Filter-->
                             <!--begin::Export dropdown-->
                             <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
                                 data-kt-menu-placement="bottom-end">
@@ -280,392 +266,388 @@
                 </div>
                 <!--end::Content container-->
             </div>
-            <!--end::Content-->
-        </div>
-        <!--end::Content wrapper-->
 
-        <!-- Form Modal -->
-        <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content rounded">
-                    <!--begin::Modal header-->
-                    <div class="modal-header pb-0 border-0 justify-content-end">
-                        <!--begin::Close-->
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <i class="ki-outline ki-cross fs-1"></i>
+            <!-- Form Modal -->
+            <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content rounded">
+                        <!--begin::Modal header-->
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
+                            </div>
+                            <!--end::Close-->
                         </div>
-                        <!--end::Close-->
-                    </div>
-                    <!--begin::Modal header-->
-                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                        <!--begin::Heading-->
-                        <div class="mb-13 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Tambah Data Shipment</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <form action="<?= BASEURL ?>/shipment/insert" method="post">
-                            <?= csrf() ?>
-                            <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
-                                <!--begin::Col-->
-                                <div class="col-md-4 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                        <span class="required">No Faktur</span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <input type="text" class="form-control form-control-solid" placeholder="Cth: F0001"
-                                        name="no_faktur" id="no_faktur" />
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-md-4 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal</label>
-                                    <!--begin::Input-->
-                                    <div class="position-relative d-flex align-items-center">
-                                        <!--begin::Icon-->
-                                        <i class="ki-outline ki-calendar-8 fs-2 position-absolute mx-4"></i>
-                                        <!--end::Icon-->
-                                        <!--begin::Datepicker-->
-                                        <input class="form-control form-control-solid ps-12" type="date" name="tanggal"
-                                            id="tanggal" value="<?= date('Y-m-d') ?>" required />
-                                        <!--end::Datepicker-->
+                        <!--begin::Modal header-->
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Tambah Data Shipment</h1>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <form action="<?= BASEURL ?>/shipment/insert" method="post">
+                                <?= csrf() ?>
+                                <!--begin::Input group-->
+                                <div class="row g-9 mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-md-4 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">No Faktur</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="text" class="form-control form-control-solid"
+                                            placeholder="Cth: F0001" name="no_faktur" id="no_faktur" />
                                     </div>
-                                    <!--end::Input-->
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-semibold mb-2">Tanggal</label>
+                                        <!--begin::Input-->
+                                        <div class="position-relative d-flex align-items-center">
+                                            <!--begin::Icon-->
+                                            <i class="ki-outline ki-calendar-8 fs-2 position-absolute mx-4"></i>
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <input class="form-control form-control-solid ps-12" type="date"
+                                                name="tanggal" id="tanggal" value="<?= date('Y-m-d') ?>" required />
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-4 fv-row">
+                                        <label class="required fs-6 fw-semibold mb-2">Supplier</label>
+                                        <!--begin::Input-->
+                                        <div class="position-relative d-flex align-items-center">
+                                            <select class="form-select form-select-solid" data-control="select2"
+                                                data-hide-search="true" name="supplier_id" id="supplier_id" required>
+                                                <?php foreach ($data['supplier'] as $supplier): ?>
+                                                    <option value="<?= $supplier['id'] ?>"><?= $supplier['nama'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-md-4 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Supplier</label>
-                                    <!--begin::Input-->
-                                    <div class="position-relative d-flex align-items-center">
-                                        <select class="form-select form-select-solid" data-control="select2"
-                                            data-hide-search="true" name="supplier_id" id="supplier_id" required>
-                                            <?php foreach ($data['supplier'] as $supplier): ?>
-                                                <option value="<?= $supplier['id'] ?>"><?= $supplier['nama'] ?></option>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-8">
+                                    <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
+                                    <textarea class="form-control form-control-solid" name="deskripsi" id="deskripsi"
+                                        rows="3" placeholder="Deskripsi shipment" required></textarea>
+                                </div>
+                                <!--end::Input group-->
+
+                                <div class="row mb-3 border-top pt-3 overflow-x-auto">
+                                    <div class="col-md-12">
+                                        <table class="w-full table table-responsive mb-4">
+                                            <thead>
+                                                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                                    <th class="min-w-50px">
+                                                        No</th>
+                                                    <th class="min-w-150px">
+                                                        Nama Barang</th>
+                                                    <th class="min-w-150px">
+                                                        Jenis</th>
+                                                    <th class="min-w-100px">
+                                                        Jumlah</th>
+                                                    <th class="min-w-100px">
+                                                        Satuan</th>
+                                                    <th class="min-w-150px">
+                                                        Harga Satuan</th>
+                                                    <th class="min-w-1500px">
+                                                        Subtotal</th>
+                                                    <th class="text-center align-middle">
+                                                        <button class="btn btn-icon btn-success btn-sm m-0 px-3"
+                                                            id="add-detail-barang" type="button">
+                                                            <i class="ki-solid ki-abstract-10 pe-0 me-0"></i>
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="detail_barang">
+                                                <!-- <tr> element on <script> tag bellow -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <datalist id="barang">
+                                        <?php foreach ($data['barang'] as $barang): ?>
+                                            <?php if ($barang['jenis'] == 'prepare')
+                                                continue; ?>
+                                            <option value="<?= $barang['nama'] ?>" data-satuan="<?= $barang['satuan'] ?>"
+                                                data-jenis="<?= $barang['jenis'] ?>">
                                             <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <!--end::Input-->
+                                    </datalist>
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8">
-                                <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
-                                <textarea class="form-control form-control-solid" name="deskripsi" id="deskripsi"
-                                    rows="3" placeholder="Deskripsi shipment" required></textarea>
-                            </div>
-                            <!--end::Input group-->
+                                <div class="row g-9 mb-8 border-top pt-2 mt-4">
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Total Berat Shipment</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div class="row pe-3">
+                                            <div class="col-10">
+                                                <input type="number" class="form-control form-control-solid count"
+                                                    id="total_berat" placeholder="Cth: 200" name="total_berat" min="0"
+                                                    required>
+                                            </div>
+                                            <div class="col-2 px-0">
+                                                <input type="text" class="form-control form-control-solid" value="gram"
+                                                    disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <label class="required fs-6 fw-semibold mb-2">Total EXW</label>
+                                        <!--begin::Input-->
+                                        <div class="position-relative d-flex align-items-center">
+                                            <!--begin::Icon-->
+                                            <span class="fs-6 position-absolute mx-4">Rp</span>
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <input class="form-control form-control-solid ps-12" name="total_exw"
+                                                id="total_exw" value="0" required readonly />
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <div class="row g-9 mb-3">
+                                    <div class="col-md-6 fv-row">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <label class="required fs-6 fw-semibold mb-2">Biaya Lainnya</label>
+                                            <button class="btn btn-success p-0 px-2 fs-6" id="add-biaya-lainnya"
+                                                type="button">+</button>
+                                        </div>
+                                        <div id="biaya-lainnya" class="d-flex flex-column gap-2">
+                                            <!-- .row element on <script> tag bellow -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 fv-row d-flex flex-column justify-content-end">
+                                        <label class="required fs-6 fw-semibold mb-2" for="total_biaya_lainnya">Total
+                                            Biaya
+                                            Lainnya</label>
+                                        <!--begin::Input-->
+                                        <div class="position-relative d-flex align-items-center">
+                                            <!--begin::Icon-->
+                                            <span class="fs-6 position-absolute mx-4">Rp</span>
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <input type="number" class="form-control form-control-solid ps-12"
+                                                name="total_biaya_lainnya" id="total_biaya_lainnya" value="0" required
+                                                readonly />
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-md-6">
+                                        <label class="form-label fs-6 mb-0 d-block text-end" for="diskon">Diskon</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-text border-0">Rp</span>
+                                            <input type="number" class="form-control form-control-solid ps-2 count"
+                                                name="diskon" id="diskon" value="0" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-md-6">
+                                        <label class="form-label fs-6 mb-0 d-block text-end" for="total">Total</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-text border-0">Rp</span>
+                                            <input type="number" class="form-control form-control-solid ps-2"
+                                                name="total" id="total" value="0" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-15 fv-row align-items-center">
+                                    <div class="col-md-6">
+                                        <label class="form-label fs-6 mb-0 d-block text-end" for="harga_all_in">Harga
+                                            All In
+                                            /
+                                            kg</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group bg-light">
+                                            <span class="input-group-text border-0">Rp</span>
+                                            <input type="number" class="form-control form-control-solid ps-2"
+                                                name="harga_all_in" id="harga_all_in" value="0" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--begin::Actions-->
+                                <div class="text-center">
+                                    <button type="button" id="kt_modal_new_target_cancel" class="btn btn-light me-3"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                                        <span class="indicator-label">Simpan</span>
+                                        <span class="indicator-progress">Please wait...
+                                            <span
+                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="row mb-3 border-top pt-3 overflow-x-auto">
-                                <div class="col-md-12">
-                                    <table class="w-full table table-responsive mb-4">
-                                        <thead>
-                                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                                <th class="min-w-50px">
-                                                    No</th>
-                                                <th class="min-w-150px">
-                                                    Nama Barang</th>
-                                                <th class="min-w-150px">
-                                                    Jenis</th>
-                                                <th class="min-w-100px">
-                                                    Jumlah</th>
-                                                <th class="min-w-100px">
-                                                    Satuan</th>
-                                                <th class="min-w-150px">
-                                                    Harga Satuan</th>
-                                                <th class="min-w-1500px">
-                                                    Subtotal</th>
-                                                <th class="text-center align-middle">
-                                                    <button class="btn btn-success btn-sm m-0 px-3"
-                                                        id="add-detail-barang" type="button">
-                                                        <i class="ki-solid ki-abstract-10 pe-0 me-0"></i>
-                                                    </button>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="detail_barang">
-                                            <!-- <tr> element on <script> tag bellow -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <datalist id="barang">
-                                    <?php foreach ($data['barang'] as $barang): ?>
-                                        <?php if ($barang['jenis'] == 'prepare')
-                                            continue; ?>
-                                        <option value="<?= $barang['nama'] ?>" data-satuan="<?= $barang['satuan'] ?>"
-                                            data-jenis="<?= $barang['jenis'] ?>">
-                                        <?php endforeach; ?>
-                                </datalist>
+            <!-- Detail Modal -->
+            <div class="modal modal-lg fade" id="detailModal" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content rounded">
+                        <!--begin::Modal header-->
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
                             </div>
-                            <div class="row g-9 mb-8 border-top pt-2 mt-4">
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                        <span class="required">Total Berat Shipment</span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <div class="row pe-3">
-                                        <div class="col-10">
-                                            <input type="number" class="form-control form-control-solid count"
-                                                id="total_berat" placeholder="Cth: 200" name="total_berat" min="0"
-                                                required>
-                                        </div>
-                                        <div class="col-2 px-0">
-                                            <input type="text" class="form-control form-control-solid" value="gram"
-                                                disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Total EXW</label>
-                                    <!--begin::Input-->
-                                    <div class="position-relative d-flex align-items-center">
-                                        <!--begin::Icon-->
-                                        <span class="fs-6 position-absolute mx-4">Rp</span>
-                                        <!--end::Icon-->
-                                        <!--begin::Datepicker-->
-                                        <input class="form-control form-control-solid ps-12" name="total_exw"
-                                            id="total_exw" value="0" required readonly />
-                                        <!--end::Datepicker-->
-                                    </div>
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Col-->
+                            <!--end::Close-->
+                        </div>
+                        <!--begin::Modal header-->
+                        <div class="modal-body">
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Detail Barang</h1>
+                                <!--end::Title-->
                             </div>
-                            <div class="row g-9 mb-3">
-                                <div class="col-md-6 fv-row">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="required fs-6 fw-semibold mb-2">Biaya Lainnya</label>
-                                        <button class="btn btn-success p-0 px-2 fs-6" id="add-biaya-lainnya"
-                                            type="button">+</button>
-                                    </div>
-                                    <div id="biaya-lainnya" class="d-flex flex-column gap-2">
-                                        <!-- .row element on <script> tag bellow -->
-                                    </div>
-                                </div>
-                                <div class="col-md-6 fv-row d-flex flex-column justify-content-end">
-                                    <label class="required fs-6 fw-semibold mb-2" for="total_biaya_lainnya">Total Biaya
-                                        Lainnya</label>
-                                    <!--begin::Input-->
-                                    <div class="position-relative d-flex align-items-center">
-                                        <!--begin::Icon-->
-                                        <span class="fs-6 position-absolute mx-4">Rp</span>
-                                        <!--end::Icon-->
-                                        <!--begin::Datepicker-->
-                                        <input type="number" class="form-control form-control-solid ps-12"
-                                            name="total_biaya_lainnya" id="total_biaya_lainnya" value="0" required
-                                            readonly />
-                                        <!--end::Datepicker-->
-                                    </div>
-                                    <!--end::Input-->
-                                </div>
+                            <!--end::Heading-->
+                            <div class="table-responsive mb-13">
+                                <table class="table table-bordered" style="border-collapse: collapse !important;"
+                                    id="tabel-detail-barang">
+                                    <thead>
+                                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                            <th class="min-w-50px">
+                                                No</th>
+                                            <th class="min-w-150px">
+                                                Nama Barang</th>
+                                            <th class="min-w-125px">
+                                                Jenis</th>
+                                            <th class="min-w-100px">
+                                                Jumlah</th>
+                                            <th class="min-w-150px">
+                                                Harga Satuan</th>
+                                            <th class="min-w-175px">
+                                                Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                            <td colspan="5" class="text-end text-sm fw-bolder pe-3">Total Biaya EXW :
+                                            </td>
+                                            <td class="total text-sm text-end fw-bolder"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                            <div class="row mb-3 align-items-center">
-                                <div class="col-md-6">
-                                    <label class="form-label fs-6 mb-0 d-block text-end" for="diskon">Diskon</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-text border-0">Rp</span>
-                                        <input type="number" class="form-control form-control-solid ps-2 count" name="diskon" id="diskon"
-                                            value="0" required>
-                                    </div>
-                                </div>
+
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Biaya Lainnya</h1>
+                                <!--end::Title-->
                             </div>
-                            <div class="row mb-3 align-items-center">
-                                <div class="col-md-6">
-                                    <label class="form-label fs-6 mb-0 d-block text-end" for="total">Total</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-text border-0">Rp</span>
-                                        <input type="number" class="form-control form-control-solid ps-2" name="total"
-                                            id="total" value="0" required readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-15 fv-row align-items-center">
-                                <div class="col-md-6">
-                                    <label class="form-label fs-6 mb-0 d-block text-end" for="harga_all_in">Harga All In
-                                        /
-                                        kg</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group bg-light">
-                                        <span class="input-group-text border-0">Rp</span>
-                                        <input type="number" class="form-control form-control-solid ps-2"
-                                            name="harga_all_in" id="harga_all_in" value="0" required readonly>
-                                    </div>
-                                </div>
+                            <!--end::Heading-->
+                            <div class="table-responsive px-4 mb-15">
+                                <table class="table table-striped border-top"
+                                    style="border-collapse: collapse !important;" id="tabel-biaya-lainnya">
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2" class="text-end text-sm fw-bolder border-end pe-3">Total
+                                                Biaya
+                                                Lainnya :</td>
+                                            <td class="total text-sm text-end fw-bolder"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
                             <!--begin::Actions-->
                             <div class="text-center">
                                 <button type="button" id="kt_modal_new_target_cancel" class="btn btn-light me-3"
-                                    data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Simpan</span>
-                                    <span class="indicator-progress">Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
+                                    data-bs-dismiss="modal">Tutup</button>
                             </div>
                             <!--end::Actions-->
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Detail Modal -->
-        <div class="modal modal-lg fade" id="detailModal" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content rounded">
-                    <!--begin::Modal header-->
-                    <div class="modal-header pb-0 border-0 justify-content-end">
-                        <!--begin::Close-->
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <i class="ki-outline ki-cross fs-1"></i>
-                        </div>
-                        <!--end::Close-->
-                    </div>
-                    <!--begin::Modal header-->
-                    <div class="modal-body">
-                        <!--begin::Heading-->
-                        <div class="mb-13 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Detail Barang</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <div class="table-responsive mb-13">
-                            <table class="table table-bordered" style="border-collapse: collapse !important;"
-                                id="tabel-detail-barang">
-                                <thead>
-                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                        <th
-                                            class="min-w-50px">
-                                            No</th>
-                                        <th
-                                            class="min-w-150px">
-                                            Nama Barang</th>
-                                        <th
-                                            class="min-w-125px">
-                                            Jenis</th>
-                                        <th
-                                            class="min-w-100px">
-                                            Jumlah</th>
-                                        <th
-                                            class="min-w-150px">
-                                            Harga Satuan</th>
-                                        <th
-                                            class="min-w-175px">
-                                            Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                                <tfoot>
-                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                        <td colspan="5" class="text-end text-sm fw-bolder pe-3">Total Biaya EXW :</td>
-                                        <td class="total text-sm text-end fw-bolder"></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+                <!--end::Vendors Javascript-->
+                <!--begin::Custom Javascript(used for this page only)-->
+                <script src="<? BASEURL ?>/js/custom/utilities/modals/new-target.js"></script>
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <!--end::Custom Javascript-->
+                <!--end::Javascript-->
 
-                        <!--begin::Heading-->
-                        <div class="mb-13 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Biaya Lainnya</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <div class="table-responsive px-4 mb-15">
-                            <table class="table table-striped border-top" style="border-collapse: collapse !important;"
-                                id="tabel-biaya-lainnya">
-                                <tbody></tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2" class="text-end text-sm fw-bolder border-end pe-3">Total Biaya
-                                            Lainnya :</td>
-                                        <td class="total text-sm text-end fw-bolder"></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!--begin::Actions-->
-                        <div class="text-center">
-                            <button type="button" id="kt_modal_new_target_cancel"
-                                class="btn btn-light me-3" data-bs-dismiss="modal">Tutup</button>
-                        </div>
-                        <!--end::Actions-->
-                    </div>
-                </div>
-            </div>
+                <script src="<?= BASEURL ?>/js/custom/shipment.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-            <!--begin::Javascript-->
-            <script>var hostUrl = "assets/";</script>
-            <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-            <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-            <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-            <!--end::Global Javascript Bundle-->
-            <!--begin::Vendors Javascript(used for this page only)-->
-            <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-            <!--end::Vendors Javascript-->
-            <!--begin::Custom Javascript(used for this page only)-->
-            <script src="<? BASEURL ?>/js/custom/utilities/modals/new-target.js"></script>
-            <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-            <!--end::Custom Javascript-->
-            <!--end::Javascript-->
+                <script>
+                    let message = 'Apakah anda yakin ingin menambah data?';
 
-            <script src="<?= BASEURL ?>/js/custom/shipment.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    $(function () {
+                        const BASEURL = window.location.href;
+                        const formater = new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR'
+                        });
 
-            <script>
-                let message = 'Apakah anda yakin ingin menambah data?';
+                        $('.tombolTambahData').click(function () {
+                            message = 'Apakah anda yakin ingin menambah data?';
 
-                $(function () {
-                    const BASEURL = window.location.href;
-                    const formater = new Intl.NumberFormat('id-ID', {
-                        style: 'currency',
-                        currency: 'IDR'
-                    });
+                            $("#formModal").removeClass("edit");
+                            $('#modalLabel').html('Tambah Data')
+                            $('.modal-footer button[type=submit]').html('Tambah Data');
+                            $(".modal-body form").attr("action", `${BASEURL}/insert`);
+                            $(".modal-body form")[0].reset();
+                            $("#tanggal").prop('disabled', false);
 
-                    $('.tombolTambahData').click(function () {
-                        message = 'Apakah anda yakin ingin menambah data?';
-
-                        $("#formModal").removeClass("edit");
-                        $('#modalLabel').html('Tambah Data')
-                        $('.modal-footer button[type=submit]').html('Tambah Data');
-                        $(".modal-body form").attr("action", `${BASEURL}/insert`);
-                        $(".modal-body form")[0].reset();
-                        $("#tanggal").prop('disabled', false);
-
-                        detailBarang.innerHTML = `
+                            detailBarang.innerHTML = `
                 <tr>
                     <td class="text-center align-middle">1</td>
                     <td class="px-1">
-                        <input type="text" class="form-control nama" name="nama[]" list="barang" autocomplete="off" placeholder="Nama Barang" required>
+                        <input type="text" class="form-control form-control-solid nama" name="nama[]" list="barang" autocomplete="off" placeholder="Nama Barang" required>
                     </td>
                     <td class="px-1">
-                        <select class="form-select jenis" name="jenis[]" required disabled>
+                        <select class="form-select form-select-solid jenis" name="jenis[]" required disabled>
                             <option value="bahan">Bahan</option>
                             <option value="kemasan">Kemasan</option>
                         </select>
                     </td>
                     <td class="px-1">
-                        <input type="number" class="form-control count-sub" name="jumlah[]" placeholder="0" min="0" required>
+                        <input type="number" class="form-control form-control-solid count-sub" name="jumlah[]" placeholder="0" min="0" required>
                     </td>
                     <td class="px-1">
-                        <select class="form-select satuan" name="satuan[]" required disabled>
+                        <select class="form-select form-select-solid satuan" name="satuan[]" required disabled>
                             <option value="Kg" selected>Kg</option>
                             <option value="Ons">Ons</option>
                             <option value="Box">Box</option>
@@ -681,29 +663,29 @@
                     </td>
                     <td class="px-1">
                         <div class="input-group">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control count-sub" name="harga_satuan[]" placeholder="0" min="0" required>
+                            <span class="input-group-text border-0">Rp</span>
+                            <input type="number" class="form-control form-control-solid count-sub" name="harga_satuan[]" placeholder="0" min="0" required>
                         </div>
                     </td>
                     <td class="px-1">
                         <div class="input-group bg-light">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control" name="subtotal[]" value="0" readonly required>
+                            <span class="input-group-text border-0">Rp</span>
+                            <input type="number" class="form-control form-control-solid" name="subtotal[]" value="0" readonly required>
                         </div>
                     </td>
                     <td class="px-1 align-middle text-center">
-                        <button class="btn btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
+                        <button class="btn btn-icon btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
                             <i class="fa fa-xmark text-sm"></i>
                         </button>
                     </td>
                 </tr>
             `;
 
-                        biayaLainnya.innerHTML = `
+                            biayaLainnya.innerHTML = `
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="input-group">
-                            <button class="btn btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
+                            <button class="btn btn-icon btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
                                 <i class="fa fa-xmark"></i>
                             </button>
                             <input type="text" class="form-control ps-2" name="nama_biaya_lainnya[]" placeholder="Nama biaya">
@@ -711,64 +693,64 @@
                     </div>
                     <div class="col-sm-6 ps-0">
                         <div class="input-group">
-                            <span class="input-group-text">Rp</span>
-                            <input type="number" class="form-control ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
+                            <span class="input-group-text border-0">Rp</span>
+                            <input type="number" class="form-control form-control-solid ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
                         </div>
                     </div>
                 </div>
             `;
 
-                        refreshEvent();
-                    });
+                            refreshEvent();
+                        });
 
-                    $(".tampilModalUbah").click(function () {
-                        message = 'Apakah anda yakin ingin mengubah data?';
-                        const id = $(this).data("id");
+                        $(".tampilModalUbah").click(function () {
+                            message = 'Apakah anda yakin ingin mengubah data?';
+                            const id = $(this).data("id");
 
-                        $("#formModal").addClass("edit");
-                        $("#modalLabel").html("Ubah Data");
-                        $(".modal-footer button[type=submit]").html("Ubah Data");
-                        $(".modal-body form").attr("action", `${BASEURL}/update/${id}`);
-                        $("#tanggal").prop('disabled', true);
+                            $("#formModal").addClass("edit");
+                            $("#modalLabel").html("Ubah Data");
+                            $(".modal-footer button[type=submit]").html("Ubah Data");
+                            $(".modal-body form").attr("action", `${BASEURL}/update/${id}`);
+                            $("#tanggal").prop('disabled', true);
 
-                        $.ajax({
-                            url: `${BASEURL}/getubah/${id}`,
-                            method: "get",
-                            dataType: "json",
-                            success: function (data) {
-                                // console.log(data);
-                                $("#nama").val(data.nama);
-                                $("#tanggal").val(data.tanggal);
-                                $("#no_faktur").val(data.no_faktur);
-                                $("#supplier_id").val(data.supplier_id);
-                                $("#deskripsi").val(data.deskripsi);
-                                $("#total_berat").val(data.total_berat);
+                            $.ajax({
+                                url: `${BASEURL}/getubah/${id}`,
+                                method: "get",
+                                dataType: "json",
+                                success: function (data) {
+                                    // console.log(data);
+                                    $("#nama").val(data.nama);
+                                    $("#tanggal").val(data.tanggal);
+                                    $("#no_faktur").val(data.no_faktur);
+                                    $("#supplier_id").val(data.supplier_id);
+                                    $("#deskripsi").val(data.deskripsi);
+                                    $("#total_berat").val(data.total_berat);
 
-                                // Detail barang
-                                detailBarang.innerHTML = '';
-                                let detail_barang = JSON.parse(data.detail_barang);
-                                detail_barang.forEach((barang, i) => {
-                                    let find = barang_all.find(item => item.nama === barang.nama);
-                                    let jenis = find.jenis;
-                                    let satuan = find.satuan;
+                                    // Detail barang
+                                    detailBarang.innerHTML = '';
+                                    let detail_barang = JSON.parse(data.detail_barang);
+                                    detail_barang.forEach((barang, i) => {
+                                        let find = barang_all.find(item => item.nama === barang.nama);
+                                        let jenis = find.jenis;
+                                        let satuan = find.satuan;
 
-                                    let row = document.createElement('tr');
-                                    row.innerHTML = `
+                                        let row = document.createElement('tr');
+                                        row.innerHTML = `
                             <td class="text-center align-middle">${i + 1}</td>
                             <td class="px-1">
-                                <input type="text" class="form-control nama" name="nama[]" value="${barang.nama}" list="barang" autocomplete="off" placeholder="Nama Barang" required>
+                                <input type="text" class="form-control form-control-solid nama" name="nama[]" value="${barang.nama}" list="barang" autocomplete="off" placeholder="Nama Barang" required>
                             </td>
                             <td class="px-1">
-                                <select class="form-select jenis" name="jenis[]" required disabled>
+                                <select class="form-select form-select-solid jenis" name="jenis[]" required disabled>
                                     <option value="bahan"${jenis == 'bahan' ? ' selected' : ''}>Bahan</option>
                                     <option value="kemasan"${jenis == 'kemasan' ? ' selected' : ''}>Kemasan</option>
                                 </select>
                             </td>
                             <td class="px-1">
-                                <input type="number" class="form-control count-sub" name="jumlah[]" value="${barang.jumlah}" placeholder="0" min="0" required>
+                                <input type="number" class="form-control form-control-solid count-sub" name="jumlah[]" value="${barang.jumlah}" placeholder="0" min="0" required>
                             </td>
                             <td class="px-1">
-                                <select class="form-select satuan" name="satuan[]" required disabled>
+                                <select class="form-select form-select-solid satuan" name="satuan[]" required disabled>
                                     <option value="Kg"${satuan == 'Kg' ? ' selected' : ''}>Kg</option>
                                     <option value="Ons"${satuan == 'Ons' ? ' selected' : ''}>Ons</option>
                                     <option value="Box"${satuan == 'Box' ? ' selected' : ''}>Box</option>
@@ -784,82 +766,82 @@
                             </td>
                             <td class="px-1">
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control count-sub" name="harga_satuan[]" value="${barang.harga_satuan}" placeholder="0" min="0" required>
+                                    <span class="input-group-text border-0">Rp</span>
+                                    <input type="number" class="form-control form-control-solid count-sub" name="harga_satuan[]" value="${barang.harga_satuan}" placeholder="0" min="0" required>
                                 </div>
                             </td>
                             <td class="px-1">
                                 <div class="input-group bg-light">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" name="subtotal[]" value="${barang.subtotal}" readonly required>
+                                    <span class="input-group-text border-0">Rp</span>
+                                    <input type="number" class="form-control form-control-solid" name="subtotal[]" value="${barang.subtotal}" readonly required>
                                 </div>
                             </td>
                             <td class="px-1 align-middle text-center">
-                                <button class="btn btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
+                                <button class="btn btn-icon btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
                                     <i class="fa fa-xmark text-sm"></i>
                                 </button>
                             </td>
                         `;
-                                    detailBarang.appendChild(row);
-                                });
-                                $("#total_exw").val(data.total_exw);
+                                        detailBarang.appendChild(row);
+                                    });
+                                    $("#total_exw").val(data.total_exw);
 
-                                // Detail biaya lainnya
-                                let biaya_lainnya = JSON.parse(data.biaya_lainnya);
-                                biayaLainnya.innerHTML = '';
+                                    // Detail biaya lainnya
+                                    let biaya_lainnya = JSON.parse(data.biaya_lainnya);
+                                    biayaLainnya.innerHTML = '';
 
-                                for (let key in biaya_lainnya) {
-                                    let biaya = document.createElement('div');
-                                    biaya.setAttribute('class', 'row');
-                                    biaya.innerHTML = `
+                                    for (let key in biaya_lainnya) {
+                                        let biaya = document.createElement('div');
+                                        biaya.setAttribute('class', 'row');
+                                        biaya.innerHTML = `
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                    <button class="btn btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
+                                    <button class="btn btn-icon btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
                                         <i class="fa fa-xmark"></i>
                                     </button>
-                                    <input type="text" class="form-control ps-2" name="nama_biaya_lainnya[]" value=${key} placeholder="Nama biaya">
+                                    <input type="text" class="form-control form-control-solid ps-2" name="nama_biaya_lainnya[]" value=${key} placeholder="Nama biaya">
                                 </div>
                             </div>
                             <div class="col-sm-6 ps-0">
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control ps-2 biaya-lainnya" name="biaya_lainnya[]" value=${biaya_lainnya[key]} placeholder="0" min="0">
+                                    <span class="input-group-text border-0">Rp</span>
+                                    <input type="number" class="form-control form-control-solid ps-2 biaya-lainnya" name="biaya_lainnya[]" value=${biaya_lainnya[key]} placeholder="0" min="0">
                                 </div>
                             </div>
                         `;
-                                    biayaLainnya.appendChild(biaya);
-                                }
+                                        biayaLainnya.appendChild(biaya);
+                                    }
 
-                                $("#total_biaya_lainnya").val(data.total_biaya_lainnya);
-                                $("#diskon").val(data.diskon);
-                                $("#total").val(data.total);
-                                $("#harga_all_in").val(data.harga_all_in);
+                                    $("#total_biaya_lainnya").val(data.total_biaya_lainnya);
+                                    $("#diskon").val(data.diskon);
+                                    $("#total").val(data.total);
+                                    $("#harga_all_in").val(data.harga_all_in);
 
-                                refreshEvent();
-                            },
+                                    refreshEvent();
+                                },
+                            });
                         });
-                    });
 
 
 
-                    $(".tampilModalDetail").click(function () {
-                        const id = $(this).data("id");
+                        $(".tampilModalDetail").click(function () {
+                            const id = $(this).data("id");
 
-                        $("#tabel-detail-barang tbody").html('');
-                        $("#tabel-biaya-lainnya tbody").html('');
-                        $("#tabel-biaya-lainnya").hide();
+                            $("#tabel-detail-barang tbody").html('');
+                            $("#tabel-biaya-lainnya tbody").html('');
+                            $("#tabel-biaya-lainnya").hide();
 
-                        $.ajax({
-                            url: `${BASEURL}/getubah/${id}`,
-                            method: "get",
-                            dataType: "json",
-                            success: function (data) {
-                                // console.log(data);
-                                let detail_barang = JSON.parse(data.detail_barang);
-                                detail_barang.forEach((barang, i) => {
-                                    let detail = barang_all.find(item => item.nama === barang.nama);
+                            $.ajax({
+                                url: `${BASEURL}/getubah/${id}`,
+                                method: "get",
+                                dataType: "json",
+                                success: function (data) {
+                                    // console.log(data);
+                                    let detail_barang = JSON.parse(data.detail_barang);
+                                    detail_barang.forEach((barang, i) => {
+                                        let detail = barang_all.find(item => item.nama === barang.nama);
 
-                                    $("#tabel-detail-barang tbody").append(`
+                                        $("#tabel-detail-barang tbody").append(`
                             <tr>
                                 <td class="text-sm text-center">${i + 1}</td>
                                 <td class="text-sm text-start">${barang.nama}</td>
@@ -869,29 +851,29 @@
                                 <td class="text-sm text-end fw-bold">${formater.format(barang.subtotal).replace(',00', '')}</td>
                             </tr>
                         `);
-                                });
-                                $('#tabel-detail-barang .total').html(formater.format(data.total_exw).replace(',00', ''))
+                                    });
+                                    $('#tabel-detail-barang .total').html(formater.format(data.total_exw).replace(',00', ''))
 
-                                if (data.biaya_lainnya !== '{}') {
-                                    let biaya_lainnya = JSON.parse(data.biaya_lainnya);
+                                    if (data.biaya_lainnya !== '{}') {
+                                        let biaya_lainnya = JSON.parse(data.biaya_lainnya);
 
-                                    $("#tabel-biaya-lainnya").show();
-                                    let i = 1;
-                                    for (let nama in biaya_lainnya) {
-                                        $("#tabel-biaya-lainnya tbody").append(`
+                                        $("#tabel-biaya-lainnya").show();
+                                        let i = 1;
+                                        for (let nama in biaya_lainnya) {
+                                            $("#tabel-biaya-lainnya tbody").append(`
                                 <tr>
                                     <td class="text-sm text-center">${i++}</td>
                                     <td class="text-sm text-start">${nama}</td>
                                     <td class="text-sm text-end fw-bold">${formater.format(biaya_lainnya[nama]).replace(',00', '')}</td>
                                 </tr>
                             `);
+                                        }
+                                        $('#tabel-biaya-lainnya .total').html(formater.format(data.total_biaya_lainnya).replace(',00', ''))
                                     }
-                                    $('#tabel-biaya-lainnya .total').html(formater.format(data.total_biaya_lainnya).replace(',00', ''))
-                                }
-                            },
+                                },
+                            });
                         });
                     });
-                });
-            </script>
+                </script>
 
-            <?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>

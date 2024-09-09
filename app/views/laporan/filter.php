@@ -1,3 +1,9 @@
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
 <div class="row">
     <div class="col-12">
         <form class="row g-3 align-middle" method="post">
@@ -74,6 +80,7 @@
     function changeFilterOption() {
         // console.log('test ' + opt);
         let opt = $("#filterOption").val();
+        console.log(opt);
 
         if (opt == "tahunan") {
             $("#filterTahunan").removeClass("hidden");

@@ -1,4 +1,3 @@
-
 <?php Get::view('templates/header', $data) ?>
 
 <style>
@@ -50,6 +49,7 @@
         padding: 4px 12px;
         font-size: 14px;
     }
+
     .menu .take-away {
         bottom: 0;
         right: 0;
@@ -97,21 +97,18 @@
                     <?= $kategori['nama'] ?>
                 </h5>
                 <div class="row">
-                    <?php foreach ($data["menu"] as $menu) : ?>
-                        <?php if ($menu['kategori_id'] !== $kategori['id']) continue;?>
+                    <?php foreach ($data["menu"] as $menu): ?>
+                        <?php if ($menu['kategori_id'] !== $kategori['id'])
+                            continue; ?>
                         <?php $tersedia = json_decode($menu['tersedia'], true)[$data['user']['outlet_uuid']]; ?>
-                        <div class="col-sm-12 mb-4 menu" 
-                            data-tersedia="<?= ($tersedia > 0) ? 'true' : 'false' ?>"
-                            data-id="<?= $menu['id'] ?>"
-                            data-nama="<?= $menu['nama'] ?>"
-                            data-harga="<?= $menu['harga'] ?>"
-                        >
+                        <div class="col-sm-12 mb-4 menu" data-tersedia="<?= ($tersedia > 0) ? 'true' : 'false' ?>"
+                            data-id="<?= $menu['id'] ?>" data-nama="<?= $menu['nama'] ?>" data-harga="<?= $menu['harga'] ?>">
                             <button class="card w-100 h-100 animation-card addProductSale p-0">
                                 <div class="row w-100 g-0">
                                     <div class="col-md-4" style="min-width: 100px;">
                                         <div class="col-md-12">
-                                            <img src="<?= BASEURL ?>/upload/menu/<?= $menu['foto'] != '' ? $menu['foto'] : 'tmp.png' ?>" 
-                                                style="min-height: 120px; max-height: 150px; object-fit: cover;" 
+                                            <img src="<?= BASEURL ?>/upload/menu/<?= $menu['foto'] != '' ? $menu['foto'] : 'tmp.png' ?>"
+                                                style="min-height: 120px; max-height: 150px; object-fit: cover;"
                                                 class="img-fluid rounded-start p-0 w-100" alt="<?= $menu['nama']; ?>">
                                         </div>
                                     </div>
@@ -119,18 +116,19 @@
                                         <div class="card-body text-start py-3 text-nowrap h-100">
                                             <h5 class="card-title">
                                                 <?= $menu['nama']; ?>
-                                                <?php if ($menu['outlet_uuid'] == $data['user']['outlet_uuid']) : ?>
-                                                    <span class="badge bg-gradient-warning copy-badge ms-1 text-xs" style="transform: translateY(-1px);">EXC</span>
+                                                <?php if ($menu['outlet_uuid'] == $data['user']['outlet_uuid']): ?>
+                                                    <span class="badge bg-gradient-warning copy-badge ms-1 text-xs"
+                                                        style="transform: translateY(-1px);">EXC</span>
                                                 <?php endif; ?>
                                             </h5>
                                             <p class="card-text mb-0">Rp <?= number_format($menu['harga'], 0, '.', '.') ?></p>
                                             <h6
                                                 class="card-text mb-0 text-md text-<?= ($tersedia > 0) ? 'success' : 'danger' ?>">
-                                                <?php if ($tersedia == "infinite") : ?>
+                                                <?php if ($tersedia == "infinite"): ?>
                                                     Tersedia
-                                                <?php elseif ($tersedia > 0) : ?>
+                                                <?php elseif ($tersedia > 0): ?>
                                                     Tersedia <?= $tersedia ?> Porsi
-                                                <?php else : ?>
+                                                <?php else: ?>
                                                     Habis
                                                 <?php endif ?>
                                             </h6>
@@ -165,19 +163,22 @@
                         <span class="input-group-text" id="basic-addon1">
                             <i class="fas fa-id-card-alt ps-2"></i>
                         </span>
-                        <input type="text" class="form-control ps-2" name="kasir" value="<?= $data['pesanan']['kasir'] ?>" required readonly>
+                        <input type="text" class="form-control ps-2" name="kasir"
+                            value="<?= $data['pesanan']['kasir'] ?>" required readonly>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">
                             <i class="fa fa-user ps-2"></i>
                         </span>
-                        <input type="text" class="form-control ps-2" name="pelanggan" value="<?= $data['pesanan']['pelanggan'] ?>" required>
+                        <input type="text" class="form-control ps-2" name="pelanggan"
+                            value="<?= $data['pesanan']['pelanggan'] ?>" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">
                             <i class="fa fa-phone ps-2"></i>
                         </span>
-                        <input type="text" class="form-control ps-2" name="nomor_telp" value="<?= $data['pesanan']['nomor_telp'] ?>" placeholder="08xxx" required>
+                        <input type="text" class="form-control ps-2" name="nomor_telp"
+                            value="<?= $data['pesanan']['nomor_telp'] ?>" placeholder="08xxx" required>
                     </div>
 
                     <div class="d-flex justify-content-between border-top pt-3 mt-4">
@@ -201,36 +202,39 @@
                                 </div>
                             </div>
                             <div id="daftar-belanja" class="border-bottom pb-3 mb-2">
-                                <?php foreach (json_decode($data['pesanan']['detail_pembayaran'], true) as $item) : ?>
-                                    <div class="row g-2"
-                                        data-id="<?= $item['id'] ?>"
-                                        data-nama="<?= $item['item'] ?>"
+                                <?php foreach (json_decode($data['pesanan']['detail_pembayaran'], true) as $item): ?>
+                                    <div class="row g-2" data-id="<?= $item['id'] ?>" data-nama="<?= $item['item'] ?>"
                                         data-harga="<?= $data['menu'][array_search($item['id'], array_column($data['menu'], 'id'))]['harga'] ?>"
-                                        data-take_away="<?= json_encode($item['take_away']) ?>"
-                                    >
+                                        data-take_away="<?= json_encode($item['take_away']) ?>">
                                         <div class="col-5">
                                             <input class="id" type="hidden" name="id[]" value="<?= $item['id'] ?>">
                                             <div class="input-group mb-3">
                                                 <button class="btn btn-danger m-0 removeList" type="button">
                                                     <i class="fa fa-xmark"></i>
                                                 </button>
-                                                <input type="text" class="item form-control ps-3" name="item[]" value="<?= $item['item'] ?>" readonly>
+                                                <input type="text" class="item form-control ps-3" name="item[]"
+                                                    value="<?= $item['item'] ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-2 ps-0">
-                                            <input type="number" class="amount form-control ps-2" name="amount[]" value="<?= $item['amount'] ?>" min="1">
+                                            <input type="number" class="amount form-control ps-2" name="amount[]"
+                                                value="<?= $item['amount'] ?>" min="1">
                                         </div>
                                         <div class="col-3 ps-0">
                                             <div class="input-group mb-3">
                                                 <span class="input input-group-text">Rp. </span>
-                                                <input type="number" class="subtotal form-control ps-2" name="item_subtotal[]" value="" readonly>
+                                                <input type="number" class="subtotal form-control ps-2"
+                                                    name="item_subtotal[]" value="" readonly>
                                             </div>
                                         </div>
                                         <div class="col-1 ps-2 pt-1">
                                             <input type="hidden" name="take_away[]" value="<?= ($item['take_away']) ?>">
-                                            <button type="button" class="tooltips btn py-2 px-3 <?= $item['take_away'] ? "bg-gradient-warning" : "bg-gradient-info" ?>"
-                                                data-bs-toggle="tooltip" data-bs-title="<?= $item['take_away'] ? 'Take Away' : 'Dine-In' ?>">
-                                                <i class="fa <?= $item['take_away'] ? "fa-right-from-bracket" : "fa-utensils" ?>"></i>
+                                            <button type="button"
+                                                class="tooltips btn py-2 px-3 <?= $item['take_away'] ? "bg-gradient-warning" : "bg-gradient-info" ?>"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="<?= $item['take_away'] ? 'Take Away' : 'Dine-In' ?>">
+                                                <i
+                                                    class="fa <?= $item['take_away'] ? "fa-right-from-bracket" : "fa-utensils" ?>"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -244,7 +248,8 @@
                             <div class="form-group">
                                 <label for="note" class="col-lg-12 col-form-label">Note</label>
                                 <div class="input-group mb-3">
-                                    <textarea class="form-control" id="note" name="note" placeholder="Keterangan tambahan..."><?= $data['pesanan']['note'] ?></textarea>
+                                    <textarea class="form-control" id="note" name="note"
+                                        placeholder="Keterangan tambahan..."><?= $data['pesanan']['note'] ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -257,12 +262,13 @@
                                 <label for="subtotal" class="col-lg-12 col-form-label">Subtotal</label>
                                 <div class="input-group mb-3">
                                     <span class="input input-group-text" id="button-addon1">Rp. </span>
-                                    <input type="number" class="form-control ps-2" id="subtotal" name="subtotal" value="0" readonly>
+                                    <input type="number" class="form-control ps-2" id="subtotal" name="subtotal"
+                                        value="0" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -271,7 +277,8 @@
                                 </label>
                                 <div class="input-group mb-3">
                                     <span class="input input-group-text" id="button-addon1">Rp. </span>
-                                    <input type="number" class="form-control ps-2" id="pajak" name="pajak" value="0" data-pajak="<?= $data['pajak'] ?>" readonly>
+                                    <input type="number" class="form-control ps-2" id="pajak" name="pajak" value="0"
+                                        data-pajak="<?= $data['pajak'] ?>" readonly>
                                 </div>
                             </div>
                         </div>
@@ -280,95 +287,14 @@
                                 <label for="total" class="col-lg-12 col-form-label">Total</label>
                                 <div class="input-group mb-3">
                                     <span class="input input-group-text" id="button-addon1">Rp. </span>
-                                    <input type="number" class="form-control ps-2"  id="total" name="total" value="0" readonly>
+                                    <input type="number" class="form-control ps-2" id="total" name="total" value="0"
+                                        readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="pembayaran" class="col-lg-12 col-form-label">Pembayaran</label>
-                                <select name="metode_pembayaran" id="pembayaran" class="form-control">
-                                    <option value="cash" <?= $data['pesanan']['metode_pembayaran'] == 'cash' ? 'selected' : '' ?>>Cash</option>
-                                    <option value="debit" <?= $data['pesanan']['metode_pembayaran'] == 'debit' ? 'selected' : '' ?>>Debit</option>
-                                    <option value="kredit" <?= $data['pesanan']['metode_pembayaran'] == 'kredit' ? 'selected' : '' ?>>Kredit</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 kode-transaksi" <?= $data['pesanan']['metode_pembayaran'] == 'cash' ? 'style="display: none"' : '' ?>>
-                            <label for="kode_transaksi" class="col-lg-12 col-form-label">Kode Transaksi</label>
-                            <div class="input-group mb-3">
-                                <span class="input input-group-text" id="button-addon1">
-                                    <i class="fa fa-lock ps-2"></i>
-                                </span>
-                                <input type="text" class="form-control ps-2" id="kode_transaksi" name="kode_transaksi" value="<?= $data['pesanan']['kode_transaksi'] ?>">
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label for="bayar" class="col-lg-12 col-form-label">Bayar</label>
-                            <div class="input-group mb-3">
-                                <span class="input input-group-text" id="button-addon1">Rp. </span>
-                                <input type="number" class="form-control ps-2" id="bayar" name="bayar" value="<?= $data['pesanan']['bayar'] ?>" min="0">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="kembali" class="col-lg-12 col-form-label">Kembalian</label>
-                            <div class="input-group mb-3">
-                                <span class="input input-group-text" id="button-addon1">Rp. </span>
-                                <input type="number" class="form-control ps-2" id="kembali" name="kembali" value="<?= $data['pesanan']['kembali'] ?>" min="0" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row p-2" style="flex-wrap: wrap;">
-                        <div class="col-12 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-success rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="pas">Uang Pas</button>
-                        </div>
-                        <div class="col-6 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-secondary rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="10000">Rp. 10.000</button>
-                        </div>
-                        <div class="col-6 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-secondary rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="20000">Rp. 20.000</button>
-                        </div>
-                        <div class="col-6 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-secondary rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="50000">Rp. 50.000</button>
-                        </div>
-                        <div class="col-6 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-secondary rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="100000">Rp. 100.000</button>
-                        </div>
-                        <div class="col-6 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-secondary rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="200000">Rp. 200.000</button>
-                        </div>
-                        <div class="col-6 col-sm-3 px-1">
-                            <button type="button" 
-                                class="instant-pay w-100 px-0 text-center btn btn-outline-secondary rounded-pill"
-                                style="white-space: nowrap"
-                                data-value="500000">Rp. 500.000</button>
-                        </div>
-                    </div>
                     <input type="hidden" name="outlet_uuid" value="<?= $data['pesanan']['outlet_uuid'] ?>">
 
                     <div class="row mt-2">
@@ -386,7 +312,7 @@
 </div>
 
 
-<script src="<?= BASEURL ?>/js/custom/kasir.js"></script>
+<script src="<?= BASEURL ?>/js/custom/pesanan.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('a.nav-link.text-body.p-0').click(); // auto minimize navbar

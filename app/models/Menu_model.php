@@ -17,7 +17,9 @@ class Menu_model extends Model
 		$this->db->query(
 			"SELECT kategori.nama AS kategori, {$this->table}.* FROM {$this->table}
 			LEFT JOIN `kategori` ON kategori.id = {$this->table}.kategori_id
-				WHERE {$this->table}.`status` = 1". ($outlet_uuid ? 
+				WHERE 
+				{$this->table}.`status` = 1 AND
+				{$this->table}.`stok_id` IS NULL". ($outlet_uuid ? 
 			" AND (
 				{$this->table}.`outlet_uuid` = :outlet_uuid OR 
 				{$this->table}.`outlet_uuid` IS NULL
@@ -25,6 +27,21 @@ class Menu_model extends Model
 		);
 
 		if ($outlet_uuid) $this->db->bind('outlet_uuid', $outlet_uuid);
+		return $this->db->fetchAll();
+	}
+
+	public function getAllPrepare($outlet_uuid) {
+		$this->db->query(
+			"SELECT riwayat_stok.stok AS stok, stok.satuan AS satuan, {$this->table}.* FROM {$this->table}
+			INNER JOIN `stok` ON stok.id = {$this->table}.stok_id
+			INNER JOIN `riwayat_stok` ON riwayat_stok.stok_id = {$this->table}.stok_id
+				WHERE 
+			{$this->table}.`status` = 1 AND
+			{$this->table}.`stok_id` IS NOT NULL AND
+			riwayat_stok.`outlet_uuid` = :outlet_uuid"
+		);
+
+		$this->db->bind('outlet_uuid', $outlet_uuid);
 		return $this->db->fetchAll();
 	}
 
@@ -46,6 +63,23 @@ class Menu_model extends Model
 		$this->db->bind('id', $id);
 		return $this->db->fetch();
 	}
+	
+	public function getPrepareById($id, $outlet_uuid = false)
+	{
+		$this->db->query(
+			"SELECT riwayat_stok.stok AS stok, stok.satuan AS satuan, {$this->table}.* FROM {$this->table}
+			INNER JOIN `stok` ON stok.id = {$this->table}.stok_id
+			INNER JOIN `riwayat_stok` ON riwayat_stok.stok_id = {$this->table}.stok_id
+				WHERE 
+			{$this->table}.`id` = :id AND
+			{$this->table}.`status` = 1 AND
+			{$this->table}.`stok_id` IS NOT NULL AND
+			riwayat_stok.`outlet_uuid` = :outlet_uuid"
+		);
+		$this->db->bind('outlet_uuid', $outlet_uuid);
+		$this->db->bind('id', $id);
+		return $this->db->fetch();
+	}
 
 	public function getMultipleBy($field = 'id', $data = [])
 	{
@@ -58,9 +92,9 @@ class Menu_model extends Model
 		return $this->db->fetchAll();
 	}
 
-	public function countAvailableAll($outlet_uuid)
+	public function countAvailableAll($outlet_uuid, $with_flasher = true, $prepare = false)
 	{
-		$allMenu = $this->getAllData($outlet_uuid);
+		$allMenu = ($prepare) ? $this->getAllPrepare($outlet_uuid) : $this->getAllData($outlet_uuid);
 
 		foreach ($allMenu as $menu) {
 			$bahan = json_decode($menu['bahan'], true);
@@ -92,7 +126,8 @@ class Menu_model extends Model
 				$tmp[$outlet_uuid] = min($availability);
 			} else {
 				$tmp[$outlet_uuid] = "infinite";
-				if (!isset($_SESSION['flash'])) Flasher::setFlash("Data bahan dari&nbsp<b>".$menu['nama']."</b>&nbspkosong! Silahkan cek kembali.", "warning", 5000);
+				if (!isset($_SESSION['flash']) && $with_flasher) 
+					Flasher::setFlash("Data bahan dari&nbsp<b>".$menu['nama']."</b>&nbspkosong! Silahkan cek kembali.", "warning", 5000);
 			}
 
 			$this->updateField($menu['id'], 'tersedia', json_encode($tmp));
@@ -101,7 +136,7 @@ class Menu_model extends Model
 		return $this->db->rowCount();
 	}
 
-	public function insert($data, $menu_prepare = false)
+	public function insert($data, $stok_id = NULL)
 	{
 		if (!$this->validateFiles([
 			'foto' => [
@@ -111,7 +146,7 @@ class Menu_model extends Model
 			],
 		])) return 0;
 
-		$fields_query = ":foto, :nama, :kategori_id, :harga, :bahan, '{}', :menu_prepare, :outlet_uuid,";
+		$fields_query = ":foto, :nama, :kategori_id, :harga, :bahan, '{}', :stok_id, :outlet_uuid,";
 
 		$this->db->query(
 			"INSERT INTO {$this->table} 
@@ -120,10 +155,10 @@ class Menu_model extends Model
 		);
 
 		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
-		$this->db->bind('foto', $this->storeFile('foto', 'upload/menu'));
+		$this->db->bind('foto', ($stok_id == NULL ? $this->storeFile('foto', 'upload/menu') : ''));
 		$this->db->bind('outlet_uuid', isset($data['exclusive']) ? $data['exclusive'] : NULL);
 		$this->db->bind('uuid', Uuid::uuid4()->toString());
-		$this->db->bind('menu_prepare', $menu_prepare);
+		$this->db->bind('stok_id', $stok_id);
 		$this->db->bind('created_by', $this->user);
 
 		$this->db->execute();

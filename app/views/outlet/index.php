@@ -169,7 +169,7 @@
                                     <div class="d-flex justify-content-center align-items-center mt-4">
                                         <div class="symbol symbol-55px me-5">
                                             <span class="symbol-label bg-light-primary">
-                                                <i class="ki-solid ki-parcel text-primary fs-1"></i>
+                                                <i class="ki-solid ki-setting-3 text-primary fs-1"></i>
                                             </span>
                                         </div>
                                         <h3 class="card-title align-items-start flex-column">

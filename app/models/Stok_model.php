@@ -157,9 +157,9 @@ class Stok_model extends Model
 		return $this->db->rowCount();
 	}
 
-	public function update($data, $rename_all = true)
+	public function update($id, $data, $rename_all = true)
 	{
-		$old_name = $this->getDataById($data['id'])['nama'];
+		$old_name = $this->getDataById($id)['nama'];
 
 		$fields_query = "
             nama = :nama,
@@ -177,7 +177,7 @@ class Stok_model extends Model
         );
 
 		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
-        $this->db->bind('id', $data['id']);
+        $this->db->bind('id', $id);
         $this->db->bind('modified_by', $this->user);
         $this->db->execute();
 

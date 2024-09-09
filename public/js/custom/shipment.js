@@ -20,17 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let biaya = document.createElement('div');
         biaya.setAttribute('class', 'row');
         biaya.innerHTML = `
-            <div class="col-sm-6 fv-row">
+            <div class="col-sm-6">
                 <div class="input-group">
-                    <button class="btn btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
+                    <button class="btn btn-icon btn-danger m-0 px-3 remove-biaya-lainnya" type="button">
                         <i class="fa fa-xmark"></i>
                     </button>
                     <input type="text" class="form-control form-control-solid ps-2" name="nama_biaya_lainnya[]" placeholder="Nama biaya">
                 </div>
             </div>
-            <div class="col-sm-6 ps-0 fv-row">
+            <div class="col-sm-6 ps-0">
                 <div class="input-group">
-                    <span class="input-group-text">Rp</span>
+                    <span class="input-group-text border-0">Rp</span>
                     <input type="number" class="form-control form-control-solid ps-2 biaya-lainnya" name="biaya_lainnya[]" placeholder="0" min="0">
                 </div>
             </div>
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="number" class="form-control form-control-solid count-sub" name="jumlah[]" placeholder="0" min="0" required>
             </td>
             <td class="px-1">
-                <select class="form-select satuan" name="satuan[]" required disabled>
+                <select class="form-select form-select-solid satuan" name="satuan[]" required disabled>
                     <option value="Kg" selected>Kg</option>
                     <option value="gram">gram</option>
                     <option value="Ons">Ons</option>
@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
             <td class="px-1">
                 <div class="input-group bg-light">
-                    <span class="input-group-text">Rp</span>
+                    <span class="input-group-text border-0">Rp</span>
                     <input type="number" class="form-control form-control-solid" name="subtotal[]" value="0" readonly required>
                 </div>
             </td>
             <td class="px-1 align-middle text-center">
-                <button class="btn btn-danger btn-sm m-0 px-3 remove-detail-barang" type="button">
+                <button class="btn btn-icon btn-danger m-0 px-3 remove-detail-barang" type="button">
                     <i class="fa fa-xmark text-sm"></i>
                 </button>
             </td>

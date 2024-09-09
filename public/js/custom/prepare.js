@@ -1,5 +1,5 @@
 const requestPrepare = document.getElementById('request-prepare');
-const addButtons = document.querySelectorAll(".addList");
+const addButtons = document.querySelectorAll(".addRequest");
 const form = document.getElementById("formPrepare");
 const submitButton = document.getElementById("submit-request");
 const textarea = document.querySelector("textarea#deskripsi");
@@ -9,22 +9,19 @@ let selected_item = []
 document.addEventListener('DOMContentLoaded', () => {
     addButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const tersedia = JSON.parse(button.dataset.tersedia);
+            const tersedia = parseInt(button.dataset.tersedia);
             const id = parseInt(button.dataset.id);
             const stok_id = parseInt(button.dataset.stok_id);
             const nama = button.dataset.nama;
-            
-            
-            console.log(tersedia);
-            
 
-            if (tersedia) {
+            if (tersedia > 0) {
                 const find = selected_item.find(index => (index.id == id));
                 if (!find) {
-                    addItem(id, stok_id, nama);
+                    addItem(id, stok_id, nama, tersedia);
                 } else {
                     const amount = find.element.querySelector('input.amount');
                     amount.value = parseInt(amount.value) + 1;
+                    validateValue(amount);
                 }
             } else {
                 alert('Stok bahan prepare habis!')
@@ -57,6 +54,12 @@ function refreshPrepare() {
     if (selected_item.length) {
         const allAmountInput = document.querySelectorAll('input.amount');
         const allDeleteBtn = document.querySelectorAll('button.removeList');
+
+        allAmountInput.forEach(inp => {
+            inp.oninput = () => {
+                validateValue(inp);
+            }
+        });
     
         allDeleteBtn.forEach(btn => {
             btn.onclick = () => {
@@ -65,7 +68,7 @@ function refreshPrepare() {
         });
 
         selected_item.forEach(item => {
-            table.querySelector(`button.addList[data-id="${item.id}"]`)
+            table.querySelector(`button.addRequest[data-id="${item.id}"]`)
                 .closest('tr')
                 .classList.add('bg-warning-subtle');
         });
@@ -74,7 +77,17 @@ function refreshPrepare() {
     }
 }
 
-function addItem(id, stok_id, nama) {
+function validateValue(amount) {
+    let name = amount.closest('.row').querySelector('input[name="item[]"]').value;
+    let max = parseInt(amount.getAttribute('max'));
+    let val = parseInt(amount.value);
+    if (val > max) {
+        alert(`${name} hanya tersedia maksimum ${max} porsi!`);
+        amount.value = max;
+    }
+}
+
+function addItem(id, stok_id, nama, tersedia) {
     let item = document.createElement('div');
     item.setAttribute('class', 'row g-2');
     item.dataset.id = id;
@@ -90,7 +103,7 @@ function addItem(id, stok_id, nama) {
             </div>
         </div>
         <div class="col-4">
-            <input type="number" class="amount form-control ps-2" name="amount[]" value="1" min="1">
+            <input type="number" class="amount form-control ps-2" name="amount[]" value="1" min="1" max="${tersedia}">
         </div>
     `;
 
