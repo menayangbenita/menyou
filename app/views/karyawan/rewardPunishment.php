@@ -162,7 +162,7 @@
                                             <!--end::Menu-->
                                         </td>
                                     <?php endforeach; ?>
-                                    </tr>
+                                </tr>
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -174,8 +174,8 @@
 
             <!-- Modal -->
             <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog modal-dialog-centered mw-650px">
-                   <div class="modal-content rounded">
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content rounded">
                         <div class="modal-header pb-0 border-0 justify-content-end">
                             <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -236,14 +236,27 @@
                                     <!--end::Col-->
                                 </div>
                                 <!--begin::Input group-->
-                                <div class="d-flex flex-column mb-8 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                        <span class="required">Keterangan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <textarea name="keterangan" class="form-control form-control-solid" id="keterangan"
-                                        rows="2" placeholder="Cth: Terlambat" required></textarea>
+                                <div class="row g-9 mb-8">
+                                    <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Jenis</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <select class="form-select form-select-solid" id="jenis" name="jenis" required>
+                                            <option value="reward">Reward</option>
+                                            <option value="punishment">Punishment</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Keterangan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <textarea name="keterangan" class="form-control form-control-solid"
+                                            id="keterangan" rows="1" placeholder="Cth: Terlambat" required></textarea>
+                                    </div>
                                 </div>
                                 <!--end::Input group-->
                                 <div class="row g-9 mb-15">

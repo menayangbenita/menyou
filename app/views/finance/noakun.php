@@ -140,7 +140,7 @@
                                                     </div>
                                                 <?php else: ?>
                                                     <div class="menu-item px-3">
-                                                        <a href="<?= BASEURL; ?>/finance/delete/<?= $nomor['id'] ?>"
+                                                        <a href="<?= BASEURL; ?>/akuntansi/delete/<?= $nomor['id'] ?>"
                                                             class="menu-link px-3" data-id="<?= $nomor['id']; ?>"
                                                             data-kt-ecommerce-product-filter="delete_row">Hapus</a>
                                                     </div>
@@ -159,113 +159,115 @@
                 </div>
                 <!--end::Products-->
 
-        <!-- modal -->
-        <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
-                <div class="modal-content rounded">
-                    <div class="modal-header pb-0 border-0 justify-content-end">
-                        <!--begin::Close-->
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <i class="ki-outline ki-cross fs-1"></i>
-                        </div>
-                        <!--end::Close-->
-                    </div>
-                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                        <!--begin::Heading-->
-                        <div class="mb-13 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Tambah Nomor Akuntansi</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <form action="<?= BASEURL; ?>/akuntansi/insert" method="post">
-                            <?= csrf() ?>
-                            <input type="hidden" name="id" id="id">
-                            <div class="row g-9 mb-8">
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Nomor Akuntansi</label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="Cth: 101"
-                                        name="akun" id="akun">
+                <!-- modal -->
+                <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <div class="modal-content rounded">
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <i class="ki-outline ki-cross fs-1"></i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                <!--begin::Heading-->
+                                <div class="mb-13 text-center">
+                                    <!--begin::Title-->
+                                    <h1 class="mb-3" id="modalLabel">Tambah Nomor Akuntansi</h1>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <form action="<?= BASEURL; ?>/akuntansi/insert" method="post">
+                                    <?= csrf() ?>
+                                    <input type="hidden" name="id" id="id">
+                                    <div class="row g-9 mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <label class="required fs-6 fw-semibold mb-2">Nomor Akuntansi</label>
+                                            <input type="text" class="form-control form-control-solid"
+                                                placeholder="Cth: 101" name="akun" id="akun">
 
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Sub Kategori</label>
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="Cth: Pemasukan" name="subkategori" id="subkategori">
-                                </div>
-                                <!--end::Col-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <label class="required fs-6 fw-semibold mb-2">Sub Kategori</label>
+                                            <input type="text" class="form-control form-control-solid"
+                                                placeholder="Cth: Pemasukan" name="subkategori" id="subkategori">
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <div class="mb-15 fv-row">
+                                        <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
+                                        <textarea class="form-control form-control-solid"
+                                            placeholder="Cth: Pendapatan penjualan" name="deskripsi"
+                                            id="deskripsi"></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-secondary mb-0"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="mb-15 fv-row">
-                                <label class="required fs-6 fw-semibold mb-2">Deskripsi</label>
-                                <textarea class="form-control form-control-solid"
-                                    placeholder="Cth: Pendapatan penjualan" name="deskripsi" id="deskripsi"></textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-secondary mb-0"
-                                    data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Simpan</span>
-                                    <span class="indicator-progress">Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!--begin::Javascript-->
-        <script>var hostUrl = "assets/";</script>
-        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-        <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-        <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-        <!--end::Global Javascript Bundle-->
-        <!--begin::Vendors Javascript(used for this page only)-->
-        <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-        <!--end::Vendors Javascript-->
-        <!--begin::Custom Javascript(used for this page only)-->
-        <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-        <!--end::Custom Javascript-->
-        <!--end::Javascript-->
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+                <!--end::Vendors Javascript-->
+                <!--begin::Custom Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <!--end::Custom Javascript-->
+                <!--end::Javascript-->
 
-        <script src="<?= BASEURL ?>/js/datatables.js"></script>
-        <script>
-            $(function () {
-                const BASEURL = window.location.href;
+                <script src="<?= BASEURL ?>/js/datatables.js"></script>
+                <script>
+                    $(function () {
+                        const BASEURL = window.location.href;
 
-                $('.tombolTambahData').on('click', function () {
-                    $('#modalLabel').html('Tambah Data')
-                    $('.modal-footer button[type=submit]').html('Tambah Data');
-                    $(".modal-body form")[0].reset();
-                    $(".modal-body form").attr("action", `${BASEURL}/insert`);
-                });
+                        $('.tombolTambahData').on('click', function () {
+                            $('#modalLabel').html('Tambah Nomor Akuntansi')
+                            $('.modal-footer button[type=submit]').html('Tambah Data');
+                            $(".modal-body form")[0].reset();
+                            $(".modal-body form").attr("action", `${BASEURL}/insert`);
+                        });
 
-                $(".tampilModalUbah").click(function () {
-                    $("#modal").addClass("edit");
-                    $("#modalLabel").html("Ubah Data");
-                    $(".modal-footer button[type=submit]").html("Ubah Data");
-                    $(".modal-body form").attr("action", `${BASEURL}/update`);
+                        $(".tampilModalUbah").click(function () {
+                            $("#modal").addClass("edit");
+                            $("#modalLabel").html("Ubah Data Nomor Akuntansi");
+                            $(".modal-footer button[type=submit]").html("Ubah Data");
+                            $(".modal-body form").attr("action", `${BASEURL}/update`);
 
-                    const id = $(this).data("id");
+                            const id = $(this).data("id");
 
-                    $.ajax({
-                        url: `${BASEURL}/getubah`,
-                        data: { id: id },
-                        method: "post",
-                        dataType: "json",
-                        success: function (data) {
-                            $('#akun').val(data.akun);
-                            $('#subkategori').val(data.subkategori);
-                            $('#deskripsi').val(data.deskripsi);
-                        },
-                    })
-                })
-            });
-        </script>
+                            $.ajax({
+                                url: `${BASEURL}/getubah`,
+                                data: { id: id },
+                                method: "post",
+                                dataType: "json",
+                                success: function (data) {
+                                    $('#akun').val(data.akun);
+                                    $('#subkategori').val(data.subkategori);
+                                    $('#deskripsi').val(data.deskripsi);
+                                    $('#id').val(data.id);
+                                },
+                            })
+                        })
+                    });
+                </script>
 
-        <?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>
