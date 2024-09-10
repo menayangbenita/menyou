@@ -258,241 +258,245 @@
                 <!--end::Products-->
             </div>
             <!--end::Content container-->
-    <!-- Form Modal -->
-    <div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <div class="modal-content rounded">
-                <!--begin::Modal header-->
-                <div class="modal-header pb-0 border-0 justify-content-end">
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-outline ki-cross fs-1"></i>
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--begin::Modal header-->
-
-                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                    <form action="<?= BASEURL ?>/menu/insert" method="post" enctype="multipart/form-data"
-                        id="kt_modal_new_target_form">
-                        <?= csrf() ?>
-                        <!--begin::Heading-->
-                        <div class="mb-13 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Tambah Produk</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <!--begin::Label-->
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Foto Menu</span>
-                            </label>
-                            <!--end::Label-->
-                            <div id="preview"
-                                class="w-100 mb-2 rounded-2 overflow-hidden d-flex align-items-center justify-content-center"
-                                style="max-height: 12rem;"></div>
-                            <input type="file" class="form-control form-control-solid" name="foto" id="foto"
-                                accept="image/*" />
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <!--begin::Label-->
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Nama Produk</span>
-                            </label>
-                            <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" name="nama" id="nama"
-                                placeholder="Cth: Nasi Goreng" oninput="toTitleCase(this)" required />
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="required fs-6 fw-semibold mb-2">Kategori</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Pilih Kategori" name="kategori_id" id="kategori_id">
-                                <?php foreach ($data['kategori'] as $kategori): ?>
-                                    <option value="<?= $kategori['id'] ?>"> <?= $kategori['nama'] ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <!--begin::Label-->
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Harga</span>
-                            </label>
-                            <!--end::Label-->
-                            <input type="number" class="form-control form-control-solid" name="harga" id="harga"
-                                placeholder="Rp" required />
-                        </div>
-                        <!--end::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <div class="d-flex justify-content-between mb-2">
-                                <label class="form-label">Bahan / Kemasan</label>
-                                <button class="btn btn-success p-0 px-2 fs-6" id="addItem" type="button">
-                                    <i class="ki-solid ki-abstract-10 pe-0"></i>
-                                </button>
+            <!-- Form Modal -->
+            <div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content rounded">
+                        <!--begin::Modal header-->
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
                             </div>
-                            <div id="bahan">
-                                <div class="row mb-2">
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <button class="btn btn-danger m-0 px-3 removeItem" type="button">
-                                                <i class="fa fa-xmark"></i>
-                                            </button>
-                                            <input type="text" class="form-control ps-2 nama-bahan" name="nama_bahan[]"
-                                                placeholder="Nama Bahan" list="barang" autocomplete="off">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="input-group d-flex">
-                                            <input type="text" class="form-control position-static jumlah"
-                                                name="jumlah_bahan[]" placeholder="0">
-                                            <span class="input-group-text position-static satuan">..</span>
-                                        </div>
-                                    </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--begin::Modal header-->
+
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <form action="<?= BASEURL ?>/menu/insert" method="post" enctype="multipart/form-data"
+                                id="kt_modal_new_target_form">
+                                <?= csrf() ?>
+                                <!--begin::Heading-->
+                                <div class="mb-13 text-center">
+                                    <!--begin::Title-->
+                                    <h1 class="mb-3" id="modalLabel">Tambah Produk</h1>
+                                    <!--end::Title-->
                                 </div>
+                                <!--end::Heading-->
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                        <span class="required">Foto Menu</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <div id="preview"
+                                        class="w-100 mb-2 rounded-2 overflow-hidden d-flex align-items-center justify-content-center"
+                                        style="max-height: 12rem;"></div>
+                                    <input type="file" class="form-control form-control-solid" name="foto" id="foto"
+                                        accept="image/*" />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                        <span class="required">Nama Produk</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="text" class="form-control form-control-solid" name="nama" id="nama"
+                                        placeholder="Cth: Nasi Goreng" oninput="toTitleCase(this)" required />
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Kategori</label>
+                                    <select class="form-select form-select-solid" data-control="select2"
+                                        data-hide-search="true" data-placeholder="Pilih Kategori" name="kategori_id"
+                                        id="kategori_id">
+                                        <?php foreach ($data['kategori'] as $kategori): ?>
+                                            <option value="<?= $kategori['id'] ?>"> <?= $kategori['nama'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                        <span class="required">Harga</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="number" class="form-control form-control-solid" name="harga" id="harga"
+                                        placeholder="Rp" required />
+                                </div>
+                                <!--end::Input group-->
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <label class="form-label">Bahan / Kemasan</label>
+                                        <button class="btn btn-success p-0 px-2 fs-6" id="addItem" type="button">
+                                            <i class="ki-solid ki-abstract-10 pe-0"></i>
+                                        </button>
+                                    </div>
+                                    <div id="bahan">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <button class="btn btn-danger m-0 px-3 removeItem" type="button">
+                                                        <i class="fa fa-xmark"></i>
+                                                    </button>
+                                                    <input type="text" class="form-control ps-2 nama-bahan"
+                                                        name="nama_bahan[]" placeholder="Nama Bahan" list="barang"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group d-flex">
+                                                    <input type="text" class="form-control position-static jumlah"
+                                                        name="jumlah_bahan[]" placeholder="0">
+                                                    <span class="input-group-text position-static satuan">..</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <datalist id="barang">
+                                        <?php foreach ($data['barang'] as $barang): ?>
+                                            <option value="<?= $barang['nama'] ?>" data-id="<?= $barang['id'] ?>"
+                                                data-satuan="<?= $barang['satuan'] ?>" data-jenis="<?= $barang['jenis'] ?>">
+                                            <?php endforeach; ?>
+                                    </datalist>
+                                </div>
+                                <div class="mt-2 mb-15 fv-row form-check">
+                                    <input class="form-check-input" name="exclusive" type="checkbox" id="exclusive"
+                                        value="<?= $data['user']['outlet_uuid'] ?>">
+                                    <label class="custom-control-label" for="exclusive">Exclusive only for your
+                                        outlet</label>
+                                </div>
+                                <!--begin::Actions-->
+                                <div class="text-center">
+                                    <button data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+                                    <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                                        <span class="indicator-label">Simpan</span>
+                                        <span class="indicator-progress">Please wait...
+                                            <span
+                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Detail -->
+            <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content rounded">
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
                             </div>
-                            <datalist id="barang">
-                                <?php foreach ($data['barang'] as $barang): ?>
-                                    <option value="<?= $barang['nama'] ?>" data-id="<?= $barang['id'] ?>"
-                                        data-satuan="<?= $barang['satuan'] ?>" data-jenis="<?= $barang['jenis'] ?>">
-                                    <?php endforeach; ?>
-                            </datalist>
+                            <!--end::Close-->
                         </div>
-                        <div class="mt-2 mb-15 fv-row form-check">
-                            <input class="form-check-input" name="exclusive" type="checkbox" id="exclusive"
-                                value="<?= $data['user']['outlet_uuid'] ?>">
-                            <label class="custom-control-label" for="exclusive">Exclusive only for your
-                                outlet</label>
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3">Bahan</h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-muted fw-semibold fs-5">Bahan yang digunakan untuk membuat produk ini
+                                </div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Heading-->
+                            <div class="table-responsive mb-15">
+                                <table class="table table-bordered" id="detail_bahan">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center fw-bold">Nama Bahan</th>
+                                            <th class="text-center fw-bold">Jumlah</th>
+                                            <th class="text-center fw-bold">Satuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3">Kemasan</h1>
+                                <!--end::Title-->
+                                <!--begin::Description-->
+                                <div class="text-muted fw-semibold fs-5">Kemasan yang digunakan produk ini</div>
+                                <!--end::Description-->
+                            </div>
+                            <!--end::Heading-->
+                            <div class="table-responsive mb-15 fv-row">
+                                <table class="table table-bordered" id="detail_kemasan">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center fw-bold">Nama Kemasan</th>
+                                            <th class="text-center fw-bold">Jumlah</th>
+                                            <th class="text-center fw-bold">Satuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <!--begin::Actions-->
+                            <div class="text-center">
+                                <button class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            <!--end::Actions-->
                         </div>
-                        <!--begin::Actions-->
-                        <div class="text-center">
-                            <button data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-                            <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
-                                <span class="indicator-label">Simpan</span>
-                                <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                        </div>
-                        <!--end::Actions-->
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Modal Detail -->
-    <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <div class="modal-content rounded">
-                <div class="modal-header pb-0 border-0 justify-content-end">
-                    <!--begin::Close-->
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-outline ki-cross fs-1"></i>
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                    <!--begin::Heading-->
-                    <div class="mb-13 text-center">
-                        <!--begin::Title-->
-                        <h1 class="mb-3">Bahan</h1>
-                        <!--end::Title-->
-                        <!--begin::Description-->
-                        <div class="text-muted fw-semibold fs-5">Bahan yang digunakan untuk membuat produk ini</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Heading-->
-                    <div class="table-responsive mb-15">
-                        <table class="table table-bordered" id="detail_bahan">
-                            <thead>
-                                <tr>
-                                    <th class="text-center fw-bold">Nama Bahan</th>
-                                    <th class="text-center fw-bold">Jumlah</th>
-                                    <th class="text-center fw-bold">Satuan</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <!--begin::Heading-->
-                    <div class="mb-13 text-center">
-                        <!--begin::Title-->
-                        <h1 class="mb-3">Kemasan</h1>
-                        <!--end::Title-->
-                        <!--begin::Description-->
-                        <div class="text-muted fw-semibold fs-5">Kemasan yang digunakan produk ini</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Heading-->
-                    <div class="table-responsive mb-15 fv-row">
-                        <table class="table table-bordered" id="detail_kemasan">
-                            <thead>
-                                <tr>
-                                    <th class="text-center fw-bold">Nama Kemasan</th>
-                                    <th class="text-center fw-bold">Jumlah</th>
-                                    <th class="text-center fw-bold">Satuan</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <!--begin::Actions-->
-                    <div class="text-center">
-                        <button class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    <!--end::Actions-->
-                </div>
-            </div>
-        </div>
-    </div>
+            <script>
+                var daftar_barang = Array.from(document.getElementById('barang').options)
+                    .map(opt => {
+                        return {
+                            nama: opt.value,
+                            satuan: opt.dataset.satuan,
+                            jenis: opt.dataset.jenis,
+                        }
+                    });
 
-    <script>
-        var daftar_barang = Array.from(document.getElementById('barang').options)
-            .map(opt => {
-                return {
-                    nama: opt.value,
-                    satuan: opt.dataset.satuan,
-                    jenis: opt.dataset.jenis,
+                function toTitleCase(input) {
+                    let text = input.value;
+                    let words = text.split(' ');
+
+                    for (let i = 0; i < words.length; i++) {
+                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                    }
+
+                    let titleCaseText = words.join(' ');
+
+                    input.value = titleCaseText;
                 }
-            });
 
-        function toTitleCase(input) {
-            let text = input.value;
-            let words = text.split(' ');
+                $('#foto').on('change', function () {
+                    let file = $(this)[0].files[0];
+                    let url = URL.createObjectURL(file);
 
-            for (let i = 0; i < words.length; i++) {
-                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
-            }
+                    $('#preview').html(`<img src="${url}" class="w-100">`);
+                });
 
-            let titleCaseText = words.join(' ');
+                $(document).ready(function () {
+                    const BASEURL = window.location.href;
 
-            input.value = titleCaseText;
-        }
-
-        $('#foto').on('change', function () {
-            let file = $(this)[0].files[0];
-            let url = URL.createObjectURL(file);
-
-            $('#preview').html(`<img src="${url}" class="w-100">`);
-        });
-
-        $(document).ready(function () {
-            const BASEURL = window.location.href;
-
-            $('.tombolTambahData').on('click', function () {
-                $('#modalLabel').html('Tambah Data')
-                $('#formModal .modal-footer button[type=submit]').html('Simpan');
-                $("#formModal form").attr("action", `${BASEURL}/insert`);
-                $("#formModal form")[0].reset();
-                $('#preview').html('');
-                $("#bahan").html(`
+                    $('.tombolTambahData').on('click', function () {
+                        $('#modalLabel').html('Tambah Data')
+                        $('#formModal .modal-footer button[type=submit]').html('Simpan');
+                        $("#formModal form").attr("action", `${BASEURL}/insert`);
+                        $("#formModal form")[0].reset();
+                        $('#preview').html('');
+                        $("#bahan").html(`
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <div class="input-group">
@@ -510,153 +514,153 @@
                     </div>
                 </div>
             `);
-                $('#exclusive').prop('checked', false)
-                refreshEvent();
-            });
-
-            $(".tampilModalUbah").click(function () {
-                const id = $(this).data("id");
-
-                $("#modalLabel").html("Ubah Data");
-                $("#formModal .text-center button[type=submit]").html("Ubah Data");
-                $("#formModal form").attr("action", `${BASEURL}/update/${id}`);
-
-                $.ajax({
-                    url: `${BASEURL}/getubah/${id}`,
-                    method: "get",
-                    dataType: "json",
-                    success: function (data) {
-                        $('#nama').val(data.nama);
-                        $('#harga').val(data.harga);
-                        $("#kategori_id").val(data.kategori_id);
-                        $('#exclusive').prop('checked', Boolean(data.outlet_uuid))
-                        if (data.foto !== '')
-                            $('#preview').html(`<img src="${BASEURL.replace('/menu', '')}/upload/menu/${data.foto}" class="w-100">`);
-                        $("#bahan").html('');
-                        let bahan = JSON.parse(data.bahan);
-                        for (let key in bahan)
-                            addList(key, bahan[key], daftar_barang.find(item => item.nama == key).satuan);
-
+                        $('#exclusive').prop('checked', false)
                         refreshEvent();
-                    },
-                });
-            });
+                    });
 
-            $(".tampilModalDetail").click(function () {
-                const id = $(this).data("id");
+                    $(".tampilModalUbah").click(function () {
+                        const id = $(this).data("id");
 
-                $.ajax({
-                    url: `${BASEURL}/getubah/${id}`,
-                    method: "post",
-                    dataType: "json",
-                    success: function (result) {
-                        let bahan = JSON.parse(result.bahan);
-                        $('#detailModal .modal-body table tbody').html('');
-                        for (let key in bahan) {
-                            let barang = daftar_barang.find(item => item.nama == key);
-                            $(`#detailModal .modal-body table#detail_${barang.jenis} tbody`).append(`
+                        $("#modalLabel").html("Ubah Data");
+                        $("#formModal .text-center button[type=submit]").html("Ubah Data");
+                        $("#formModal form").attr("action", `${BASEURL}/update/${id}`);
+
+                        $.ajax({
+                            url: `${BASEURL}/getubah/${id}`,
+                            method: "get",
+                            dataType: "json",
+                            success: function (data) {
+                                $('#nama').val(data.nama);
+                                $('#harga').val(data.harga);
+                                $("#kategori_id").val(data.kategori_id);
+                                $('#exclusive').prop('checked', Boolean(data.outlet_uuid))
+                                if (data.foto !== '')
+                                    $('#preview').html(`<img src="${BASEURL.replace('/menu', '')}/upload/menu/${data.foto}" class="w-100">`);
+                                $("#bahan").html('');
+                                let bahan = JSON.parse(data.bahan);
+                                for (let key in bahan)
+                                    addList(key, bahan[key], daftar_barang.find(item => item.nama == key).satuan);
+
+                                refreshEvent();
+                            },
+                        });
+                    });
+
+                    $(".tampilModalDetail").click(function () {
+                        const id = $(this).data("id");
+
+                        $.ajax({
+                            url: `${BASEURL}/getubah/${id}`,
+                            method: "post",
+                            dataType: "json",
+                            success: function (result) {
+                                let bahan = JSON.parse(result.bahan);
+                                $('#detailModal .modal-body table tbody').html('');
+                                for (let key in bahan) {
+                                    let barang = daftar_barang.find(item => item.nama == key);
+                                    $(`#detailModal .modal-body table#detail_${barang.jenis} tbody`).append(`
                             <tr>
                                 <td>${key}</td>
                                 <td>${bahan[key]}</td>
                                 <td>${barang.satuan}</td>
                             </tr>`);
-                        }
-                    },
-                });
-            });
-        });
-    </script>
-    <!--begin::Javascript-->
-    <script>var hostUrl = "assets/";</script>
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-    <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-    <!--end::Global Javascript Bundle-->
-    <!--begin::Vendors Javascript(used for this page only)-->   
-    <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-    <!--end::Vendors Javascript-->
-    <script src="<?= BASEURL ?>/js/custom/menu.js"></script>
-
-    <script>
-        "use strict";
-        var KTAppEcommerceProducts = (function () {
-            var t, e, n = () => {
-                t.querySelectorAll(
-                    '[data-kt-ecommerce-product-filter="delete_row"]'
-                ).forEach((t) => {
-                    t.addEventListener("click", function (t) {
-                        t.preventDefault();
-                        const n = t.target.closest("tr"),
-                            r = n.querySelector(
-                                '[data-kt-ecommerce-product-filter="product_name"]'
-                            ).innerText,
-                            // Mengambil ID produk dari atribut data-id
-                            productId = n.querySelector('[data-kt-ecommerce-product-filter="delete_row"]').getAttribute('data-id');
-                        Swal.fire({
-                            text: "Are you sure you want to delete " + r + "?",
-                            icon: "warning",
-                            showCancelButton: !0,
-                            buttonsStyling: !1,
-                            confirmButtonText: "Yes, delete!",
-                            cancelButtonText: "No, cancel",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-danger",
-                                cancelButton: "btn fw-bold btn-active-light-primary",
+                                }
                             },
-                        }).then(function (result) {
-                            if (result.value) {
-                                // Redirect ke URL penghapusan setelah konfirmasi
-                                window.location.href = `<?= BASEURL; ?>/menu/delete/${productId}`;
-                            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                Swal.fire({
-                                    text: r + " was not deleted.",
-                                    icon: "error",
-                                    buttonsStyling: !1,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: { confirmButton: "btn fw-bold btn-primary" },
-                                });
-                            }
                         });
                     });
                 });
-            };
-            return {
-                init: function () {
-                    if ((t = document.querySelector("#kt_ecommerce_products_table")) &&
-                        (e = $(t).DataTable({
-                            info: !1,
-                            order: [],
-                            pageLength: 10,
-                            columnDefs: [
-                                { render: DataTable.render.number(",", ".", 2), targets: 4 },
-                                { orderable: !1, targets: 0 },
-                                { orderable: !1, targets: 3 },
-                            ],
-                        })).on("draw", function () {
-                            n();
-                        }),
-                        document
-                            .querySelector('[data-kt-ecommerce-product-filter="search"]')
-                            .addEventListener("keyup", function (t) {
-                                e.search(t.target.value).draw();
-                            }),
-                        (() => {
-                            const t = document.querySelector(
-                                '[data-kt-ecommerce-product-filter="filter_kategori"]'
-                            );
-                            $(t).on("change", (t) => {
-                                let n = t.target.value;
-                                "all" === n && (n = ""), e.column(2).search(n).draw();
+            </script>
+            <!--begin::Javascript-->
+            <script>var hostUrl = "assets/";</script>
+            <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+            <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+            <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+            <!--end::Global Javascript Bundle-->
+            <!--begin::Vendors Javascript(used for this page only)-->
+            <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+            <!--end::Vendors Javascript-->
+            <script src="<?= BASEURL ?>/js/custom/menu.js"></script>
+
+            <script>
+                "use strict";
+                var KTAppEcommerceProducts = (function () {
+                    var t, e, n = () => {
+                        t.querySelectorAll(
+                            '[data-kt-ecommerce-product-filter="delete_row"]'
+                        ).forEach((t) => {
+                            t.addEventListener("click", function (t) {
+                                t.preventDefault();
+                                const n = t.target.closest("tr"),
+                                    r = n.querySelector(
+                                        '[data-kt-ecommerce-product-filter="product_name"]'
+                                    ).innerText,
+                                    // Mengambil ID produk dari atribut data-id
+                                    productId = n.querySelector('[data-kt-ecommerce-product-filter="delete_row"]').getAttribute('data-id');
+                                Swal.fire({
+                                    text: "Are you sure you want to delete " + r + "?",
+                                    icon: "warning",
+                                    showCancelButton: !0,
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Yes, delete!",
+                                    cancelButtonText: "No, cancel",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-danger",
+                                        cancelButton: "btn fw-bold btn-active-light-primary",
+                                    },
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        // Redirect ke URL penghapusan setelah konfirmasi
+                                        window.location.href = `<?= BASEURL; ?>/menu/delete/${productId}`;
+                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        Swal.fire({
+                                            text: r + " was not deleted.",
+                                            icon: "error",
+                                            buttonsStyling: !1,
+                                            confirmButtonText: "Ok, got it!",
+                                            customClass: { confirmButton: "btn fw-bold btn-primary" },
+                                        });
+                                    }
+                                });
                             });
-                        })(),
-                        n());
-                },
-            };
-        })();
-        KTUtil.onDOMContentLoaded(function () {
-            KTAppEcommerceProducts.init();
-        });
+                        });
+                    };
+                    return {
+                        init: function () {
+                            if ((t = document.querySelector("#kt_ecommerce_products_table")) &&
+                                (e = $(t).DataTable({
+                                    info: !1,
+                                    order: [],
+                                    pageLength: 10,
+                                    columnDefs: [
+                                        { render: DataTable.render.number(",", ".", 2), targets: 4 },
+                                        { orderable: !1, targets: 0 },
+                                        { orderable: !1, targets: 3 },
+                                    ],
+                                })).on("draw", function () {
+                                    n();
+                                }),
+                                document
+                                    .querySelector('[data-kt-ecommerce-product-filter="search"]')
+                                    .addEventListener("keyup", function (t) {
+                                        e.search(t.target.value).draw();
+                                    }),
+                                (() => {
+                                    const t = document.querySelector(
+                                        '[data-kt-ecommerce-product-filter="filter_kategori"]'
+                                    );
+                                    $(t).on("change", (t) => {
+                                        let n = t.target.value;
+                                        "all" === n && (n = ""), e.column(2).search(n).draw();
+                                    });
+                                })(),
+                                n());
+                        },
+                    };
+                })();
+                KTUtil.onDOMContentLoaded(function () {
+                    KTAppEcommerceProducts.init();
+                });
 
-    </script>
+            </script>
 
-    <?php Get::view('templates/footer', $data) ?>
+            <?php Get::view('templates/footer', $data) ?>

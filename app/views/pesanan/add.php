@@ -198,7 +198,7 @@
                                             placeholder="Cth: 081945115544" required>
                                     </div>
 
-                                    <div class="d-flex justify-content-between border-top pt-3 mt-4 mb-4">
+                                    <div class="d-flex justify-content-between border-top pt-3 my-4">
                                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2">Daftar Belanja</label>
                                         <button type="button" class="btn btn-light-danger rounded-pill" id="clear">Clear All
                                             Items</button>
