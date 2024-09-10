@@ -45,7 +45,7 @@
                     <!--end::Page title-->
                     <!--begin::Actions-->
                     <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        <a href="#" class="btn btn-flex btn-primary h-40px fs-7 fw-bold" data-bs-toggle="modal"
+                        <a href="#" class="btn btn-flex btn-primary fw-bold" data-bs-toggle="modal"
                             data-bs-target="#formModal">Tambah Data</a>
                     </div>
                     <!--end::Actions-->
@@ -79,10 +79,6 @@
                         <!--end::Card title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                            <!--begin::Daterangepicker-->
-                            <input class="form-control form-control-solid w-100 mw-250px"
-                                placeholder="Pilih rentang tanggal" id="kt_ecommerce_report_views_daterangepicker" />
-                            <!--end::Daterangepicker-->
                             <!--begin::Export dropdown-->
                             <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
                                 data-kt-menu-placement="bottom-end">

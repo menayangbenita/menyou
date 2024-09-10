@@ -992,6 +992,14 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
+                                                <span class="menu-title">Kelola Barang</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/stok/rekap" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
                                                 <span class="menu-title">Rekap Stok</span>
                                             </a>
                                             <!--end:Menu link-->
