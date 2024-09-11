@@ -165,7 +165,8 @@
                             <!--begin::Card body-->
                             <div class="card-body">
                                 <!--begin::Table-->
-                                <table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_ecommerce_products_table">
+                                <table class="table align-middle table-row-dashed fs-6 gy-3"
+                                    id="kt_ecommerce_products_table">
                                     <!--begin::Table head-->
                                     <thead>
                                         <!--begin::Table row-->
@@ -194,11 +195,14 @@
                                                 </td>
                                                 <!--end::Item-->
                                                 <!--begin::Product ID-->
-                                                <td class="text-start"><a href="apps/ecommerce/catalog/edit-product.html"
-                                                        class="text-gray-900 text-hover-primary"><?= $menu['nama'] ?>
+                                                <td class="text-start">
+                                                    <a class="text-gray-900 text-hover-primary">
+                                                        <?= $menu['nama'] ?>
                                                         <?php if ($menu['outlet_uuid'] == $data['user']['outlet_uuid']): ?>
                                                             <span class="badge badge-primary copy-badge ms-1">EXC</span>
-                                                        <?php endif; ?></a></td>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                </td>
                                                 <!--end::Product ID-->
                                                 <!--begin::Date added-->
                                                 <td class="text-start" data-order="<?= $menu['kategori'] ?>"

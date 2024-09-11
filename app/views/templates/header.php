@@ -32,7 +32,7 @@
     <script src="<?= BASEURL ?>/js/jquery-1.10.2.js"></script>
 
     <!-- title -->
-    <title>POS - <?= $data['title'] ?></title>
+    <title>Menune - <?= $data['title'] ?></title>
     <script>
         // Init function for DataTable
         function initDataTables(id, with_export = true, with_info = true, fixed_column = {left: 1, right: 1}) {

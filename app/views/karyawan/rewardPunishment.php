@@ -193,6 +193,7 @@
                             <!--end::Heading-->
                             <form action="<?= BASEURL ?>/rewardpunishment/insert" method="post">
                                 <?= csrf() ?>
+                                <input type="hidden" name="id" id="id">
                                 <div class="row g-9 mb-8">
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
@@ -240,6 +241,15 @@
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Label-->
                                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Tanggal</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="date" class="form-control form-control-solid" id="tanggal"
+                                            name="tanggal" value="<?= date('Y-m-d') ?>" required>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                             <span class="required">Jenis</span>
                                         </label>
                                         <!--end::Label-->
@@ -248,17 +258,17 @@
                                             <option value="punishment">Punishment</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                            <span class="required">Keterangan</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <textarea name="keterangan" class="form-control form-control-solid"
-                                            id="keterangan" rows="1" placeholder="Cth: Terlambat" required></textarea>
-                                    </div>
                                 </div>
                                 <!--end::Input group-->
+                                <div class="mb-8 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                        <span class="required">Keterangan</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <textarea name="keterangan" class="form-control form-control-solid" id="keterangan"
+                                        rows="2" placeholder="Cth: Terlambat" required></textarea>
+                                </div>
                                 <div class="row g-9 mb-15">
                                     <!--begin::Col-->
                                     <div class="col-md-4 fv-row">
@@ -313,14 +323,14 @@
                     const BASEURL = window.location.href;
 
                     $('.tombolTambahData').on('click', function () {
-                        $('#exampleModalLabel').html('Tambah Data');
+                        $('#modalLabel').html('Tambah Data');
                         $('.modal-footer button[type=submit]').html('Tambah Data');
                         $('.modal-body form').attr('action', `${BASEURL}/insert`);
                         $('.modal-body form')[0].reset();
                     });
 
                     $('.tampilModalUbah').on('click', function () {
-                        $('#exampleModalLabel').html('Ubah Data Reward & Punishment');
+                        $('#modalLabel').html('Ubah Data Reward & Punishment');
                         $('.modal-footer button[type=submit]').html('Ubah Data');
                         $('.modal-body form').attr('action', `${BASEURL}/update`);
 
