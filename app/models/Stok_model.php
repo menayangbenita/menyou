@@ -20,7 +20,7 @@ class Stok_model extends Model
 				($outlet_uuid) ?
 					"SELECT r.`riwayat`, r.`stok`, s.* FROM {$this->table} s
 					LEFT JOIN {$this->riwayat} r ON r.`stok_id` = s.`id`
-						WHERE s.`status` = 1 AND r.`outlet_uuid` = :outlet_uuid"
+						WHERE s.`status` = 1 AND r.status = 1 AND r.`outlet_uuid` = :outlet_uuid"
 				:
 					"SELECT * FROM {$this->table} WHERE `status` = 1"
 			)

@@ -61,7 +61,7 @@ class Laporan extends Controller
 			$detail_pembayaran = json_decode($item['detail_pembayaran'], true);
 			foreach ($detail_pembayaran as $item) {
 				$id = $item['id'];
-				$data['dataset_produk_sebelumnya'][$id] += $item['amount'];
+				if (isset($data['dataset_produk_sebelumnya'][$id])) $data['dataset_produk_sebelumnya'][$id] += $item['amount'];
 			}
 		}
 

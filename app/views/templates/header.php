@@ -35,7 +35,7 @@
     <title>Menune - <?= $data['title'] ?></title>
     <script>
         // Init function for DataTable
-        function initDataTables(id, with_export = true, with_info = true, fixed_column = {left: 1, right: 1}) {
+        function initDataTables(id, with_export = true, with_info = true, fixed_column = { left: 1, right: 1 }) {
             let table = $(id);
 
             if (table.length == 0) {
@@ -43,34 +43,34 @@
                 return false;
             }
 
-            const buttons_detail = (with_export) ? 
-            [
-                {
-                    extend: 'copy',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'excel',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'colvis'
-            ] : [];
+            const buttons_detail = (with_export) ?
+                [
+                    {
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    'colvis'
+                ] : [];
 
             let init = table.DataTable({
                 lengthChange: false,
@@ -887,43 +887,6 @@
                                     <!--begin:Menu link-->
                                     <span class="menu-link">
                                         <span class="menu-icon">
-                                            <i class="ki-outline ki-gift fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Penjualan</span>
-                                        <span class="menu-arrow"></span>
-                                    </span>
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
-                                    <div class="menu-sub menu-sub-accordion">
-                                        <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                            <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/pesanan" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Pesanan</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/pesanan/add" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Tambah Pesanan</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                    </div>
-                                    <!--end:Menu sub-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                    <!--begin:Menu link-->
-                                    <span class="menu-link">
-                                        <span class="menu-icon">
                                             <i class="ki-outline ki-lots-shopping fs-2"></i>
                                         </span>
                                         <span class="menu-title">Produk</span>
@@ -979,7 +942,7 @@
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-parcel fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Stok</span>
+                                        <span class="menu-title">Inventory</span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->
@@ -992,7 +955,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Kelola Barang</span>
+                                                <span class="menu-title">Barang</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
@@ -1008,7 +971,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Shipment</span>
+                                                <span class="menu-title">Pembelian Stok</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
@@ -1016,7 +979,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Pengeluaran</span>
+                                                <span class="menu-title">Kelola Stok</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
@@ -1025,6 +988,43 @@
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">Supplier</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                    </div>
+                                    <!--end:Menu sub-->
+                                </div>
+                                <!--end:Menu item-->
+                                <!--begin:Menu item-->
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <!--begin:Menu link-->
+                                    <span class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-gift fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Penjualan</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                    <!--end:Menu link-->
+                                    <!--begin:Menu sub-->
+                                    <div class="menu-sub menu-sub-accordion">
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/pesanan" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Pesanan</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/pesanan/add" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Pesan Menu</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -1114,7 +1114,7 @@
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-people fs-2"></i>
                                         </span>
-                                        <span class="menu-title">HR</span>
+                                        <span class="menu-title">Pegawai</span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->
@@ -1127,7 +1127,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Manage Karyawan</span>
+                                                <span class="menu-title">Data Pegawai</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
@@ -1135,7 +1135,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Absensi</span>
+                                                <span class="menu-title">Kehadiran</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
@@ -1143,7 +1143,7 @@
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Reward & Punishment</span>
+                                                <span class="menu-title">Insentif</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
@@ -1163,23 +1163,11 @@
                                 <!--begin:Menu item-->
                                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                     <!--begin:Menu link-->
-                                    <a class="menu-link" href="<?= BASEURL ?>/outlet">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-shop fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Outlet</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                    <!--begin:Menu link-->
                                     <span class="menu-link">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-setting-3 fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Admin</span>
+                                        <span class="menu-title">Setting</span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->
@@ -1187,6 +1175,14 @@
                                     <div class="menu-sub menu-sub-accordion">
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/outlet" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Outlet</span>
+                                            </a>
+                                            <!--end:Menu link-->
                                             <!--begin:Menu link-->
                                             <a href="<?= BASEURL ?>/users" class="menu-link">
                                                 <span class="menu-bullet">

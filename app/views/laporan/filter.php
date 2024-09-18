@@ -58,15 +58,15 @@
             ?>
 
             <div class="col-md-2 mt-4 mb-8 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary mb-0 me-3">
+                <button type="submit" class="btn btn-icon btn-primary mb-0 me-3">
                     <i class="fa fa-search-plus" aria-hidden="true"></i>
                 </button>
                 <?php if ($current_page == 'penjualan') : ?>
-                    <a href="<?= BASEURL ?>/laporan/penjualan" class="btn btn-primary mb-0">
+                    <a href="<?= BASEURL ?>/laporan/penjualan" class="btn btn-icon btn-primary mb-0">
                         <i class="fa fa-xmark" aria-hidden="true"></i>
                     </a>
                 <?php elseif ($current_page == 'karyawan') : ?>
-                    <a href="<?= BASEURL ?>/laporan/karyawan" class="btn btn-primary mb-0">
+                    <a href="<?= BASEURL ?>/laporan/karyawan" class="btn btn-icon btn-primary mb-0">
                         <i class="fa fa-xmark" aria-hidden="true"></i>
                     </a>
                 <?php endif; ?>

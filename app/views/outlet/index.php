@@ -144,7 +144,7 @@
                                                     </div>
                                                 <?php endif; ?>
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= BASEURL; ?>/outlet/detail/<?= $outlet['id'] ?>"
+                                                    <a href="<?= BASEURL; ?>/outlet/detail/<?= $outlet['uuid'] ?>"
                                                         class="menu-link px-3" data-id="<?= $outlet['uuid']; ?>">Detail</a>
                                                 </div>
                                             </div>

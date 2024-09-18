@@ -126,40 +126,30 @@
                                 id="kt_ecommerce_report_views_table">
                                 <thead>
                                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                        <th rowspan="2" class="min-w-75px align-middle">
+                                        <th class="min-w-75px align-middle">
                                             No</th>
-                                        <th rowspan="2" class="min-w-100px align-middle">
+                                        <th class="min-w-100px align-middle">
                                             No Faktur</th>
-                                        <th rowspan="2" class="min-w-125px align-middle">
+                                        <th class="min-w-125px align-middle">
                                             Tanggal</th>
-                                        <th rowspan="2" class="min-w-175px align-middle">
+                                        <th class="min-w-175px align-middle">
                                             Deskripsi</th>
-                                        <th rowspan="2" class="min-w-150px align-middle">
+                                        <th class="min-w-150px align-middle">
                                             Total Berat</th>
-                                        <th colspan="2" class="min-w-400px align-middle">
+                                        <th class="min-w-350px align-middle">
                                             Biaya EXW</th>
-                                        <th colspan="2" class="min-w-400px align-middle">
+                                        <th class="min-w-250px align-middle">
                                             Biaya Lainnya</th>
-                                        <th rowspan="2" class="min-w-150px align-middle">
+                                        <th class="min-w-150px align-middle">
                                             Diskon</th>
-                                        <th rowspan="2" class="min-w-200px align-middle">
+                                        <th class="min-w-150px align-middle">
                                             Total</th>
-                                        <th rowspan="2" class="min-w-200px align-middle">
+                                        <th class="min-w-150px align-middle">
                                             Harga All In / Kg</th>
-                                        <th rowspan="2" class="min-w-150px align-middle">
+                                        <th class="min-w-150px align-middle">
                                             Supplier</th>
-                                        <th rowspan="2" class="text-end min-w-150px align-middle">
+                                        <th class="text-end min-w-150px align-middle">
                                             Aksi</th>
-                                    </tr>
-                                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                        <th class="min-w-200px align-middle">
-                                            List</th>
-                                        <th class="min-w-200px align-middle">
-                                            Total</th>
-                                        <th class="min-w-200px align-middle">
-                                            List</th>
-                                        <th class="min-w-200px align-middle">
-                                            Total</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
@@ -181,15 +171,15 @@
                                             <td class="text-start pe-0">
                                                 <?= $shipment['total_berat'] ?> gram
                                             </td>
-                                            <td class="text-sm text-start font-weight-bold table-responsive mb-0">
+                                            <td class="font-weight-bold mb-0">
                                                 <?php foreach (json_decode($shipment['detail_barang'], true) as $barang): ?>
                                                     - <?= $barang['nama'] ?>
                                                     <?= $barang['jumlah'] . " " . $data['satuan'][$barang['nama']] ?> : Rp
                                                     <?= number_format($barang['subtotal'], 0, ',', '.') ?> <br>
                                                 <?php endforeach; ?>
-                                            </td>
-                                            <td class="text-start pe-0">
-                                                Rp <?= number_format($shipment['total_exw'], 0, ',', '.') ?>
+                                                <span class="text-end text-primary">
+                                                    Total: Rp <?= number_format($shipment['total_exw'], 0, ',', '.') ?>
+                                                </span>
                                             </td>
                                             <td class="text-start pe-0">
                                                 <?php $biaya_lainnya = json_decode($shipment['biaya_lainnya'], true); ?>
@@ -200,9 +190,9 @@
                                                         - <?= $key ?> : Rp <?= number_format($val, 0, ',', '.') ?> <br>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
-                                            </td>
-                                            <td class="text-start pe-0">
-                                                Rp <?= number_format($shipment['total_biaya_lainnya'], 0, ',', '.') ?>
+                                                <span class="text-end text-primary">
+                                                    Total: <?= number_format($shipment['total_biaya_lainnya'], 0, ',', '.') ?>
+                                                </span>
                                             </td>
                                             <td class="text-start pe-0">
                                                 Rp <?= number_format($shipment['diskon'], 0, ',', '.') ?>

@@ -114,12 +114,12 @@
                     <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                         <!--begin::Card title-->
                         <div class="d-flex justify-content-center align-items-center">
-                            <div class="avatar avatar-xl position-relative me-4">
+                            <div class="d-block overlay position-relative me-4">
                                 <img src="<?= BASEURL ?>/upload/karyawan/<?= $data['karyawan']['foto'] ?>"
                                     alt="profile_image" class="rounded shadow-sm profile w-50px h-50px"
                                     draggable="false" data-bs-toggle="modal" data-bs-target="#imageModal">
-                                <div class="overlay" data-bs-toggle="modal" data-bs-target="#imageModal">
-                                    <i class="fas fa-eye"></i>
+                                <div class="overlay-layer bg-dark card-rounded bg-opacity-25" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                    <i class="ki-outline ki-eye fs-2x text-white"></i>
                                 </div>
                             </div>
                             <div class="card-title align-items-start flex-column">
