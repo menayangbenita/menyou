@@ -129,7 +129,7 @@
                         </div>
                         <!--end::Sidebar mobile toggle-->
                         <!--begin::Logo-->
-                        <a href="index.html" class="app-sidebar-logo">
+                        <a href="<?= BASEURL ?>" class="app-sidebar-logo">
                             <img alt="Logo" src="<?= BASEURL ?>/media/logos/text logo.png"
                                 class="h-50px theme-light-show" />
                             <img alt="Logo" src="<?= BASEURL ?>/media/logos/text logo white.png"
