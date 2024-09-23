@@ -8,8 +8,6 @@ class Prepare_model extends Model
 	protected $fields = [
 		'deskripsi',
 		'detail_items',
-		'tanggal',
-		'outlet_uuid',
 	];
 
 	public function getAllData($outlet_uuid = false)
@@ -79,6 +77,8 @@ class Prepare_model extends Model
 		);
 
 		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		$this->db->bind('tanggal', $data['tanggal']);
+		$this->db->bind('outlet_uuid', $data['outlet_uuid']);
 		$this->db->bind('uuid', Uuid::uuid4()->toString());
 		$this->db->bind('created_by', $this->user);
 
@@ -93,10 +93,7 @@ class Prepare_model extends Model
 
 		$fields_query = "
 			deskripsi = :deskripsi, 
-			detail_items = :detail_items, 
-			tanggal = :tanggal, 
-			status_order = :status_order, 
-			outlet_uuid = :outlet_uuid,
+			detail_items = :detail_items,
 		";
 
 		$this->db->query(

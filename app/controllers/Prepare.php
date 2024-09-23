@@ -32,6 +32,21 @@ class Prepare extends Controller
 
         $this->view('/prepare/request', $data);
     }
+    
+    function edit($id) {
+        $this->auth('user', 'Owner|Manager|Sales');
+        csrf_generate();
+
+        $data['title'] = 'Edit Request Prepare';
+		$data['user'] = $this->user;
+
+        $this->model('Menu_model')->countAvailableAll($this->user['outlet_uuid'], true, true);
+        $data['prepare'] = $this->model('Prepare_model')->getDataById($id);
+        $data['menu'] = $this->model('Menu_model')->getAllPrepare($this->user['outlet_uuid']);
+        $data['barang'] = $this->model('Stok_model')->getAllData($this->user['outlet_uuid']);
+
+        $this->view('/prepare/edit', $data);
+    }
 
     public function invoice($uuid = null)
 	{
@@ -81,6 +96,40 @@ class Prepare extends Controller
             Flasher::setFlash('Insert&nbsp<b>FAILED</b>', 'danger');
         }
         redirectTo('/prepare');
+    }
+
+    public function editRequest($id)  {
+        try {
+            httpPOST();
+            $this->auth('user', 'Owner|Manager|Sales');
+            csrf_validate('/prepare');
+
+            // Prepare data
+            $data = posts();
+
+            // Proses detail items untuk request prepare
+            $detail_items = [];
+            foreach ($data->id as $i => $item_id) {
+                array_push($detail_items, [
+                    'id' => $item_id,
+                    'stok_id' => $data->stok_id[$i],
+                    'item' => $data->item[$i],
+                    'amount' => $data->amount[$i],
+                ]);
+            }
+            $data->detail_items = json_encode($detail_items);
+            unset($data->id); unset($data->item); unset($data->stok_id); unset($data->amount);
+
+            // Update data pembayaran
+            $res = $this->model($this->model_name)->update($id, (array)$data);
+            if (!$res) new Exception('Haha eror');
+            
+            Flasher::setFlash('Update&nbsp<b>SUCCESS</b>', 'success');
+        } catch (Exception $e) {
+            // dd($e->getMessage());
+            Flasher::setFlash('Update&nbsp<b>FAILED</b>', 'danger');
+        }
+        redirectTo('/prepare/request');
     }
 
     public function updateStatusRequest()
