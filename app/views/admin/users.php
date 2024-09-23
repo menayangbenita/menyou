@@ -1,5 +1,9 @@
 <?php Get::view('templates/header', $data) ?>
-
+<style>
+    .password-container {
+        display: none;
+    }
+</style>
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
     <!--begin::Content wrapper-->
@@ -69,8 +73,8 @@
                             <div class="d-flex align-items-center position-relative my-1">
                                 <i class="ki-outline ki-magnifier fs-2 position-absolute ms-4"></i>
                                 <input type="text" data-kt-ecommerce-order-filter="search"
-                                    class="form-control form-control-solid w-250px ps-12"
-                                    placeholder="Cari Reward/Punishment" />
+                                    class="form-control form-control-solid form-control form-control-solid-solid w-250px ps-12"
+                                    placeholder="Cari User" />
                             </div>
                             <!--end::Search-->
                             <!--begin::Export buttons-->
@@ -218,24 +222,24 @@
                                 <!--end::Title-->
                             </div>
                             <!--end::Heading-->
-                            <form action="<?= BASEURL; ?>/user/insert" method="post">
+                            <form action="<?= BASEURL; ?>/users/insert" method="post">
                                 <?= csrf() ?>
                                 <div class="d-flex flex-column mb-8 fv-row">
                                     <label for="username" class="fd-flex align-items-center fs-6 fw-semibold mb-2"><span
                                             class="required">Name</span></label>
-                                    <input type="text" class="form-control" name="username" id="username"
+                                    <input type="text" class="form-control form-control-solid" name="username" id="username"
                                         placeholder="Username">
                                 </div>
                                 <div class="d-flex flex-column mb-8 fv-row">
                                     <label for="email" class="fd-flex align-items-center fs-6 fw-semibold mb-2"><span
                                             class="required">Email</span></label>
-                                    <input type="email" class="form-control" name="email" id="email"
+                                    <input type="email" class="form-control form-control-solid" name="email" id="email"
                                         placeholder="email@example.com">
                                 </div>
                                 <div class="d-flex flex-column mb-8 fv-row">
                                     <label for="role" class="fd-flex align-items-center fs-6 fw-semibold mb-2"><span
                                             class="required">Role</span></label>
-                                    <select class="form-control" name="role" id="role">
+                                    <select class="form-select form-select-solid" name="role" id="role">
                                         <option value="Owner">Owner</option>
                                         <option value="Manager">Manager</option>
                                         <option value="Sales">Sales</option>
@@ -248,7 +252,7 @@
                                 <div class="d-flex flex-column mb-15 fv-row password-container">
                                     <label for="password" class="fd-flex align-items-center fs-6 fw-semibold mb-2"><span
                                             class="required">Password</span></label>
-                                    <input type="password" class="form-control" name="password" id="password"
+                                    <input type="password" class="form-control form-control-solid" name="password" id="password"
                                         placeholder="Password">
                                 </div>
                                 <div class="text-center">
@@ -260,133 +264,136 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- modal switch -->
-                <div class="modal fade" id="switchModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <div class="modal-content rounded">
-                            <div class="modal-content rounded">
-                                <div class="modal-header pb-0 border-0 justify-content-end">
-                                    <!--begin::Close-->
-                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                        <i class="ki-outline ki-cross fs-1"></i>
-                                    </div>
-                                    <!--end::Close-->
-                                </div>
-                                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                                    <!--begin::Heading-->
-                                    <div class="mb-13 text-center">
-                                        <!--begin::Title-->
-                                        <h1 class="mb-3" id="modalLabel">Aktivasi User</h1>
-                                        <!--end::Title-->
-                                    </div>
-                                    <!--end::Heading-->
-                                    <form action="<?= BASEURL ?>/users/activateUser" method="post"
-                                        enctype="multipart/form-data">
-                                        <?= csrf() ?>
-                                        <div class="d-flex flex-column mb-8 fv-row" id="select-outlet">
-                                            <label for="outlet_uuid"
-                                                class="d-flex align-items-center fs-6 fw-semibold mb-2"><span
-                                                    class="required">Pilih outlet</span></label>
-                                            <select class="form-control" name="outlet_uuid">
-                                                <?php foreach ($data['outlet'] as $outlet): ?>
-                                                    <option value="<?= $outlet['uuid'] ?>"><?= $outlet['nama'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class="d-flex flex-column mb-8 fv-row">
-                                            <label for="role"
-                                                class="d-flex align-items-center fs-6 fw-semibold mb-2"><span
-                                                    class="required">Pilih Role</span></label>
-                                            <select class="form-control" name="role">
-                                                <option value="Manager">Manager</option>
-                                                <option value="Sales">Sales</option>
-                                                <option value="Warehouse">Warehouse</option>
-                                                <option value="Analyzer">Data Analyse</option>
-                                                <option value="HR">Human Resource Manager</option>
-                                                <option value="Karyawan">Karyawan</option>
-                                            </select>
-                                        </div>
-                                        <div class="d-flex flex-column mb-15 fv-row">
-                                            <label for="password"
-                                                class="d-flex align-items-center fs-6 fw-semibold mb-2 text-danger fw-normal fs-6">
-                                                <span class="required">Masukkan password untuk user
-                                                    <b><?= $data['user']['username'] ?></b>:</span>
-                                            </label>
-                                            <input type="password" class="form-control" name="password"
-                                                placeholder="********" required>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-secondary mb-1"
-                                                data-bs-dismiss="modal">Tutup</button>
-                                            <button type="submit" class="btn bg-gradient-primary mb-1">Simpan</button>
-                                    </form>
-                                </div>
+        <!-- modal switch -->
+        <div class="modal fade" id="switchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content rounded">
+                    <div class="modal-content rounded">
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
                             </div>
+                            <!--end::Close-->
+                        </div>
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Aktivasi User</h1>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <form action="<?= BASEURL ?>/users/activateUser" method="post"
+                                enctype="multipart/form-data">
+                                <?= csrf() ?>
+                                <div class="d-flex flex-column mb-8 fv-row" id="select-outlet">
+                                    <label for="outlet_uuid"
+                                        class="d-flex align-items-center fs-6 fw-semibold mb-2"><span
+                                            class="required">Pilih outlet</span></label>
+                                    <select class="form-select form-select-solid" name="outlet_uuid">
+                                        <?php foreach ($data['outlet'] as $outlet): ?>
+                                            <option value="<?= $outlet['uuid'] ?>"><?= $outlet['nama'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="d-flex flex-column mb-8 fv-row">
+                                    <label for="role" class="d-flex align-items-center fs-6 fw-semibold mb-2"><span
+                                            class="required">Pilih Role</span></label>
+                                    <select class="form-select form-select-solid" name="role">
+                                        <option value="Manager">Manager</option>
+                                        <option value="Sales">Sales</option>
+                                        <option value="Warehouse">Warehouse</option>
+                                        <option value="Analyzer">Data Analyse</option>
+                                        <option value="HR">Human Resource Manager</option>
+                                        <option value="Karyawan">Karyawan</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex flex-column mb-15 fv-row">
+                                    <label for="password"
+                                        class="d-flex align-items-center fs-6 fw-semibold mb-2 text-danger fw-normal fs-6">
+                                        <span class="required">Masukkan password untuk user
+                                            <b><?= $data['user']['username'] ?></b>:</span>
+                                    </label>
+                                    <input type="password" class="form-control form-control-solid" name="password" placeholder="********"
+                                        required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-secondary mb-1"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-primary mb-1">Simpan</button>
+                            </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <!--begin::Javascript-->
-                    <script>var hostUrl = "assets/";</script>
-                    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-                    <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-                    <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-                    <!--end::Global Javascript Bundle-->
-                    <!--begin::Vendors Javascript(used for this page only)-->
-                    <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-                    <!--end::Vendors Javascript-->
-                    <!--begin::Custom Javascript(used for this page only)-->
-                    <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-                    <!--end::Custom Javascript-->
-                    <!--end::Javascript-->
 
-                    <script src="<?= BASEURL ?>/js/datatables.js"></script>
-                    <script src="<?= BASEURL ?>/js/datatables.js"></script>
+        <!--begin::Javascript-->
+        <script>var hostUrl = "assets/";</script>
+        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+        <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+        <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+        <!--end::Global Javascript Bundle-->
+        <!--begin::Vendors Javascript(used for this page only)-->
+        <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+        <!--end::Vendors Javascript-->
+        <!--begin::Custom Javascript(used for this page only)-->
+        <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+        <!--end::Custom Javascript-->
+        <!--end::Javascript-->
 
-                    <script>
-                        $(function () {
-                            const BASEURL = window.location.href;
+        <script src="<?= BASEURL ?>/js/datatables.js"></script>
+        <script src="<?= BASEURL ?>/js/datatables.js"></script>
 
-                            $('.tombolActivation').on('click', function () {
-                                let id = $(this).data('id');
+        <script>
+            $(function () {
+                const BASEURL = window.location.href;
 
-                                // console.log(id);
-                                $('#switchModal form')[0].reset();
-                                $('#switchModal form').attr('action', `${BASEURL}/activateUser/${id}`);
-                            });
+                $('.tombolActivation').on('click', function () {
+                    let id = $(this).data('id');
 
-                            $('.tombolTambahData').on('click', function () {
-                                $('#modalLabel').html('Tambah Data')
-                                $('#formModal .modal-footer button[type=submit]').html('Tambah Data');
-                                $("#formModal .modal-body form").attr("action", `${BASEURL}/insert`);
-                                $('#formModal .modal-body .password-container').show();
-                                $("#formModal .modal-body form")[0].reset();
-                            });
+                    // console.log(id);
+                    $('#switchModal form')[0].reset();
+                    $('#switchModal form').attr('action', `${BASEURL}/activateUser/${id}`);
+                });
 
-                            $(".tampilModalUbah").click(function () {
-                                const id = $(this).data("id");
+                $('.tombolTambahData').on('click', function () {
+                    $('#modalLabel').html('Tambah Data')
+                    $('#formModal .modal-footer button[type=submit]').html('Tambah Data');
+                    $("#formModal .modal-body form").attr("action", `${BASEURL}/insert`);
+                    $('#formModal .modal-body .password-container').show();
+                    $("#formModal .modal-body form")[0].reset();
+                });
 
-                                $("#modalLabel").html("Ubah Data");
-                                $("#formModal .modal-footer button[type=submit]").html("Ubah Data");
-                                $("#formModal .modal-body form").attr("action", `${BASEURL}/update/${id}`);
-                                $('#formModal .modal-body .password-container').hide();
+                $(".tampilModalUbah").click(function () {
+                    const id = $(this).data("id");
 
-                                $.ajax({
-                                    url: `${BASEURL}/getubah`,
-                                    data: {
-                                        id: id
-                                    },
-                                    method: "post",
-                                    dataType: "json",
-                                    success: function (data) {
-                                        $('#username').val(data.username);
-                                        $('#email').val(data.email);
-                                        $('#role').val(data.role || 'null');
-                                    },
-                                })
-                            })
-                        });
-                    </script>
+                    $("#modalLabel").html("Ubah Data");
+                    $("#formModal .modal-footer button[type=submit]").html("Ubah Data");
+                    $("#formModal .modal-body form").attr("action", `${BASEURL}/update/${id}`);
+                    $('#formModal .modal-body .password-container').hide();
 
-                    <?php Get::view('templates/footer', $data) ?>
+                    $.ajax({
+                        url: `${BASEURL}/getubah`,
+                        data: {
+                            id: id
+                        },
+                        method: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            $('#username').val(data.username);
+                            $('#email').val(data.email);
+                            $('#role').val(data.role || 'null');
+                        },
+                    })
+                })
+            });
+        </script>
+
+        <?php Get::view('templates/footer', $data) ?>

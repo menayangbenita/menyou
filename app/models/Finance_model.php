@@ -189,48 +189,38 @@ class Finance_model extends Model
 	}
 
 	public function update($id, $data)
-{
-    $fields_query = "
-        no_akun = :no_akun,
-        kategori = :kategori,
-        deskripsi = :deskripsi,
-        jumlah = :jumlah,
-        tanggal = :tanggal
-    ";
+	{
+		$fields_query = "
+			no_akun = :no_akun,
+			kategori = :kategori,
+			deskripsi = :deskripsi,
+			jumlah = :jumlah,
+			tanggal = :tanggal,
+		";
 
-    $this->db->query(
-        "UPDATE {$this->table}
-            SET
-            {$fields_query},
-            modified_at = CURRENT_TIMESTAMP,
-            modified_by = :modified_by
-        WHERE id = :id"
-    );
+		$this->db->query(
+			"UPDATE {$this->table}
+				SET
+				{$fields_query}
+				modified_at = CURRENT_TIMESTAMP,
+				modified_by = :modified_by
+			WHERE id = :id"
+		);
 
-    // Bind data yang dikirim melalui POST
-    $this->db->bind('no_akun', $data['no_akun']);
-    $this->db->bind('kategori', $data['kategori']);
-    $this->db->bind('deskripsi', $data['deskripsi']);
-    $this->db->bind('jumlah', $data['jumlah']);
-    $this->db->bind('tanggal', $data['tanggal']);
-    $this->db->bind('modified_by', $this->user);
-    $this->db->bind('id', $id);
+		foreach ($this->fields as $field)
+			$this->db->bind($field, $data[$field]);
+		$this->db->bind('modified_by', $this->user);
+		$this->db->bind('id', $id);
 
-    // Jalankan query
-    try {
-        $this->db->execute();
-        return $this->db->rowCount(); // Mengembalikan jumlah baris yang terpengaruh
-    } catch (PDOException $e) {
-        error_log("Database Error: " . $e->getMessage());
-        throw new Exception("Gagal update data: " . $e->getMessage());
-    }
-}
+		$this->db->execute();
+		return $this->db->rowCount();
 
+	}
 	public function updateFrom($relation, $jumlah, $tanggal)
 	{
 		$fields_query = "
 			jumlah = :jumlah,
-			tanggal = :tanggal
+			tanggal = :tanggal,
 		";
 
 		$this->db->query(
@@ -283,6 +273,24 @@ class Finance_model extends Model
 
 		$this->db->bind('deleted_by', $this->user);
 		$this->db->bind('id', $id);
+
+		$this->db->execute();
+		return $this->db->rowCount();
+	}
+
+	public function deleteFrom($relation)
+	{
+		$this->db->query(
+			"UPDATE {$this->table}
+				SET
+				`deleted_at` = CURRENT_TIMESTAMP,
+				`deleted_by` = :deleted_by,
+				`is_deleted` = 1
+			WHERE `relation` = :relation"
+		);
+
+		$this->db->bind('relation', $relation);
+		$this->db->bind('deleted_by', $this->user);
 
 		$this->db->execute();
 		return $this->db->rowCount();

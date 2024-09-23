@@ -94,7 +94,7 @@ class Stok extends Controller
         try {
             $this->auth('user', 'Owner|Manager|Warehouse');
 
-            $res = $this->model($this->model_name)->deleteRiwayat($id);
+            $res = $this->model($this->model_name)->deleteRiwayat($id, $this->user['outlet_uuid']);
             if (!$res) new Exception('Haha eror');
 
             Flasher::setFlash('Delete&nbsp<b>SUCCESS</b>', 'success');

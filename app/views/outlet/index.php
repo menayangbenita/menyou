@@ -140,14 +140,12 @@
                                                     <div class="menu-item px-3">
                                                         <a href="<?= BASEURL; ?>/outlet/delete/<?= $outlet['id'] ?>"
                                                             class="menu-link px-3" data-id="<?= $outlet['id']; ?>"
-                                                            onclick="return confirm ('Hapus data?')"
-                                                            data-kt-ecommerce-product-filter="delete_row">Hapus</a>
+                                                            onclick="return confirm ('Hapus data?')">Hapus</a>
                                                     </div>
                                                 <?php endif; ?>
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= BASEURL; ?>/outlet/detail/<?= $outlet['id'] ?>"
-                                                        class="menu-link px-3" data-id="<?= $outlet['uuid']; ?>"
-                                                        data-kt-ecommerce-product-filter="delete_row">Detail</a>
+                                                    <a href="<?= BASEURL; ?>/outlet/detail/<?= $outlet['uuid'] ?>"
+                                                        class="menu-link px-3" data-id="<?= $outlet['uuid']; ?>">Detail</a>
                                                 </div>
                                             </div>
                                             <!--end::Menu-->

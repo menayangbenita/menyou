@@ -6,13 +6,13 @@ class Rewardpunishment_model extends Model
 {
 	protected $table = "reward_punishment";
 	protected $fields = [
-        'karyawan_id',
-        'jenis',
-        'jumlah',
-        'besaran',
-        'keterangan',
-        'tanggal',
-    ];
+		'karyawan_id',
+		'jenis',
+		'jumlah',
+		'besaran',
+		'keterangan',
+		'tanggal',
+	];
 
 	public function getAllData()
 	{
@@ -25,24 +25,25 @@ class Rewardpunishment_model extends Model
 		return $this->db->fetchAll();
 	}
 
-	public function getAllDataFiltered($tanggal, $jenis = null) {
+	public function getAllDataFiltered($tanggal, $jenis = null)
+	{
 		$query = "SELECT * FROM reward_punishment WHERE tanggal = :tanggal";
-		
+
 		if ($jenis) {
 			$query .= " AND jenis = :jenis";
 		}
-		
+
 		$this->db->query($query);
 		$this->db->bind(':tanggal', $tanggal);
-	
+
 		if ($jenis) {
 			$this->db->bind(':jenis', $jenis);
 		}
-	
+
 		return $this->db->fetchAll();
 	}
-	
-	
+
+
 
 	public function getLatestData()
 	{
@@ -94,89 +95,76 @@ class Rewardpunishment_model extends Model
 				WHERE
 			EXTRACT(MONTH FROM {$this->table}.tanggal) = :month AND
 			EXTRACT(YEAR FROM {$this->table}.tanggal) = :year AND
-			{$this->table}.status = 1"	
+			{$this->table}.status = 1"
 		);
 
 		$this->db->bind('month', $month);
 		$this->db->bind('year', $year);
-		
+
 		return $this->db->fetchAll();
 	}
 
 	public function insert($data)
-{
-    // Query untuk insert data, gunakan placeholder untuk binding parameter
-    $fields_query = ":karyawan_id, :jenis, :jumlah, :besaran, DEFAULT, :keterangan, :tanggal, :total";
+	{
+		// Query untuk insert data, gunakan placeholder untuk binding parameter
+		$fields_query = ":karyawan_id, :jenis, :jumlah, :besaran, DEFAULT, :keterangan, :tanggal, :total";
 
-    $this->db->query(
-        "INSERT INTO {$this->table} 
+		$this->db->query(
+			"INSERT INTO {$this->table} 
         VALUES
         (null, :uuid, {$fields_query}, CURRENT_TIMESTAMP, :created_by, null, '', null, '', null, '', 0, 0, DEFAULT)"
-    );
+		);
 
-    // Bind data secara manual, hapus foreach karena tidak diperlukan
-    $this->db->bind('uuid', Uuid::uuid4()->toString());  // UUID
-    $this->db->bind('karyawan_id', $data['karyawan_id']);
-    $this->db->bind('jenis', $data['jenis']);
-    $this->db->bind('jumlah', $data['jumlah']);
-    $this->db->bind('besaran', $data['besaran']);
-    $this->db->bind('keterangan', $data['keterangan']);
-    $this->db->bind('tanggal', $data['tanggal']);  // Pastikan tanggal sudah diset
-    $this->db->bind('total', $data['total']);      // Pastikan total sudah dihitung di controller
-    $this->db->bind('created_by', $this->user);    // User yang membuat data
+		// Bind data secara manual, hapus foreach karena tidak diperlukan
+		$this->db->bind('uuid', Uuid::uuid4()->toString());  // UUID
+		$this->db->bind('karyawan_id', $data['karyawan_id']);
+		$this->db->bind('jenis', $data['jenis']);
+		$this->db->bind('jumlah', $data['jumlah']);
+		$this->db->bind('besaran', $data['besaran']);
+		$this->db->bind('keterangan', $data['keterangan']);
+		$this->db->bind('tanggal', $data['tanggal']);  // Pastikan tanggal sudah diset
+		$this->db->bind('total', $data['total']);      // Pastikan total sudah dihitung di controller
+		$this->db->bind('created_by', $this->user);    // User yang membuat data
 
-    try {
-        // Eksekusi query
-        $this->db->execute();
-        return $this->db->rowCount();  // Mengembalikan jumlah row yang berhasil di-insert
-    } catch (Exception $e) {
-        // Menangkap dan menampilkan pesan error
-        echo "Error: " . $e->getMessage();
-        exit;
-    }
-}
+		try {
+			// Eksekusi query
+			$this->db->execute();
+			return $this->db->rowCount();  // Mengembalikan jumlah row yang berhasil di-insert
+		} catch (Exception $e) {
+			// Menangkap dan menampilkan pesan error
+			echo "Error: " . $e->getMessage();
+			exit;
+		}
+	}
 
-public function update($id, $data)
-{
-    // Pastikan fields_query sesuai dengan kolom yang ada
-    $fields_query = "
-        karyawan_id = :karyawan_id,
-        jenis = :jenis,
-        jumlah = :jumlah,
-        besaran = :besaran,
-        keterangan = :keterangan,
-        tanggal = :tanggal
-    ";
+	public function update($id, $data)
+	{
+		$fields_query = "
+			karyawan_id = :karyawan_id,
+			jenis = :jenis,
+			jumlah = :jumlah,
+			besaran = :besaran,
+			total = DEFAULT,
+			keterangan = :keterangan,
+			tanggal = :tanggal,
+		";
 
-    // Query update tanpa kolom yang dihasilkan
-    $this->db->query(
-        "UPDATE {$this->table}
-        SET
-            {$fields_query},
-            modified_at = CURRENT_TIMESTAMP,
-            modified_by = :modified_by
-        WHERE id = :id"
-    );
+		$this->db->query(
+      		"UPDATE {$this->table}
+				SET
+				{$fields_query}
+				modified_at = CURRENT_TIMESTAMP,
+				modified_by = :modified_by
+			WHERE id = :id"
+		);
 
-    // Bind parameters sesuai dengan yang ada dalam query
-    $this->db->bind('karyawan_id', $data['karyawan_id']);
-    $this->db->bind('jenis', $data['jenis']);
-    $this->db->bind('jumlah', $data['jumlah']);
-    $this->db->bind('besaran', $data['besaran']);
-    $this->db->bind('keterangan', $data['keterangan']);
-    $this->db->bind('tanggal', $data['tanggal']);
-    $this->db->bind('modified_by', $this->user);
-    $this->db->bind('id', $id);
+		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		$this->db->bind('modified_by', $this->user);
+		$this->db->bind('id', $id);
 
-    try {
-        $this->db->execute();
-        return $this->db->rowCount();
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-        exit;
-    }
-}
-
+		$this->db->execute();
+		return $this->db->rowCount();
+	}
 
 	public function updateField($id, $field, $value)
 	{
@@ -219,7 +207,7 @@ public function update($id, $data)
 	public function destroy($id)
 	{
 		$this->db->query("DELETE FROM {$this->table} WHERE");
-		
+
 		$this->db->bind('id', $id);
 
 		$this->db->execute();

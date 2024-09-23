@@ -51,16 +51,16 @@ function addList(nama = '', jumlah = '', satuan = '..') {
     list.innerHTML = `
         <div class="col-sm-6">
             <div class="input-group">
-                <button class="btn btn-danger m-0 px-3 removeItem" type="button">
+                <button class="btn btn-icon btn-danger m-0 px-3 removeItem" type="button">
                     <i class="fa fa-xmark"></i>
                 </button>
-                <input type="text" class="form-control ps-2 nama-bahan" name="nama_bahan[]" value="${nama}" placeholder="Nama Bahan" list="barang" autocomplete="off">
+                <input type="text" class="form-control form-control-solid ps-2 nama-bahan" name="nama_bahan[]" value="${nama}" placeholder="Nama Bahan" list="barang" autocomplete="off">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="input-group d-flex">
-                <input type="text" class="form-control position-static rounded-end-0 jumlah" name="jumlah_bahan[]" value="${jumlah}" placeholder="0">
-                <span class="input-group-text position-static satuan">${satuan}</span>
+                <input type="text" class="form-control form-control-solid position-static rounded-end-0 jumlah" name="jumlah_bahan[]" value="${jumlah}" placeholder="0">
+                <span class="input-group-text position-static satuan border-0">${satuan}</span>
             </div>
         </div>
     `;

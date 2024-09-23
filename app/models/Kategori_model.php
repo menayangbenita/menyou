@@ -76,9 +76,9 @@ class Kategori_model extends Model
 		$old = $this->getDataById($id);
 
 		$fields_query = "
-			foto= :foto
+			foto= :foto,
 			nama= :nama, 
-			deskripsi= :deskripsi
+			deskripsi= :deskripsi,
 		";
 
 		$this->db->query(
@@ -90,10 +90,10 @@ class Kategori_model extends Model
 			WHERE id = :id"
 		);
 
-		foreach ($this->fields as $field)
-			$this->db->bind($field, $data[$field]);
-		$this->db->bind('id', $id);
+		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		$this->db->bind('foto', $this->storeFile('foto', 'upload/kategori', false, $old['foto']));
 		$this->db->bind('modified_by', $this->user);
+		$this->db->bind('id', $id);
 
 		$this->db->execute();
 		return $this->db->rowCount();

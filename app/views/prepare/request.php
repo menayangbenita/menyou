@@ -121,19 +121,19 @@
                                             </td>
                                             <td class="align-middle text-end">
                                                 <?php if (!$prepare['status_order']): ?>
-                                                    <a class="btn btn-light-warning rounded-pill m-0"
+                                                    <a class="btn btn-icon btn-light-warning m-0"
                                                         href="<?= BASEURL; ?>/prepare/invoice/<?= $prepare['uuid'] ?>"
                                                         data-bs-toggle="tooltip" data-bs-title="Cetak Request">
-                                                        <i class="bi bi-printer-fill"></i>
+                                                        <i class="ki-solid ki-printer"></i>
                                                     </a>
-                                                    <a class="btn btn-light-info rounded-pill m-0"
+                                                    <a class="btn btn-icon btn-light-info m-0"
                                                         href="<?= BASEURL; ?>/pesanan/kasir/<?= $prepare['id'] ?>"
                                                         data-bs-toggle="tooltip" data-bs-title="Edit Request">
-                                                        <i class="bi bi-pencil"></i>
+                                                        <i class="ki-solid ki-pencil"></i>
                                                     </a>
                                                 <?php endif ?>
-                                                <a class="btn btn-icon btn-dark btn-lg"
-                                                    href="<?= BASEURL; ?>/pesanan/delete/<?= $prepare['id'] ?>"
+                                                <a class="btn btn-icon btn-light btn-lg"
+                                                    href="<?= BASEURL; ?>/prepare/delete/<?= $prepare['id'] ?>"
                                                     data-bs-toggle="tooltip" data-bs-title="Hapus Request"
                                                     onclick="return confirm ('Hapus data?')">
                                                     <i class="ki-solid ki-trash"></i>
@@ -146,99 +146,111 @@
                                 </tbody>
                             </table>
                         </div>
-
-                    </div>
-                </div>
-
-        <!-- Modal Detail Menu -->
-        <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5">Detail Prepare</h1>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="text-center fw-bold">Nama</th>
-                                    <th class="text-center fw-bold">Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary mb-1" data-bs-dismiss="modal">Close</button>
-                        <form action="<?= BASEURL ?>/prepare/updateStatusRequest" method="post" style="display: none;">
-                            <?= csrf() ?>
-                            <input type="hidden" name="id" id="id">
-                            <button type="submit" class="btn bg-gradient-primary mb-1" data-bs-dismiss="modal"
-                                onclick='return confirm(`Apakah anda yakin ingin mengubah status request menjadi "Selesai"?`)'>
-                                Ubah Status Pesanan
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--begin::Javascript-->
-        <script>var hostUrl = "assets/";</script>
-        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-        <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-        <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-        <!--end::Global Javascript Bundle-->
-        <!--begin::Vendors Javascript(used for this page only)-->
-        <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-        <!--end::Vendors Javascript-->
-        <!--begin::Custom Javascript(used for this page only)-->
-        <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-        <!--end::Custom Javascript-->
-        <!--end::Javascript-->
+            <!-- Modal Detail Menu -->
+            <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content rounded">
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Detail Prepare</h1>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <table class="table table-row-dashed mb-15">
+                                <thead>
+                                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                        <th class="fw-bold">Nama</th>
+                                        <th class="text-center fw-bold">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-semibold text-gray-600"></tbody>
+                            </table>
+                            <div class="text-center d-flex justify-content-center">
+                                <button type="button" class="btn btn-secondary mb-1 me-2"
+                                    data-bs-dismiss="modal">Close</button>
+                                <form action="<?= BASEURL ?>/prepare/updateStatusRequest" method="post"
+                                    style="display: none;">
+                                    <?= csrf() ?>
+                                    <input type="hidden" name="id" id="id">
+                                    <button type="submit" class="btn btn-primary mb-1" data-bs-dismiss="modal"
+                                        onclick='return confirm(`Apakah anda yakin ingin mengubah status request menjadi "Selesai"?`)'>
+                                        Ubah Status Pesanan
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <script src="<?= BASEURL ?>/js/datatables.js"></script>
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+                <!--end::Vendors Javascript-->
+                <!--begin::Custom Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <!--end::Custom Javascript-->
+                <!--end::Javascript-->
 
-        <script>
-            let satuan = JSON.parse(`<?= json_encode($data['satuan']) ?>`);
+                <script src="<?= BASEURL ?>/js/datatables.js"></script>
 
-            $(document).ready(function () {
-                var tablePrepare = initDataTables('#table-prepare', false);
-                const BASEURL = `<?= BASEURL ?>`;
+                <script>
+                    let satuan = JSON.parse(`<?= json_encode($data['satuan']) ?>`);
 
-                $(".tampilModalDetail").click(function () {
-                    const id = $(this).data("id");
+                    $(document).ready(function () {
+                        var tablePrepare = initDataTables('#table-prepare', false);
+                        const BASEURL = `<?= BASEURL ?>`;
 
-                    $('.modal-body table tbody').html('');
-                    $('.modal-footer form').hide();
+                        $(".tampilModalDetail").click(function () {
+                            const id = $(this).data("id");
 
-                    $.ajax({
-                        url: `${BASEURL}/prepare/getPrepare`,
-                        data: { id: id },
-                        method: "post",
-                        dataType: "json",
-                        success: function (data) {
-                            for (let row of JSON.parse(data.detail_items).sort((a, b) => a.item.localeCompare(b.item))) {
-                                $('.modal-body table tbody').append(`
+                            $('.modal-body table tbody').html('');
+                            $('.text-center form').hide();
+
+                            $.ajax({
+                                url: `${BASEURL}/prepare/getPrepare`,
+                                data: { id: id },
+                                method: "post",
+                                dataType: "json",
+                                success: function (data) {
+                                    for (let row of JSON.parse(data.detail_items).sort((a, b) => a.item.localeCompare(b.item))) {
+                                        $('.modal-body table tbody').append(`
                             <tr>
                                 <td>${row.item}</td>
-                                <td>${row.amount} ${satuan[row.item]}</td>
+                                <td class="text-center">${row.amount} ${satuan[row.item]}</td>
                             </tr>`
-                                );
-                            }
+                                        );
+                                    }
 
-                            if (data.status_order == 0) {
-                                $('.modal-footer form').show();
-                                $('input#id').val(id);
-                            } else {
-                                $('.modal-footer form').hide();
-                            }
-                        },
+                                    if (data.status_order == 0) {
+                                        $('.text-center form').show();
+                                        $('input#id').val(id);
+                                    } else {
+                                        $('.text-center form').hide();
+                                    }
+                                },
+                            });
+                        });
                     });
-                });
-            });
-        </script>
+                </script>
 
 
-        <?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>

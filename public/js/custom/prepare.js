@@ -96,14 +96,14 @@ function addItem(id, stok_id, nama, tersedia) {
             <input type="hidden" name="id[]" value="${id}">
             <input type="hidden" name="stok_id[]" value="${stok_id}">
             <div class="input-group mb-3">
-                <button class="btn btn-danger m-0 removeList" type="button">
+                <button class="btn btn-icon btn-danger m-0 removeList" type="button">
                     <i class="fa fa-xmark"></i>
                 </button>
-                <input type="text" class="form-control ps-3" name="item[]" value="${nama}" readonly>
+                <input type="text" class="form-control form-control-solid ps-3" name="item[]" value="${nama}" readonly>
             </div>
         </div>
         <div class="col-4">
-            <input type="number" class="amount form-control ps-2" name="amount[]" value="1" min="1" max="${tersedia}">
+            <input type="number" class="amount form-control form-control-solid ps-2" name="amount[]" value="1" min="1" max="${tersedia}">
         </div>
     `;
 

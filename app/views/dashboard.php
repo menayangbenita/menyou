@@ -160,37 +160,6 @@
                                             terbaik</span>
                                     </h3>
                                 </div>
-                                <!--begin::Actions-->
-                                <div class="card-toolbar">
-                                    <!--begin::Filters-->
-                                    <div class="d-flex flex-stack flex-wrap gap-4">
-                                        <!--begin::Destination-->
-                                        <div class="d-flex align-items-center fw-bold">
-                                            <!--begin::Label-->
-                                            <div class="text-muted fs-7 me-2">Kategori</div>
-                                            <!--end::Label-->
-                                            <!--begin::Select-->
-
-                                            <select
-                                                class="form-select form-select-transparent text-gray-900 fs-7 lh-1 fw-bold py-0 ps-3 w-auto"
-                                                data-control="select2" data-hide-search="true"
-                                                data-dropdown-css-class="w-150px" data-placeholder="Select an option"
-                                                data-kt-ecommerce-product-filter="filter_kategori">
-                                                <option></option>
-                                                <option value="lihat" selected="selected">Lihat Semua</option>
-                                                <?php foreach ($data['kategori'] as $kategori): ?>
-                                                    <option value="<?= $kategori['nama'] ?>"> <?= $kategori['nama'] ?>
-                                                    </option>
-                                                <?php endforeach ?>
-                                            </select>
-
-                                            <!--end::Select-->
-                                        </div>
-                                        <!--end::Destination-->
-                                    </div>
-                                    <!--begin::Filters-->
-                                </div>
-                                <!--end::Actions-->
                             </div>
                             <!--end::Card header-->
                             <!--begin::Card body-->
@@ -226,11 +195,14 @@
                                                 </td>
                                                 <!--end::Item-->
                                                 <!--begin::Product ID-->
-                                                <td class="text-start"><a href="apps/ecommerce/catalog/edit-product.html"
-                                                        class="text-gray-900 text-hover-primary"><?= $menu['nama'] ?>
+                                                <td class="text-start">
+                                                    <a class="text-gray-900 text-hover-primary">
+                                                        <?= $menu['nama'] ?>
                                                         <?php if ($menu['outlet_uuid'] == $data['user']['outlet_uuid']): ?>
                                                             <span class="badge badge-primary copy-badge ms-1">EXC</span>
-                                                        <?php endif; ?></a></td>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                </td>
                                                 <!--end::Product ID-->
                                                 <!--begin::Date added-->
                                                 <td class="text-start" data-order="<?= $menu['kategori'] ?>"
@@ -359,28 +331,5 @@
 <script src="<?= BASEURL ?>/js/custom/utilities/modals/users-search.js"></script>
 <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
 <script src="<?= BASEURL ?>/js\widgets.bundle.js"></script>
-<!-- js datatable start-->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.1.2/js/dataTables.bootstrap5.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.0/js/dataTables.buttons.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.bootstrap5.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.0/js/buttons.colVis.min.js"></script>
-<script>
-    new DataTable('#example', {
-        layout: {
-            topStart: {
-                buttons: ['copy', 'excel', 'print', 'pdf']
-            }
-        }
-    });
-</script>
-<!-- js datatable end-->
 
 <?php require_once "templates/footer.php" ?>

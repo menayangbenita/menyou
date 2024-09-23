@@ -1,4 +1,5 @@
     <?php Get::view('templates/header', $data) ?>
+
     <?php
     $kuartal_option = [
         '1' => 'Kuartal 1 | Januari - Maret',
@@ -228,7 +229,7 @@
                                                         value="1" />
                                                 </div>
                                             </th>
-                                            <th class="min-w-100px align-middle">Tanggal</th>
+                                            <th class="min-w-175px align-middle">Tanggal</th>
                                             <th class="min-w-150px align-middle">Kode</th>
                                             <th class="text-center min-w-75px align-middle">No. Akun</th>
                                             <th class="min-w-250px align-middle">Deskripsi</th>
@@ -465,13 +466,12 @@
                 <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
                 <!--end::Global Javascript Bundle-->
                 <!--begin::Vendors Javascript(used for this page only)-->
-                <script src="assets/js/widgets.bundle.js"></script>
-                <script src="assets/js/custom/widgets.js"></script>
+                <script src="<?= BASEURL ?>/js/widgets.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/custom/widgets.js"></script>
                 <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>\
                 <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
                 <!--end::Custom Javascript-->
                 <!--end::Javascript-->
-
 
                 <script>
                     $(function() {

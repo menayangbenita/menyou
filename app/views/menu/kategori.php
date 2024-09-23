@@ -61,12 +61,10 @@
                         <div class="card-title">
                             <!--begin::Search-->
                             <div class="d-flex align-items-center position-relative my-1">
-                                <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                <input type="text" data-kt-ecommerce-product-filter="search"
-                                    class="form-control form-control-solid w-250px ps-12" placeholder="Cari Kategori" />
+                                <i class="ki-outline ki-magnifier fs-2 position-absolute ms-4"></i>
+                                <input type="text" data-kt-ecommerce-order-filter="search"
+                                    class="form-control form-control-solid w-250px ps-12"
+                                    placeholder="Cari Kategori" />
                             </div>
                             <!--end::Search-->
                         </div>
@@ -84,13 +82,14 @@
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
                         <!--begin::Table-->
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="w-10px pe-2">
                                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                             <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                                data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1" />
+                                                data-kt-check-target="#kt_ecommerce_category_table .form-check-input"
+                                                value="1" />
                                         </div>
                                     </th>
                                     <th class="text-start min-w-250px">Kategori</th>
@@ -150,7 +149,9 @@
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="<?= BASEURL; ?>/kategori/delete/<?= $kategori['id'] ?>" onclick="return confirm ('Hapus data?')" class="menu-link px-3">Hapus</a>
+                                                    <a href="<?= BASEURL; ?>/kategori/delete/<?= $kategori['id'] ?>"
+                                                        onclick="return confirm ('Hapus data?')"
+                                                        class="menu-link px-3">Hapus</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -166,210 +167,216 @@
                 </div>
                 <!--end::Products-->
 
-        <!-- modal -->
-        <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
-                <div class="modal-content rounded">
-                    <div class="modal-header pb-0 border-0 justify-content-end">
-                        <!--begin::Close-->
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <i class="ki-outline ki-cross fs-1"></i>
+                <!-- modal -->
+                <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <div class="modal-content rounded">
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <i class="ki-outline ki-cross fs-1"></i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                <!--begin::Heading-->
+                                <div class="mb-13 text-center">
+                                    <!--begin::Title-->
+                                    <h1 class="mb-3" id="modalLabel">Tambah Kategori</h1>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <form action="<?= BASEURL; ?>/kategori/insert" method="post"
+                                    enctype="multipart/form-data">
+                                    <?= csrf() ?>
+                                    <input type="hidden" name="id" id="id">
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Foto Kategori</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div id="preview"
+                                            class="w-100 mb-2 rounded-2 overflow-hidden d-flex align-items-center justify-content-center"
+                                            style="max-height: 12rem;"></div>
+                                        <input type="file" class="form-control form-control-solid" name="foto" id="foto"
+                                            accept="image/*" />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Nama Kategori</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="text" class="form-control form-control-solid" name="nama"
+                                            id="nama" />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Deskripsi Kategori</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="text" class="form-control form-control-solid" name="deskripsi"
+                                            id="deskripsi" />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Actions-->
+                                    <div class="text-center">
+                                        <button data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+                                        <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </form>
+                            </div>
                         </div>
-                        <!--end::Close-->
-                    </div>
-                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                        <form action="<?= BASEURL; ?>/kategori/insert" method="post" enctype="multipart/form-data">
-                            <?= csrf() ?>
-                            <!--begin::Heading-->
-                            <div class="mb-13 text-center">
-                                <!--begin::Title-->
-                                <h1 class="mb-3" id="modalLabel">Tambah Kategori</h1>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Heading-->
-                            <input type="hidden" name="id" id="id">
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Foto Kategori</span>
-                                </label>
-                                <!--end::Label-->
-                                <div id="preview"
-                                    class="w-100 mb-2 rounded-2 overflow-hidden d-flex align-items-center justify-content-center"
-                                    style="max-height: 12rem;"></div>
-                                <input type="file" class="form-control form-control-solid" name="foto" id="foto"
-                                    accept="image/*" />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Nama Kategori</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" name="nama" id="nama" />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Deskripsi Kategori</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" name="deskripsi"
-                                    id="deskripsi" />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="text-center">
-                                <button data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-                                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Simpan</span>
-                                    <span class="indicator-progress">Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                    </span>
-                                </button>
-                            </div>
-                            <!--end::Actions-->
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!--begin::Javascript-->
-        <script>var hostUrl = "assets/";</script>
-        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-        <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-        <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-        <!--end::Global Javascript Bundle-->
-        <!--begin::Vendors Javascript(used for this page only)-->
-        <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
 
-        <script>
-            $('#foto').on('change', function () {
-                let file = $(this)[0].files[0];
-                let url = URL.createObjectURL(file);
+                <script>
+                    $('#foto').on('change', function () {
+                        let file = $(this)[0].files[0];
+                        let url = URL.createObjectURL(file);
 
-                $('#preview').html(`<img src="${url}" class="w-100">`);
-            });
-            $(function () {
-                const BASEURL = window.location.href;
-                console.log(BASEURL)
-                $('.tombolTambahData').on('click', function () {
-                    $('modalLabel').html('Tambah Kategori')
-                    $('.modal-footer button[type=submit]').html('Simpan');
-                    $('#preview').html('');
-                });
+                        $('#preview').html(`<img src="${url}" class="w-100">`);
+                    });
 
-                $(".tampilModalUbah").click(function () {
-                    $("#modal").addClass("edit");
-                    $("#modalLabel").html("Ubah Kategori");
-                    $(".modal-footer button[type=submit]").html("Simpan");
-                    $(".modal-body form").attr("action", `${BASEURL}/update`);
+                    $(function () {
+                        const BASEURL = window.location.href;
+                        console.log(BASEURL)
+                        $('.tombolTambahData').on('click', function () {
+                            $('modalLabel').html('Tambah Kategori')
+                            $('.modal-footer button[type=submit]').html('Simpan');
+                            $('#preview').html('');
+                        });
 
-                    const id = $(this).data("id");
-                    console.log(id);
+                        $(".tampilModalUbah").click(function () {
+                            $("#modal").addClass("edit");
+                            $("#modalLabel").html("Ubah Kategori");
+                            $(".modal-footer button[type=submit]").html("Simpan");
+                            $(".modal-body form").attr("action", `${BASEURL}/update`);
 
-                    $.ajax({
-                        url: `${BASEURL}/getubah`,
-                        data: {
-                            id: id
-                        },
-                        method: "post",
-                        dataType: "json",
-                        success: function (data) {
-                            $('#nama').val(data.nama);
-                            $('#deskripsi').val(data.deskripsi);
-                            $('#id').val(data.id);
-                            console.log(data);
-                        },
-                    })
-                })
-            });
-        </script>
+                            const id = $(this).data("id");
+                            console.log(id);
 
-        <script>
-            "use strict";
-            var KTAppEcommerceCategories = function () {
-                var t, e, n = () => {
-                    t.querySelectorAll('[data-kt-ecommerce-category-filter="delete_row"]').forEach((t => {
-                        t.addEventListener("click", (function (t) {
-                            t.preventDefault();
-                            const n = t.target.closest("tr")
-                                , o = n.querySelector('[data-kt-ecommerce-category-filter="category_name"]').innerText;
-                            Swal.fire({
-                                text: "Are you sure you want to delete " + o + "?",
-                                icon: "warning",
-                                showCancelButton: !0,
-                                buttonsStyling: !1,
-                                confirmButtonText: "Yes, delete!",
-                                cancelButtonText: "No, cancel",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-danger",
-                                    cancelButton: "btn fw-bold btn-active-light-primary"
-                                }
-                            }).then((function (t) {
-                                t.value ? Swal.fire({
-                                    text: "You have deleted " + o + "!.",
-                                    icon: "success",
-                                    buttonsStyling: !1,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary"
+                            $.ajax({
+                                url: `${BASEURL}/getubah`,
+                                data: {
+                                    id: id
+                                },
+                                method: "post",
+                                dataType: "json",
+                                success: function (data) {
+                                    $('#nama').val(data.nama);
+                                    $('#deskripsi').val(data.deskripsi);
+                                    if (data.foto !== '')
+                                        $('#preview').html(`<img src="${BASEURL.replace('/kategori', '')}/upload/kategori/${data.foto}" class="w-100">`);
+                                    $('#id').val(data.id);
+                                },
+                            })
+                        })
+                    });
+                </script>
+
+                <script>
+                    "use strict";
+                    var KTAppEcommerceCategories = function () {
+                        var t, e, n = () => {
+                            t.querySelectorAll('[data-kt-ecommerce-category-filter="delete_row"]').forEach((t => {
+                                t.addEventListener("click", (function (t) {
+                                    t.preventDefault();
+                                    const n = t.target.closest("tr")
+                                        , o = n.querySelector('[data-kt-ecommerce-category-filter="category_name"]').innerText;
+                                    Swal.fire({
+                                        text: "Are you sure you want to delete " + o + "?",
+                                        icon: "warning",
+                                        showCancelButton: !0,
+                                        buttonsStyling: !1,
+                                        confirmButtonText: "Yes, delete!",
+                                        cancelButtonText: "No, cancel",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-danger",
+                                            cancelButton: "btn fw-bold btn-active-light-primary"
+                                        }
+                                    }).then((function (t) {
+                                        t.value ? Swal.fire({
+                                            text: "You have deleted " + o + "!.",
+                                            icon: "success",
+                                            buttonsStyling: !1,
+                                            confirmButtonText: "Ok, got it!",
+                                            customClass: {
+                                                confirmButton: "btn fw-bold btn-primary"
+                                            }
+                                        }).then((function () {
+                                            e.row($(n)).remove().draw()
+                                        }
+                                        )) : "cancel" === t.dismiss && Swal.fire({
+                                            text: o + " was not deleted.",
+                                            icon: "error",
+                                            buttonsStyling: !1,
+                                            confirmButtonText: "Ok, got it!",
+                                            customClass: {
+                                                confirmButton: "btn fw-bold btn-primary"
+                                            }
+                                        })
                                     }
-                                }).then((function () {
-                                    e.row($(n)).remove().draw()
+                                    ))
                                 }
-                                )) : "cancel" === t.dismiss && Swal.fire({
-                                    text: o + " was not deleted.",
-                                    icon: "error",
-                                    buttonsStyling: !1,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary"
-                                    }
-                                })
+                                ))
                             }
                             ))
                         }
-                        ))
-                    }
-                    ))
-                }
-                    ;
-                return {
-                    init: function () {
-                        (t = document.querySelector("#kt_ecommerce_category_table")) && ((e = $(t).DataTable({
-                            info: !1,
-                            order: [],
-                            pageLength: 10,
-                            columnDefs: [{
-                                orderable: !1,
-                                targets: 0
-                            }, {
-                                orderable: !1,
-                                targets: 3
-                            }]
-                        })).on("draw", (function () {
-                            n()
-                        }
-                        )),
-                            document.querySelector('[data-kt-ecommerce-category-filter="search"]').addEventListener("keyup", (function (t) {
-                                e.search(t.target.value).draw()
+                            ;
+                        return {
+                            init: function () {
+                                (t = document.querySelector("#kt_ecommerce_category_table")) && ((e = $(t).DataTable({
+                                    info: !1,
+                                    order: [],
+                                    pageLength: 10,
+                                    columnDefs: [{
+                                        orderable: !1,
+                                        targets: 0
+                                    }, {
+                                        orderable: !1,
+                                        targets: 3
+                                    }]
+                                })).on("draw", (function () {
+                                    n()
+                                }
+                                )),
+                                    document.querySelector('[data-kt-ecommerce-category-filter="search"]').addEventListener("keyup", (function (t) {
+                                        e.search(t.target.value).draw()
+                                    }
+                                    )),
+                                    n())
                             }
-                            )),
-                            n())
+                        }
+                    }();
+                    KTUtil.onDOMContentLoaded((function () {
+                        KTAppEcommerceCategories.init()
                     }
-                }
-            }();
-            KTUtil.onDOMContentLoaded((function () {
-                KTAppEcommerceCategories.init()
-            }
-            ));
-        </script>
+                    ));
+                </script>
 
-        <?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>

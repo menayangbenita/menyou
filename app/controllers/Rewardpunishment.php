@@ -60,35 +60,18 @@ class Rewardpunishment extends Controller
     public function insert()
     {
         try {
-            // Autentikasi pengguna
             $this->auth('user', 'Owner|Manager|HR');
-            
-            // Validasi CSRF
             csrf_validate('/rewardpunishment');
-    
-            // Set tanggal jika tidak dikirim dari form
-            if (!isset($_POST['tanggal']) || empty($_POST['tanggal'])) {
-                $_POST['tanggal'] = date('Y-m-d'); // Set tanggal hari ini
-            }
-    
-            // Hitung total
-            $_POST['total'] = $_POST['besaran'] * $_POST['jumlah'];
-    
-            // Insert data ke model
+
             $this->model($this->model_name)->insert($_POST);
-    
-            // Flash message sukses
+
             Flasher::setFlash('Insert&nbsp<b>SUCCESS</b>', 'success');
         } catch (Exception $e) {
-            // Tampilkan pesan error dari exception
-            Flasher::setFlash('Insert&nbsp<b>FAILED</b>: ' . $e->getMessage(), 'danger');
+            // dd($e->getMessage());
+            Flasher::setFlash('Insert&nbsp<b>FAILED</b>', 'danger');
         }
-    
-        // Redirect kembali ke halaman
         redirectTo('/rewardpunishment');
     }
-    
-    
 
     public function delete($id)
     {
@@ -110,35 +93,17 @@ class Rewardpunishment extends Controller
         try {
             $this->auth('user', 'Owner|Manager|HR');
             csrf_validate('/rewardpunishment');
-    
-            // Validasi bahwa 'id' ada dalam data POST
-            if (isset($_POST['id'])) {
-                // Pastikan data yang diperlukan ada dalam POST
-                $data = [
-                    'karyawan_id' => $_POST['karyawan_id'] ?? null,
-                    'jenis' => $_POST['jenis'] ?? null,
-                    'jumlah' => $_POST['jumlah'] ?? null,
-                    'besaran' => $_POST['besaran'] ?? null,
-                    'keterangan' => $_POST['keterangan'] ?? null,
-                    'tanggal' => $_POST['tanggal'] ?? null,
-                    'total' => $_POST['total'] ?? 0 // Pastikan 'total' ada dengan nilai default
-                ];
-    
-                $this->model($this->model_name)->update($_POST['id'], $data);
-    
-                Flasher::setFlash('Update&nbsp<b>SUCCESS</b>', 'success');
-            } else {
-                throw new Exception('ID is missing.');
-            }
+
+            $this->model($this->model_name)->update($_POST['id'], $_POST);
+
+            Flasher::setFlash('Update&nbsp<b>SUCCESS</b>', 'success');            
         } catch (Exception $e) {
+            // dd($e->getMessage());
             Flasher::setFlash('Update&nbsp<b>FAILED</b>', 'danger');
         }
         redirectTo('/rewardpunishment');
     }
-    
-    
-    
-    
+
     public function getubah()
     {
         $this->auth('user', 'Owner|Manager|Sales');

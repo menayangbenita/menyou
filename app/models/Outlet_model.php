@@ -162,9 +162,9 @@ class Outlet_model extends Model
 				`deleted_at` = CURRENT_TIMESTAMP,
 				`deleted_by` = :deleted_by,
 				`is_deleted` = 1
-			WHERE id = :id AND (SELECT COUNT(*) FROM {$this->table}) > 1"
+			WHERE id = :id"
 		);
-
+		
 		$this->db->bind('deleted_by', $this->user);
 		$this->db->bind('id', $id);
 

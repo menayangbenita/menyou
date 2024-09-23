@@ -73,8 +73,8 @@
                     <form class="card-body pt-0" action="<?= BASEURL ?>/stok/updatePengeluaran" method="post">
                         <?= csrf() ?>
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead class="text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                <thead class="text-center text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                     <th
                                         class="text-center min-w-125px">
                                         No</th>
@@ -93,7 +93,7 @@
                                         class="text-center min-w-125px">
                                         Sisa Stok Saat Ini</th>
                                 </thead>
-                                <tbody>
+                                <tbody class="fw-semibold text-gray-600">
                                     <?php $i = 0; ?>
                                     <?php foreach ($data['barang'] as $barang): ?>
                                         <tr>
@@ -105,14 +105,14 @@
                                                 <?= $barang['nama'] ?>
                                             </td>
                                             <td class="text-sm text-center font-weight-bold align-middle">
-                                                <input type="text" class="form-control text-center stok"
+                                                <input type="text" class="form-control form-control-solid text-center stok"
                                                     value="<?= $barang['stok'] + $data['pengeluaran'][$i - 1] ?>" disabled>
                                             </td>
                                             <td class="text-sm text-center font-weight-bold align-middle">
                                                 -
                                             </td>
                                             <td class="text-sm text-center font-weight-bold align-middle">
-                                                <input type="text" class="form-control text-center pengeluaran"
+                                                <input type="text" class="form-control form-control-solid text-center pengeluaran"
                                                     name="pengeluaran[]" value="<?= $data['pengeluaran'][$i - 1] ?>" min="0"
                                                     max="<?= $barang['stok'] + $data['pengeluaran'][$i - 1] ?>" />
                                             </td>
@@ -120,7 +120,7 @@
                                                 =
                                             </td>
                                             <td class="text-sm text-center font-weight-bold align-middle">
-                                                <input type="text" class="form-control text-center sisa"
+                                                <input type="text" class="form-control form-control-solid text-center sisa"
                                                     value="<?= $barang['stok'] ?>" min="0"
                                                     max="<?= $barang['stok'] + $data['pengeluaran'][$i - 1] ?>" />
                                             </td>

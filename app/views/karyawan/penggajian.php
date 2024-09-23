@@ -43,6 +43,30 @@
                         </div>
                     </div>
                     <!--end::Page title-->
+                    <form class="d-flex align-items-center gap-2 gap-lg-3" method="post">
+                        <!--begin::Filter-->
+                        <div class="w-150px">
+                            <select class="form-select form-select-solid" name="bulan" id="bulan">
+                                <?php $months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] ?>
+                                <?php foreach ($months as $i => $month): ?>
+                                    <option value="<?= $i + 1 ?>" <?= ($i == $data['filter']['bulan'] - 1) ? ' selected' : '' ?>>
+                                        <?= $month ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="w-150px">
+                            <select class="form-select form-select-solid" name="tahun" id="tahun">
+                                <?php for ($i = date('Y') - 5; $i <= date('Y'); $i++) : ?>
+                                    <option value="<?= $i ?>" <?= ($i == $data['filter']['tahun']) ? ' selected' : '' ?>><?= $i ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+                        <div class="w-125px">
+                            <button type="submit" class="btn btn-primary w-100">Cari</button>
+                        </div>
+                        <!--end::Filter-->
+                    </form>
                 </div>
                 <!--end::Toolbar wrapper-->
             </div>
@@ -200,18 +224,18 @@
                 </div>
                 <!--end::Products-->
 
-<!--begin::Javascript-->
-<script>var hostUrl = "assets/";</script>
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-<script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-<!--end::Custom Javascript-->
-<!--end::Javascript-->
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+                <!--end::Vendors Javascript-->
+                <!--begin::Custom Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <!--end::Custom Javascript-->
+                <!--end::Javascript-->
 
-<?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>

@@ -60,11 +60,8 @@
                         <div class="card-title">
                             <!--begin::Search-->
                             <div class="d-flex align-items-center position-relative my-1">
-                                <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                <input type="text" data-kt-ecommerce-product-filter="search"
+                                <i class="ki-outline ki-magnifier fs-2 position-absolute ms-4"></i>
+                                <input type="text" data-kt-ecommerce-order-filter="search"
                                     class="form-control form-control-solid w-250px ps-12" placeholder="Cari Supplier" />
                             </div>
                             <!--end::Search-->
@@ -167,144 +164,145 @@
                     <!--end::Products-->
                 </div>
                 <!--end::Content container-->
-        <!--end::Content wrapper-->
-        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
-                <div class="modal-content rounded">
-                    <!--begin::Modal header-->
-                    <div class="modal-header pb-0 border-0 justify-content-end">
-                        <!--begin::Close-->
-                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                            <i class="ki-outline ki-cross fs-1"></i>
+                <!--end::Content wrapper-->
+                <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <div class="modal-content rounded">
+                            <!--begin::Modal header-->
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <i class="ki-outline ki-cross fs-1"></i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--begin::Modal header-->
+                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                <!--begin::Heading-->
+                                <div class="mb-13 text-center">
+                                    <!--begin::Title-->
+                                    <h1 class="mb-3" id="modalLabel">Tambah Supplier</h1>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <form action="<?= BASEURL; ?>/supplier/insert" method="post">
+                                    <?= csrf() ?>
+                                    <input type="hidden" name="id" id="id">
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Nama Supplier</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="text" class="form-control form-control-solid" name="nama" id="nama"
+                                            placeholder="Cth: Menune" required />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Alamat Supplier</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="text" class="form-control form-control-solid" name="alamat"
+                                            id="alamat" placeholder="Cth: Jl. Merbabu No. 14" required />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Kontak Supplier</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="number" class="form-control form-control-solid" name="kontak"
+                                            id="kontak" placeholder="Cth: 08123456789" required />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-15 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                            <span class="required">Email Supplier</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <input type="email" class="form-control form-control-solid" name="email"
+                                            id="email" placeholder="Cth: admin@menune.com" required />
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Actions-->
+                                    <div class="text-center">
+                                        <button data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+                                        <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span
+                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </form>
+                            </div>
                         </div>
-                        <!--end::Close-->
-                    </div>
-                    <!--begin::Modal header-->
-                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                        <!--begin::Heading-->
-                        <div class="mb-13 text-center">
-                            <!--begin::Title-->
-                            <h1 class="mb-3" id="modalLabel">Tambah Supplier</h1>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <form action="<?= BASEURL; ?>/supplier/insert" method="post">
-                            <?= csrf() ?>
-                            <input type="hidden" name="id" id="id">
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Nama Supplier</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" name="nama" id="nama"
-                                    placeholder="Cth: Menune" required />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Alamat Supplier</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" name="alamat" id="alamat"
-                                    placeholder="Cth: Jl. Merbabu No. 14" required />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Kontak Supplier</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="number" class="form-control form-control-solid" name="kontak" id="kontak"
-                                    placeholder="Cth: 08123456789" required />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-15 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                    <span class="required">Email Supplier</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="email" class="form-control form-control-solid" name="email" id="email"
-                                    placeholder="Cth: admin@menune.com" required />
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="text-center">
-                                <button data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-                                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Simpan</span>
-                                    <span class="indicator-progress">Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                            </div>
-                            <!--end::Actions-->
-                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!--begin::Javascript-->
-        <script>var hostUrl = "assets/";</script>
-        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-        <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
-        <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
-        <!--end::Global Javascript Bundle-->
-        <!--begin::Vendors Javascript(used for this page only)-->
-        <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
-        <!--end::Vendors Javascript-->
-        <!--begin::Custom Javascript(used for this page only)-->
-        <script src="<? BASEURL ?>/js/custom/utilities/modals/new-target.js"></script>
-        <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
-        <!--end::Custom Javascript-->
-        <!--end::Javascript-->
+                <!--begin::Javascript-->
+                <script>var hostUrl = "assets/";</script>
+                <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                <script src="<?= BASEURL ?>/plugins/global/plugins.bundle.js"></script>
+                <script src="<?= BASEURL ?>/js/scripts.bundle.js"></script>
+                <!--end::Global Javascript Bundle-->
+                <!--begin::Vendors Javascript(used for this page only)-->
+                <script src="<?= BASEURL ?>/plugins/custom/datatables/datatables.bundle.js"></script>
+                <!--end::Vendors Javascript-->
+                <!--begin::Custom Javascript(used for this page only)-->
+                <script src="<? BASEURL ?>/js/custom/utilities/modals/new-target.js"></script>
+                <script src="<?= BASEURL ?>/js/custom/apps/ecommerce/reports/views/views.js"></script>
+                <!--end::Custom Javascript-->
+                <!--end::Javascript-->
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <script>
-            $(function () {
-                const BASEURL = window.location.href;
-                console.log(BASEURL)
-                $('.tombolTambahData').on('click', function () {
-                    $('modalLabel').html('Tambah Data')
-                    $('.modal-footer button[type=submit]').html('Tambah Data');
-                    $(".modal-body form").attr("action", `${BASEURL}/insert`);
-                    $(".modal-body form")[0].reset();
-                });
+                <script>
+                    $(function () {
+                        const BASEURL = window.location.href;
+                        console.log(BASEURL)
+                        $('.tombolTambahData').on('click', function () {
+                            $('modalLabel').html('Tambah Data')
+                            $('.modal-footer button[type=submit]').html('Tambah Data');
+                            $(".modal-body form").attr("action", `${BASEURL}/insert`);
+                            $(".modal-body form")[0].reset();
+                        });
 
-                $(".tampilModalUbah").click(function () {
-                    $("#modal").addClass("edit");
-                    $("#modalLabel").html("Ubah Data");
-                    $(".modal-footer button[type=submit]").html("Ubah Data");
-                    $(".modal-body form").attr("action", `${BASEURL}/update`);
+                        $(".tampilModalUbah").click(function () {
+                            $("#modal").addClass("edit");
+                            $("#modalLabel").html("Ubah Data");
+                            $(".modal-footer button[type=submit]").html("Ubah Data");
+                            $(".modal-body form").attr("action", `${BASEURL}/update`);
 
-                    const id = $(this).data("id");
-                    console.log(id);
+                            const id = $(this).data("id");
+                            console.log(id);
 
-                    $.ajax({
-                        url: `${BASEURL}/getubah`,
-                        data: { id: id },
-                        method: "post",
-                        dataType: "json",
-                        success: function (data) {
-                            $('#nama').val(data.nama);
-                            $("#alamat").val(data.alamat);
-                            $('#kontak').val(data.kontak);
-                            $('#email').val(data.email);
-                            $('#id').val(data.id);
-                            console.log(data);
-                        },
-                    })
-                })
-            });
-        </script>
+                            $.ajax({
+                                url: `${BASEURL}/getubah`,
+                                data: { id: id },
+                                method: "post",
+                                dataType: "json",
+                                success: function (data) {
+                                    $('#nama').val(data.nama);
+                                    $("#alamat").val(data.alamat);
+                                    $('#kontak').val(data.kontak);
+                                    $('#email').val(data.email);
+                                    $('#id').val(data.id);
+                                    console.log(data);
+                                },
+                            })
+                        })
+                    });
+                </script>
 
-        <?php Get::view('templates/footer', $data) ?>
+                <?php Get::view('templates/footer', $data) ?>

@@ -16,7 +16,7 @@ class Prepare extends Controller
         $data['menu'] = $this->model('Menu_model')->getAllPrepare($this->user['outlet_uuid']);
         $data['barang'] = $this->model('Stok_model')->getAllData($this->user['outlet_uuid']);
 
-        $this->view('prepare/index', $data);
+        $this->view('/prepare/index', $data);
 	}
 
     public function request() 
@@ -30,7 +30,7 @@ class Prepare extends Controller
         $menu_prepare = $this->model('Menu_model')->getAllPrepare($this->user['outlet_uuid']);
         foreach($menu_prepare as $item) $data['satuan'][$item['nama']] = $item['satuan'];
 
-        $this->view('prepare/request', $data);
+        $this->view('/prepare/request', $data);
     }
 
     public function invoice($uuid = null)
@@ -80,7 +80,7 @@ class Prepare extends Controller
             // dd($e->getMessage());
             Flasher::setFlash('Insert&nbsp<b>FAILED</b>', 'danger');
         }
-        redirectTo('prepare');
+        redirectTo('/prepare');
     }
 
     public function updateStatusRequest()
@@ -88,7 +88,7 @@ class Prepare extends Controller
         try {
             httpPOST();
             $this->auth('user', 'Owner|Manager|Sales');
-            csrf_validate('prepare/request');
+            csrf_validate('/prepare/request');
 
             // Prepare data
             $id = posts()->id;
@@ -182,13 +182,14 @@ class Prepare extends Controller
         try {
             httpPOST();
             $this->auth('user', 'Owner|Manager|Sales');
-            csrf_validate('prepare');
+            csrf_validate('/prepare');
 
             // Set data
             $data = posts();
             $data->harga = NULL;
             $data->kategori_id = NULL;
             $data->outlet_uuid = $this->user['outlet_uuid'];
+            $data->nama = stripAndSanitize($data->nama);
 
             // Insert stok data
             $res = $this->model('Stok_model')->insert([
@@ -228,7 +229,7 @@ class Prepare extends Controller
             // dd($e->getMessage());
             Flasher::setFlash('Insert&nbsp<b>FAILED</b>', 'danger');
         }
-        redirectTo('prepare');
+        redirectTo('/prepare');
     }
 
     public function delete($id)
@@ -243,7 +244,7 @@ class Prepare extends Controller
             // dd($e->getMessage());
             Flasher::setFlash('Delete&nbsp<b>FAILED</b>', 'danger');
         }
-        redirectTo('prepare', 200);
+        redirectTo('/prepare', 200);
     }
 
 	public function update($id)
@@ -260,6 +261,7 @@ class Prepare extends Controller
             $data->harga = NULL;
             $data->kategori_id = NULL;
             $outlet_uuid = $this->user['outlet_uuid'];
+            $data->nama = stripAndSanitize($data->nama);
 
             foreach ($data->nama_bahan as $i => $nama_bahan)
                 $bahan[$nama_bahan] = floatval($data->jumlah_bahan[$i]);

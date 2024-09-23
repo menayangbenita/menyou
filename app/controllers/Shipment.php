@@ -173,8 +173,7 @@ class Shipment extends Controller
             }
 
             // Delete finance data
-            $res = $this->model('Finance_model')->deleteFrom('shipment|' . $old['uuid']);
-            if (!$res) new Exception('Haha eror');
+            $this->model('Finance_model')->deleteFrom('shipment|' . $old['uuid']);
 
             // Delete shipment data
             $res = $this->model($this->model_name)->delete($id);
