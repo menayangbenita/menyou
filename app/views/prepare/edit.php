@@ -1,6 +1,5 @@
 <?php Get::view('templates/header', $data) ?>
 
-
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
     <!--begin::Content wrapper-->
@@ -23,7 +22,7 @@
                                 <!--begin::Title-->
                                 <h1
                                     class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                                    Menu Prepare</h1>
+                                    Edit Prepare</h1>
                                 <!--end::Title-->
                                 <!--begin::Breadcrumb-->
                                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
@@ -36,7 +35,15 @@
                                     </li>
                                     <!--end::Item-->
                                     <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">Menu Prepare</li>
+                                    <li class="breadcrumb-item text-muted">Request Prepare</li>
+                                    <!--end::Item-->
+                                    <!--begin::Item-->
+                                    <li class="breadcrumb-item">
+                                        <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                                    </li>
+                                    <!--end::Item-->
+                                    <!--begin::Item-->
+                                    <li class="breadcrumb-item text-muted">Edit Prepare</li>
                                     <!--end::Item-->
                                 </ul>
                                 <!--end::Breadcrumb-->
@@ -72,19 +79,13 @@
                                     <!--end::Search-->
                                 </div>
                                 <!--end::Card title-->
-                                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                                    <button class="btn btn-primary mb-0 tombolTambahData" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#formModal">
-                                        Tambah Data Prepare
-                                    </button>
-                                </div>
                             </div>
                             <!--end::Card header-->
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
                                 <div class="table-responsive">
                                     <table class="table align-middle table-row-dashed fs-6 gy-5"
-                                    id="kt_ecommerce_report_views_table">
+                                        id="kt_ecommerce_report_views_table">
                                         <thead>
                                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                                 <th class="text-center min-w-50px">
@@ -106,10 +107,10 @@
                                                     <td class="text-center font-weight-bold mb-0 bg-transparent">
                                                         <?= $i++; ?>
                                                     </td>
-                                                    <td class="text-start font-weight-bold mb-0 text-wrap">
+                                                    <td class="text-center font-weight-bold mb-0 text-wrap">
                                                         <?= $menu['nama']; ?>
                                                         <?php if ($menu['outlet_uuid'] == $data['user']['outlet_uuid']): ?>
-                                                            <span class="badge badge-light-warning copy-badge ms-1">EXC</span>
+                                                            <span class="badge bg-gradient-warning copy-badge ms-1">EXC</span>
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="text-center font-weight-bold mb-0">
@@ -136,24 +137,24 @@
                                                         <?php endif ?>
                                                     </td>
                                                     <td class="align-middle text-center bg-transparent">
-                                                        <a class="btn btn-icon btn-light-info btn-sm py-1 px-2 mb-0 align-middle tampilModalDetail"
+                                                        <a class="btn btn-icon btn-sm btn-light-info btn-md py-1 px-2 mb-0 align-middle tampilModalDetail"
                                                             data-bs-toggle="modal" data-bs-target="#detailModal"
                                                             data-id="<?= $menu['id']; ?>">
                                                             <i class="fa fa-search"></i>
                                                         </a>
                                                         <a href="<?= BASEURL; ?>/menu/update/<?= $menu['id'] ?>"
-                                                            class="btn btn-icon btn-light-primary btn-sm py-1 px-2 mb-0 align-middle tampilModalUbah"
+                                                            class="btn btn-icon btn-sm btn-light-primary btn-md py-1 px-2 mb-0 align-middle tampilModalUbah"
                                                             data-bs-toggle="modal" data-bs-target="#formModal"
                                                             data-id="<?= $menu['id']; ?>">
                                                             <i class="fa fa-pen"></i>
                                                         </a>
                                                         <a href="<?= BASEURL; ?>/menu/delete/<?= $menu['id'] ?>"
-                                                            class="btn btn-icon btn-light-dark btn-sm py-1 px-2 mb-0 align-middle"
+                                                            class="btn btn-icon btn-sm btn-light-dark btn-md py-1 px-2 mb-0 align-middle"
                                                             onclick="return confirm ('Hapus data?')">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                         <button
-                                                            class="btn btn-icon btn-light-warning btn-md py-1 px-2 mb-0 ms-2 align-middle addRequest"
+                                                            class="btn btn-icon btn-sm btn-light-warning btn-lg py-1 px-2 mb-0 ms-2 align-middle addRequest"
                                                             data-tersedia="<?= $tersedia ?>" data-id="<?= $menu['id'] ?>"
                                                             data-nama="<?= $menu['nama'] ?>"
                                                             data-stok_id="<?= $menu['stok_id'] ?>">
@@ -183,21 +184,21 @@
                                     </button>
                                 </div>
                             </div>
-                            <form action="<?= BASEURL ?>/prepare/addRequest" method="post" id="formPrepare">
+                            <form action="<?= BASEURL ?>/prepare/editRequest/<?= $data['prepare']['id'] ?>"
+                                method="post" id="formPrepare">
                                 <?= csrf() ?>
                                 <div class="card-body p-3">
                                     <div class="row mb-1">
                                         <div class="input-group mb-3">
-                                            <textarea
-                                                class="form-control form-control-solid form-control form-control-solid-solid"
-                                                id="deskripsi" name="deskripsi" placeholder="Deskripsi prepare..."
-                                                required></textarea>
+                                            <textarea class="form-control form-control-solid" id="deskripsi"
+                                                name="deskripsi" placeholder="Deskripsi prepare..."
+                                                required><?= $data['prepare']['deskripsi'] ?></textarea>
                                         </div>
                                     </div>
 
                                     <div class="border-top mb-3"></div>
 
-                                    <div class="row mb-2 g-2">
+                                    <div class="row mb-1 g-2">
                                         <div class="col-8 py-1 text-sm">
                                             Item
                                         </div>
@@ -206,10 +207,32 @@
                                         </div>
                                     </div>
 
-                                    <div id="request-prepare"></div>
+                                    <div id="request-prepare">
+                                        <?php foreach (json_decode($data['prepare']['detail_items'], true) as $prepare): ?>
+                                            <div class="row g-2" data-id="<?= $prepare['id'] ?>">
+                                                <div class="col-8">
+                                                    <input type="hidden" name="id[]" value="<?= $prepare['id'] ?>">
+                                                    <input type="hidden" name="stok_id[]"
+                                                        value="<?= $prepare['stok_id'] ?>">
+                                                    <div class="input-group mb-3">
+                                                        <button class="btn btn-icon btn-danger m-0 removeList"
+                                                            type="button">
+                                                            <i class="fa fa-xmark"></i>
+                                                        </button>
+                                                        <input type="text" class="name form-control form-control-solid ps-3"
+                                                            name="item[]" value="<?= $prepare['item'] ?>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="number" class="amount form-control form-control-solid"
+                                                        name="amount[]" value="1" min="1" max="<?= $prepare['amount'] ?>">
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
 
                                 </div>
-                                <div class="card-footer d-flex justify-content-end p-3">
+                                <div class="card-footer border-top d-flex justify-content-end p-3">
                                     <button type="submit" class="btn btn-primary mb-0" id="submit-request">
                                         Simpan
                                     </button>
@@ -218,146 +241,28 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Form Modal -->
-            <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <div class="modal-content rounded">
-                        <div class="modal-header pb-0 border-0 justify-content-end">
-                            <!--begin::Close-->
-                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                <i class="ki-outline ki-cross fs-1"></i>
+                <!-- Modal Detail -->
+                <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5">Bahan-Bahan</h1>
                             </div>
-                            <!--end::Close-->
-                        </div>
-                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                            <!--begin::Heading-->
-                            <div class="mb-13 text-center">
-                                <!--begin::Title-->
-                                <h1 class="mb-3" id="modalLabel">Tambah Data Prepare</h1>
-                                <!--end::Title-->
+                            <div class="modal-body">
+                                <table class="table table-striped" id="detail_bahan">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center fw-bold">Nama Bahan</th>
+                                            <th class="text-center fw-bold">Jumlah</th>
+                                            <th class="text-center fw-bold">Satuan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
-                            <!--end::Heading-->
-                            <form action="<?= BASEURL ?>/" method="post" enctype="multipart/form-data">
-                                <?= csrf() ?>
-                                <input type="hidden" name="prepare" value="1">
-                                <div class="mb-8 fv-row">
-                                    <label for="nama" class="required fs-6 fw-semibold mb-2">Nama Item</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control form-control-solid fle" name="nama"
-                                            id="nama" placeholder="Cth: Kentang Dadu" oninput="toTitleCase(this)"
-                                            required>
-                                        <select class="input-group-text position-static text-muted border-0"
-                                            name="satuan" id="satuan" required>
-                                            <option value="Kg" selected>Kg</option>
-                                            <option value="gram">gram</option>
-                                            <option value="Ons">Ons</option>
-                                            <option value="Box">Box</option>
-                                            <option value="Pack">Pack</option>
-                                            <option value="Liter">Liter</option>
-                                            <option value="Lusin">Lusin</option>
-                                            <option value="Gros">Gros</option>
-                                            <option value="Rim">Rim</option>
-                                            <option value="Kodi">Kodi</option>
-                                            <option value="pcs" selected>pcs</option>
-                                            <option value="meter">meter</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-8 fv-row" id="stok-container">
-                                    <label class="required fs-6 fw-semibold mb-2">Stok</label>
-                                    <input type="number" class="form-control form-control-solid" name="stok" id="stok"
-                                        value="0" required>
-                                </div>
-                                <div class="mb-8 fv-row">
-                                    <div class="d-flex justify-content-between">
-                                        <label class="required fs-6 fw-semibold mb-2">Bahan</label>
-                                        <button class="btn btn-success p-0 px-2 fs-6 mb-2" id="addItem"
-                                            type="button">+</button>
-                                    </div>
-                                    <div id="bahan">
-                                        <div class="row mb-2">
-                                            <div class="col-sm-6">
-                                                <div class="input-group">
-                                                    <button class="btn btn-danger m-0 px-3 removeItem" type="button">
-                                                        <i class="fa fa-xmark"></i>
-                                                    </button>
-                                                    <input type="text"
-                                                        class="form-control form-control-solid ps-2 nama-bahan"
-                                                        name="nama_bahan[]" placeholder="Nama Bahan" list="barang"
-                                                        autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group d-flex">
-                                                    <input type="text"
-                                                        class="form-control form-control-solid position-static jumlah"
-                                                        name="jumlah_bahan[]" placeholder="0">
-                                                    <span class="input-group-text position-static satuan">..</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <datalist id="barang">
-                                        <?php foreach ($data['barang'] as $barang): ?>
-                                            <?php if ($barang['jenis'] != 'bahan')
-                                                continue; ?>
-                                            <option value="<?= $barang['nama'] ?>" data-id="<?= $barang['id'] ?>"
-                                                data-satuan="<?= $barang['satuan'] ?>" data-jenis="<?= $barang['jenis'] ?>">
-                                            <?php endforeach; ?>
-                                    </datalist>
-                                </div>
-                                <div class="mb-15 form-check">
-                                    <input class="form-check-input" name="exclusive" type="checkbox" id="exclusive"
-                                        value="<?= $data['user']['outlet_uuid'] ?>">
-                                    <label class="custom-control-label" for="exclusive">Exclusive only for your
-                                        outlet</label>
-                                </div>
-
-                                <div class="text-center">
-                                    <button type="button" class="btn btn-light mb-1"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary mb-1">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Detail -->
-            <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <div class="modal-content rounded">
-                        <div class="modal-header pb-0 border-0 justify-content-end">
-                            <!--begin::Close-->
-                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                <i class="ki-outline ki-cross fs-1"></i>
-                            </div>
-                            <!--end::Close-->
-                        </div>
-                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                            <!--begin::Heading-->
-                            <div class="mb-13 text-center">
-                                <!--begin::Title-->
-                                <h1 class="mb-3" id="modalLabel">Bahan-Bahan</h1>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Heading-->
-                            <table class="table table-row-dashed mb-15" id="detail_bahan">
-                                <thead>
-                                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                        <th class="text-start fw-bold">Nama Bahan</th>
-                                        <th class="text-center fw-bold">Jumlah</th>
-                                        <th class="text-center fw-bold">Satuan</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="fw-semibold text-gray-600"></tbody>
-                            </table>
-                            <div class="text-center">
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary mb-1"
                                     data-bs-dismiss="modal">Close</button>
                             </div>
@@ -380,6 +285,7 @@
                 <!--end::Custom Javascript-->
                 <script src="<?= BASEURL ?>/js/datatables.js"></script>
                 <!--end::Javascript-->
+                <script src="<?= BASEURL ?>/js/custom/prepare.js"></script>
 
                 <script>
                     var daftar_barang = Array.from(document.getElementById('barang').options)
@@ -392,85 +298,15 @@
                         });
                     var barang_all = JSON.parse(`<?= json_encode(array_column($data['barang'], 'nama')) ?>`);
 
-                    function toTitleCase(input) {
-                        let result = input.value.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1));
-                        input.value = result.join(' ');
-                    }
-
                     $(document).ready(function () {
-                        let tableNoExport = initDataTables('#table-no-export', false);
-                        const BASEURL = `<?= BASEURL ?>`;
-
-                        $('.tombolTambahData').on('click', function () {
-                            $('#modalLabel').html('Tambah Data')
-                            $('#formModal .modal-footer button[type=submit]').html('Simpan');
-                            $("#formModal form").attr("action", `${BASEURL}/prepare/insert`);
-                            $("#formModal form")[0].reset();
-                            $('#preview').html('');
-                            $("#bahan").html(`
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <div class="input-group">
-                            <button class="btn btn-icon btn-danger m-0 px-3 removeItem" type="button">
-                                <i class="fa fa-xmark"></i>
-                            </button>
-                            <input type="text" class="form-control form-control-solid ps-2 nama-bahan" name="nama_bahan[]" placeholder="Nama Bahan" list="barang" autocomplete="off" required>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="input-group d-flex">
-                            <input type="text" class="form-control form-control-solid position-static rounded-end-0 jumlah-bahan" name="jumlah_bahan[]" placeholder="0" required>
-                            <span class="input-group-text position-static satuan border-0">..</span>
-                        </div>
-                    </div>
-                </div>
-            `);
-                            $('#stok-container').show();
-                            $('#exclusive').prop('checked', false);
-
-                            const nama = document.querySelector('input#nama');
-                            nama.onchange = () => {
-                                let value = nama.value;
-                                let find = barang_all.find(item => item.toLowerCase() === value.toLowerCase());
-
-                                if (value) {
-                                    if (find) {
-                                        alert(`${find} sudah ada di dalam daftar stok!`)
-                                        nama.value = ''
-                                    }
-                                }
-                            };
-
-                            refreshEvent();
-                        });
-
-                        $(".tampilModalUbah").click(function () {
-                            const id = $(this).data("id");
-
-                            $("#modalLabel").html("Ubah Data");
-                            $("#formModal .modal-footer button[type=submit]").html("Ubah Data");
-                            $("#formModal form").attr("action", `${BASEURL}/prepare/update/${id}`);
-                            $('#stok-container').hide();
-
-                            $.ajax({
-                                url: `${BASEURL}/prepare/getubah`,
-                                data: { id: id },
-                                method: "post",
-                                dataType: "json",
-                                success: function (data) {
-                                    $('#nama').val(data.nama);
-                                    $('#exclusive').prop('checked', Boolean(data.outlet_uuid))
-                                    if (data.foto !== '')
-                                        $('#preview').html(`<img src="${BASEURL.replace('/menu', '')}/upload/menu/${data.foto}" class="w-100">`);
-                                    $("#bahan").html('');
-                                    let bahan = JSON.parse(data.bahan);
-                                    for (let key in bahan)
-                                        addList(key, bahan[key], daftar_barang.find(item => item.nama == key).satuan);
-
-                                    refreshEvent();
-                                },
+                        document.querySelectorAll('#request-prepare > *').forEach(row => {
+                            selected_item.push({
+                                id: row.dataset.id,
+                                element: row,
                             });
                         });
+
+                        refreshPrepare();
 
                         $(".tampilModalDetail").click(function () {
                             const id = $(this).data("id");
@@ -488,8 +324,8 @@
                                         $(`#detailModal .modal-body table#detail_bahan tbody`).append(`
                             <tr>
                                 <td>${key}</td>
-                                <td class="text-center">${bahan[key]}</td>
-                                <td class="text-center">${satuan}</td>
+                                <td>${bahan[key]}</td>
+                                <td>${satuan}</td>
                             </tr>
                         `);
                                     }
@@ -498,6 +334,7 @@
                         });
                     });
                 </script>
+                <script src="<?= BASEURL ?>/js/custom/menu.js"></script>
                 <script>
                     document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
@@ -505,6 +342,5 @@
                         }, 1000)
                     });
                 </script>
-                <script src="<?= BASEURL ?>/js/custom/menu.js"></script>
 
                 <?php Get::view('templates/footer', $data) ?>

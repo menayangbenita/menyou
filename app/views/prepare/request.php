@@ -127,7 +127,7 @@
                                                         <i class="ki-solid ki-printer"></i>
                                                     </a>
                                                     <a class="btn btn-icon btn-light-info m-0"
-                                                        href="<?= BASEURL; ?>/pesanan/kasir/<?= $prepare['id'] ?>"
+                                                        href="<?= BASEURL; ?>/prepare/edit/<?= $prepare['id'] ?>"
                                                         data-bs-toggle="tooltip" data-bs-title="Edit Request">
                                                         <i class="ki-solid ki-pencil"></i>
                                                     </a>
