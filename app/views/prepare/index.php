@@ -83,8 +83,8 @@
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
                                 <div class="table-responsive">
-                                    <table class="table align-items-center mb-0 search"
-                                        iid="kt_ecommerce_report_views_table" style="width: 100%">
+                                    <table class="table align-middle table-row-dashed fs-6 gy-5"
+                                    id="kt_ecommerce_report_views_table">
                                         <thead>
                                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                                 <th class="text-center min-w-50px">
@@ -99,7 +99,7 @@
                                                     Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="fw-semibold text-gray-600">
                                             <?php $i = 1; ?>
                                             <?php foreach ($data["menu"] as $menu): ?>
                                                 <tr class="fw-bold align-middle">
@@ -241,7 +241,7 @@
                                 <!--end::Title-->
                             </div>
                             <!--end::Heading-->
-                            <form action="<?= BASEURL ?>" method="post" enctype="multipart/form-data">
+                            <form action="<?= BASEURL ?>/" method="post" enctype="multipart/form-data">
                                 <?= csrf() ?>
                                 <input type="hidden" name="prepare" value="1">
                                 <div class="mb-8 fv-row">
@@ -275,7 +275,7 @@
                                 <div class="mb-8 fv-row">
                                     <div class="d-flex justify-content-between">
                                         <label class="required fs-6 fw-semibold mb-2">Bahan</label>
-                                        <button class="btn btn-success p-0 px-2 fs-6" id="addItem"
+                                        <button class="btn btn-success p-0 px-2 fs-6 mb-2" id="addItem"
                                             type="button">+</button>
                                     </div>
                                     <div id="bahan">
@@ -326,28 +326,39 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Modal Detail -->
-                <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5">Bahan-Bahan</h1>
+            <!-- Modal Detail -->
+            <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <div class="modal-content rounded">
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <i class="ki-outline ki-cross fs-1"></i>
                             </div>
-                            <div class="modal-body">
-                                <table class="table table-striped" id="detail_bahan">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center fw-bold">Nama Bahan</th>
-                                            <th class="text-center fw-bold">Jumlah</th>
-                                            <th class="text-center fw-bold">Satuan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                            <!--end::Close-->
+                        </div>
+                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                            <!--begin::Heading-->
+                            <div class="mb-13 text-center">
+                                <!--begin::Title-->
+                                <h1 class="mb-3" id="modalLabel">Bahan-Bahan</h1>
+                                <!--end::Title-->
                             </div>
-                            <div class="modal-footer">
+                            <!--end::Heading-->
+                            <table class="table table-row-dashed mb-15" id="detail_bahan">
+                                <thead>
+                                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                        <th class="text-start fw-bold">Nama Bahan</th>
+                                        <th class="text-center fw-bold">Jumlah</th>
+                                        <th class="text-center fw-bold">Satuan</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-semibold text-gray-600"></tbody>
+                            </table>
+                            <div class="text-center">
                                 <button type="button" class="btn btn-secondary mb-1"
                                     data-bs-dismiss="modal">Close</button>
                             </div>
@@ -401,7 +412,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <div class="input-group">
-                            <button class="btn btn-danger m-0 px-3 removeItem" type="button">
+                            <button class="btn btn-icon btn-danger m-0 px-3 removeItem" type="button">
                                 <i class="fa fa-xmark"></i>
                             </button>
                             <input type="text" class="form-control form-control-solid ps-2 nama-bahan" name="nama_bahan[]" placeholder="Nama Bahan" list="barang" autocomplete="off" required>
@@ -410,7 +421,7 @@
                     <div class="col-sm-6">
                         <div class="input-group d-flex">
                             <input type="text" class="form-control form-control-solid position-static rounded-end-0 jumlah-bahan" name="jumlah_bahan[]" placeholder="0" required>
-                            <span class="input-group-text position-static satuan">..</span>
+                            <span class="input-group-text position-static satuan border-0">..</span>
                         </div>
                     </div>
                 </div>
@@ -478,8 +489,8 @@
                                         $(`#detailModal .modal-body table#detail_bahan tbody`).append(`
                             <tr>
                                 <td>${key}</td>
-                                <td>${bahan[key]}</td>
-                                <td>${satuan}</td>
+                                <td class="text-center">${bahan[key]}</td>
+                                <td class="text-center">${satuan}</td>
                             </tr>
                         `);
                                     }
