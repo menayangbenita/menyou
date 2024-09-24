@@ -3,26 +3,39 @@
 class Finance extends Controller
 {
     protected $model_name = 'Finance_model';
-
     public function index()
     {
         $this->auth('user', 'Owner|Manager|Analyzer');
         csrf_generate();
-
+    
         $data['title'] = 'Rekap Finance';
         $data['user'] = $this->user;
-
-        $data['kuartal'] = intval((isset($_POST['kuartal'])) ? $_POST['kuartal'] : ceil(date('n') / 3));
-        $data['tahun'] = intval((isset($_POST['tahun'])) ? $_POST['tahun'] : date('Y'));
-        $data['finance'] = $this->model($this->model_name)->getDataByKuartal(
-            $data['kuartal'],
-            $data['tahun'],
-            $this->user['outlet_uuid']
-        );
+    
+        // Cek apakah ada filter kuartal dan tahun
+        if (isset($_POST['kuartal']) && isset($_POST['tahun'])) {
+            $data['kuartal'] = intval($_POST['kuartal']);
+            $data['tahun'] = intval($_POST['tahun']);
+            
+            // Jika ada filter, ambil data yang difilter
+            $data['finance'] = $this->model($this->model_name)->getDataByKuartal(
+                $data['kuartal'],
+                $data['tahun'],
+                $this->user['outlet_uuid']
+            );
+        } else {
+            // Jika tidak ada filter, ambil semua data
+            $data['finance'] = $this->model($this->model_name)->getAllData($this->user['outlet_uuid']);
+            
+            // Set default kuartal dan tahun untuk tampilan
+            $data['kuartal'] = ceil(date('n') / 3);
+            $data['tahun'] = date('Y');
+        }
+    
         $data['akuntansi'] = $this->model('Akuntansi_model')->getAllData();
-
+    
         $this->view('finance/index', $data);
     }
+    
 
     public function insert()
     {

@@ -33,16 +33,22 @@ class Finance_model extends Model
 	}
 
 	public function getAllData($outlet_uuid = false)
-	{
-		$this->db->query(
-			"SELECT * FROM {$this->table} WHERE `status` = 1" . ($outlet_uuid ?
-				" AND {$this->table}.`outlet_uuid` = :outlet_uuid" : '')
-		);
+{
+    $query = "SELECT * FROM {$this->table} WHERE `status` = 1";
+    
+    if ($outlet_uuid) {
+        $query .= " AND `outlet_uuid` = :outlet_uuid";
+    }
 
-		if ($outlet_uuid)
-			$this->db->bind('outlet_uuid', $outlet_uuid);
-		return $this->db->fetchAll();
-	}
+    $this->db->query($query);
+
+    if ($outlet_uuid) {
+        $this->db->bind('outlet_uuid', $outlet_uuid);
+    }
+
+    return $this->db->fetchAll();
+}
+
 
 	public function getDataByKuartal($kuartal, $tahun, $outlet_uuid = false)
 	{
