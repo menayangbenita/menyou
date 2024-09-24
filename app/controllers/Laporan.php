@@ -4,7 +4,7 @@ class Laporan extends Controller
 {
 	function index()
 	{
-		redirectTo('/laporan/penjualan', 200);
+		redirectTo('/http/notfound', 200);
 	}
 
 	public function penjualan()

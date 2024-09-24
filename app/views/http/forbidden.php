@@ -13,7 +13,7 @@
   <link href="<?= BASEURL ?>/css/nucleo-icons.css" rel="stylesheet" />
   <link href="<?= BASEURL ?>/css/nucleo-svg.css" rel="stylesheet" />
   <!-- title -->
-  <title>POS - <?= $data['title'] ?></title>
+  <title>Menune - <?= $data['title'] ?></title>
 </head>
 <body>
   <main class="main-content  mt-0">

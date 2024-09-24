@@ -6,7 +6,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- icon -->
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= BASEURL ?>/img/apple-icon.png">
     <link rel="shortcut icon" href="<?= BASEURL ?>/media/logos/icon logo.png" />
     <!-- stylesheet -->
     <link rel="stylesheet" <link rel="stylesheet"
@@ -913,22 +912,6 @@
                                                 <span class="menu-title">Kategori Menu</span>
                                             </a>
                                             <!--end:Menu link-->
-                                            <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/prepare" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Menu Prepare</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/prepare/request" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Request Prepare</span>
-                                            </a>
-                                            <!--end:Menu link-->
                                         </div>
                                         <!--end:Menu item-->
                                     </div>
@@ -950,6 +933,22 @@
                                     <div class="menu-sub menu-sub-accordion">
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/prepare" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Menu Prepare</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/prepare/request" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Request Prepare</span>
+                                            </a>
+                                            <!--end:Menu link-->
                                             <!--begin:Menu link-->
                                             <a href="<?= BASEURL ?>/stok" class="menu-link">
                                                 <span class="menu-bullet">
@@ -980,14 +979,6 @@
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">Kelola Stok</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/supplier" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Supplier</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -1027,6 +1018,51 @@
                                                 <span class="menu-title">Pesan Menu</span>
                                             </a>
                                             <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/kas" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Kas Kasir</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                    </div>
+                                    <!--end:Menu sub-->
+                                </div>
+                                <!--end:Menu item-->
+                                <!--begin:Menu item-->
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <!--begin:Menu link-->
+                                    <span class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-coffee fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Dapur</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                    <!--end:Menu link-->
+                                    <!--begin:Menu sub-->
+                                    <div class="menu-sub menu-sub-accordion">
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/dapur" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Dasboard</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/dapur/progress" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Progress Pesan Menu</span>
+                                            </a>
+                                            <!--end:Menu link-->
                                         </div>
                                         <!--end:Menu item-->
                                     </div>
@@ -1040,7 +1076,7 @@
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-bank fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Finance</span>
+                                        <span class="menu-title">Transaksi Lain</span>
                                         <span class="menu-arrow"></span>
                                     </span>
                                     <!--end:Menu link-->
@@ -1064,41 +1100,28 @@
                                                 <span class="menu-title">No. Akun</span>
                                             </a>
                                             <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                    </div>
-                                    <!--end:Menu sub-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                    <!--begin:Menu link-->
-                                    <span class="menu-link">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-document fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Laporan</span>
-                                        <span class="menu-arrow"></span>
-                                    </span>
-                                    <!--end:Menu link-->
-                                    <!--begin:Menu sub-->
-                                    <div class="menu-sub menu-sub-accordion">
-                                        <!--begin:Menu item-->
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/laporan/penjualan" class="menu-link">
+                                            <a href="<?= BASEURL ?>/pemasukan" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Laporan Penjualan</span>
+                                                <span class="menu-title">Pemasukan</span>
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/laporan/keuangan" class="menu-link">
+                                            <a href="<?= BASEURL ?>/pengeluaran" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
-                                                <span class="menu-title">Laporan Keuangan</span>
+                                                <span class="menu-title">Pengeluaran</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/bukukas" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Pencatatan Buku Kas & Bank</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -1197,6 +1220,168 @@
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">Settings</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                    </div>
+                                    <!--end:Menu sub-->
+                                </div>
+                                <!--end:Menu item-->
+                                <!--begin:Menu item-->
+                                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                                    <!--begin:Menu link-->
+                                    <a href="<?= BASEURL ?>/pelanggan" class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-user-square fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Pelanggan</span>
+                                    </a>
+                                    <!--end:Menu link-->
+                                </div>
+                                <!--end:Menu item-->
+                                <!--begin:Menu item-->
+                                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                                    <!--begin:Menu link-->
+                                    <a href="<?= BASEURL ?>/supplier" class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-delivery-3 fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Supplier</span>
+                                    </a>
+                                    <!--end:Menu link-->
+                                </div>
+                                <!--end:Menu item-->
+                                <!--begin:Menu item-->
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <!--begin:Menu link-->
+                                    <span class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-document fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Laporan</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                    <!--end:Menu link-->
+                                    <!--begin:Menu sub-->
+                                    <div class="menu-sub menu-sub-accordion">
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/penjualan" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Penjualan</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/keuangan" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Keuangan</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/bayar" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Jenis Bayar</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/stok" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Barang & Stok</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/pengeluaran" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Pengeluaran</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/dapur" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Dapur</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/pegawai" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Pegawai</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/laporan/bukukas" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Laporan Buku Kas & Bank</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                        </div>
+                                        <!--end:Menu item-->
+                                    </div>
+                                    <!--end:Menu sub-->
+                                </div>
+                                <!--end:Menu item-->
+                                <!--begin:Menu item-->
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <!--begin:Menu link-->
+                                    <span class="menu-link">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-user fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">User</span>
+                                        <span class="menu-arrow"></span>
+                                    </span>
+                                    <!--end:Menu link-->
+                                    <!--begin:Menu sub-->
+                                    <div class="menu-sub menu-sub-accordion">
+                                        <!--begin:Menu item-->
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/user/admin" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">User Admin</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/user/pegawai" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Users Pegawai</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/level" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Role User</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/access" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">User Access</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
