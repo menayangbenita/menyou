@@ -1207,19 +1207,35 @@
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/users" class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">Manage Users</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                            <!--begin:Menu link-->
                                             <a href="<?= BASEURL ?>/settings" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>
                                                 <span class="menu-title">Settings</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/jenisbayar" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Jenis Bayar</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/bank" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Bank</span>
+                                            </a>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/norek" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Nomor Rekening Bank</span>
                                             </a>
                                             <!--end:Menu link-->
                                         </div>
@@ -1352,6 +1368,14 @@
                                     <div class="menu-sub menu-sub-accordion">
                                         <!--begin:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <!--begin:Menu link-->
+                                            <a href="<?= BASEURL ?>/users" class="menu-link">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Manage Users</span>
+                                            </a>
+                                            <!--end:Menu link-->
                                             <!--begin:Menu link-->
                                             <a href="<?= BASEURL ?>/user/admin" class="menu-link">
                                                 <span class="menu-bullet">
