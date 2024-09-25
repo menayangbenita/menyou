@@ -190,7 +190,7 @@
                                                 <!--end::Product ID-->
                                                 <!--begin::Item-->
                                                 <td>
-                                                    <img src="<?= BASEURL; ?>/uploads/menu/<?= $menu['foto'] != '' ? $menu['foto'] : 'tmp.png' ?>"
+                                                    <img src="<?= BASEURL; ?>/upload/menu/<?= $menu['foto'] != '' ? $menu['foto'] : 'tmp.png' ?>"
                                                         class="w-50px rounded img-fluid img-menu" alt="" />
                                                 </td>
                                                 <!--end::Item-->

@@ -197,7 +197,7 @@ class Menu_model extends Model
 		);
 
 		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
-		$this->db->bind('foto', $this->storeFile('foto', 'uploads/menu', false, $old['foto']));
+		$this->db->bind('foto', $this->storeFile('foto', 'upload/menu', false, $old['foto']));
 		$this->db->bind('outlet_uuid', isset($data['exclusive']) ? $data['exclusive'] : $old['outlet_uuid']);
 		$this->db->bind('modified_by', $this->user);
 		$this->db->bind('id', $id);
