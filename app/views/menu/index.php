@@ -304,7 +304,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" class="form-control form-control-solid" name="nama" id="nama"
-                                        placeholder="Cth: Nasi Goreng" oninput="checkMenu(this.value)" required />
+                                        placeholder="Cth: Nasi Goreng" oninput="toTitleCase(this)" required />
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
