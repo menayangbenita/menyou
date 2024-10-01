@@ -19,18 +19,20 @@ class Menu_model extends Model
 			LEFT JOIN `kategori` ON kategori.id = {$this->table}.kategori_id
 				WHERE 
 				{$this->table}.`status` = 1 AND
-				{$this->table}.`stok_id` IS NULL". ($outlet_uuid ? 
-			" AND (
+				{$this->table}.`stok_id` IS NULL" . ($outlet_uuid ?
+				" AND (
 				{$this->table}.`outlet_uuid` = :outlet_uuid OR 
 				{$this->table}.`outlet_uuid` IS NULL
 			)" : '')
 		);
 
-		if ($outlet_uuid) $this->db->bind('outlet_uuid', $outlet_uuid);
+		if ($outlet_uuid)
+			$this->db->bind('outlet_uuid', $outlet_uuid);
 		return $this->db->fetchAll();
 	}
 
-	public function getAllPrepare($outlet_uuid) {
+	public function getAllPrepare($outlet_uuid)
+	{
 		$this->db->query(
 			"SELECT riwayat_stok.stok AS stok, stok.satuan AS satuan, {$this->table}.* FROM {$this->table}
 			INNER JOIN `stok` ON stok.id = {$this->table}.stok_id
@@ -63,7 +65,7 @@ class Menu_model extends Model
 		$this->db->bind('id', $id);
 		return $this->db->fetch();
 	}
-	
+
 	public function getPrepareById($id, $outlet_uuid = false)
 	{
 		$this->db->query(
@@ -80,6 +82,14 @@ class Menu_model extends Model
 		$this->db->bind('id', $id);
 		return $this->db->fetch();
 	}
+
+	public function cekMenu($name)
+	{
+		$this->db->query("SELECT * FROM {$this->table} WHERE nama = :nama AND status = 1");
+		$this->db->bind('nama', $name);
+		return $this->db->fetch();
+	}
+
 
 	public function getMultipleBy($field = 'id', $data = [])
 	{
@@ -99,8 +109,9 @@ class Menu_model extends Model
 		foreach ($allMenu as $menu) {
 			$bahan = json_decode($menu['bahan'], true);
 
-			if (!is_array($bahan)) continue; 
-		
+			if (!is_array($bahan))
+				continue;
+
 			$availability = [];
 			foreach ($bahan as $nama => $value) {
 				$this->db->query(
@@ -115,8 +126,9 @@ class Menu_model extends Model
 				$this->db->bind('outlet_uuid', $outlet_uuid);
 
 				$stok = $this->db->fetch(PDO::FETCH_COLUMN);
-				
-				if (!$stok || !$value) continue;
+
+				if (!$stok || !$value)
+					continue;
 				array_push($availability, floor($stok / $value));
 			}
 
@@ -126,25 +138,28 @@ class Menu_model extends Model
 				$tmp[$outlet_uuid] = min($availability);
 			} else {
 				$tmp[$outlet_uuid] = "infinite";
-				if (!isset($_SESSION['flash']) && $with_flasher) 
-					Flasher::setFlash("Data bahan dari&nbsp<b>".$menu['nama']."</b>&nbspkosong! Silahkan cek kembali.", "warning", 5000);
+				if (!isset($_SESSION['flash']) && $with_flasher)
+					Flasher::setFlash("Data bahan dari&nbsp<b>" . $menu['nama'] . "</b>&nbspkosong! Silahkan cek kembali.", "warning", 5000);
 			}
 
 			$this->updateField($menu['id'], 'tersedia', json_encode($tmp));
 		}
-		
+
 		return $this->db->rowCount();
 	}
 
-	public function insert($data, $stok_id = NULL)
+	public function insert($data, $stok_id = NULL, $with_flasher = true)
 	{
-		if (!$this->validateFiles([
-			'foto' => [
-				'mime:image/jpeg,image/png,image/gif',
-				'type:png,jpg,jpeg,gif',
-				'size:2*MB',
-			],
-		])) return 0;
+		if (
+			!$this->validateFiles([
+				'foto' => [
+					'mime:image/jpeg,image/png,image/gif',
+					'type:png,jpg,jpeg,gif',
+					'size:2*MB',
+				],
+			])
+		)
+			return 0;
 
 		$fields_query = ":foto, :nama, :kategori_id, :harga, :bahan, '{}', :stok_id, :outlet_uuid,";
 
@@ -154,7 +169,8 @@ class Menu_model extends Model
 			(null, :uuid, {$fields_query} '', CURRENT_TIMESTAMP, :created_by, null, '', null, '', null, '', 0, 0, DEFAULT)"
 		);
 
-		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		foreach ($this->fields as $field)
+			$this->db->bind($field, $data[$field]);
 		$this->db->bind('foto', ($stok_id == NULL ? $this->storeFile('foto', 'upload/menu') : ''));
 		$this->db->bind('outlet_uuid', isset($data['exclusive']) ? $data['exclusive'] : NULL);
 		$this->db->bind('uuid', Uuid::uuid4()->toString());
@@ -168,13 +184,16 @@ class Menu_model extends Model
 
 	public function update($id, $data)
 	{
-		if (!$this->validateFiles([
-			'foto' => [
-				'mime:image/jpeg,image/png,image/gif',
-				'type:png,jpg,jpeg,gif',
-				'size:2*MB',
-			],
-		])) return 0;
+		if (
+			!$this->validateFiles([
+				'foto' => [
+					'mime:image/jpeg,image/png,image/gif',
+					'type:png,jpg,jpeg,gif',
+					'size:2*MB',
+				],
+			])
+		)
+			return 0;
 
 		$old = $this->getDataById($id);
 
@@ -196,12 +215,13 @@ class Menu_model extends Model
 			WHERE id = :id"
 		);
 
-		foreach ($this->fields as $field) $this->db->bind($field, $data[$field]);
+		foreach ($this->fields as $field)
+			$this->db->bind($field, $data[$field]);
 		$this->db->bind('foto', $this->storeFile('foto', 'upload/menu', false, $old['foto']));
 		$this->db->bind('outlet_uuid', isset($data['exclusive']) ? $data['exclusive'] : $old['outlet_uuid']);
 		$this->db->bind('modified_by', $this->user);
 		$this->db->bind('id', $id);
-		
+
 		$this->db->execute();
 		return $this->db->rowCount();
 	}

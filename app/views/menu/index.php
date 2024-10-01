@@ -49,6 +49,39 @@
         transform: scale(1.03);
     }
 </style>
+
+<script>
+    document.getElementById('kt_modal_new_target_form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var namaMenu = document.getElementById('nama').value;
+        var form = this;
+        
+        checkMenu(namaMenu, function(menuExists) {
+            if (menuExists) {
+                alert('Menu sudah ada dengan status aktif.');
+            } else {
+                form.submit();
+            }
+        });
+    });
+
+    // Fungsi untuk melakukan pengecekan ke server
+    function checkMenu(namaMenu, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "<?= BASEURL ?>/menu/cekMenu", true); // URL yang akan memproses pengecekan
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                callback(response.exists);
+            }
+        };
+        xhr.send("nama=" + encodeURIComponent(namaMenu));
+    }
+</script>
+
+
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
     <!--begin::Content wrapper-->
@@ -156,11 +189,10 @@
                                                 value="1" />
                                         </div>
                                     </th>
-                                    <th class="min-w-200px">Produk</th>
-                                    <th class="text-center min-w-100px">Kategori</th>
-                                    <th class="text-center min-w-70px">Bahan</th>
-                                    <th class="text-center min-w-100px">Harga</th>
-                                    <th class="text-center min-w-100px">Porsi Tersedia</th>
+                                    <th class="min-w-450px">Produk</th>
+                                    <th class="min-w-125px">Kategori</th>
+                                    <th class="min-w-100px">Harga</th>
+                                    <th class="text-center min-w-75px">Porsi Tersedia</th>
                                     <th class="text-end min-w-70px">Aksi</th>
                                 </tr>
                             </thead>
@@ -176,36 +208,28 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <!--begin::Thumbnail-->
-                                                <a href="apps/ecommerce/catalog/edit-product.html"
-                                                    class="symbol symbol-50px">
+                                                <div class="symbol symbol-50px">
                                                     <span class="symbol-label"
                                                         style="background-image:url(<?= BASEURL ?>/upload/menu/<?= $menu['foto'] != '' ? $menu['foto'] : 'tmp.png' ?>);"></span>
-                                                </a>
+                                                </div>
                                                 <!--end::Thumbnail-->
                                                 <div class="ms-5">
                                                     <!--begin::Title-->
-                                                    <a href="apps/ecommerce/catalog/edit-product.html"
-                                                        class="text-gray-800 text-hover-primary fs-5 fw-bold"
+                                                    <div class="text-gray-800 text-hover-primary fs-5 fw-bold"
                                                         data-kt-ecommerce-product-filter="product_name">
                                                         <?= $menu['nama']; ?>
                                                         <?php if ($menu['outlet_uuid'] == $data['user']['outlet_uuid']): ?>
                                                             <span class="badge badge-primary copy-badge ms-1">EXC</span>
-                                                        <?php endif; ?></a>
+                                                        <?php endif; ?>
+                                                    </div>
                                                     <!--end::Title-->
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center pe-0" data-order="<?= $menu['kategori'] ?>">
+                                        <td class="pe-0" data-order="<?= $menu['kategori'] ?>">
                                             <?= $menu['kategori'] ?>
                                         </td>
-                                        <td class="text-center pe-0">
-                                            <a class="btn btn-light-primary rounded-pill hover-elevate-up tampilModalDetail m-0"
-                                                data-bs-toggle="modal" data-bs-target="#detailModal"
-                                                data-id="<?= $menu['id']; ?>">
-                                                <i class="ki-solid ki-magnifier p-0 m-0"></i>
-                                            </a>
-                                        </td>
-                                        <td class="text-center pe-0">Rp <?= number_format($menu['harga'], 0, '.', '.') ?>
+                                        <td class="pe-0">Rp <?= number_format($menu['harga'], 0, '.', '.') ?>
                                         </td>
                                         <td class="text-center pe-0" data-order="rating-3">
                                             <?php $tersedia = json_decode($menu['tersedia'], true)[$data['user']['outlet_uuid']]; ?>
@@ -231,6 +255,13 @@
                                             <!--begin::Menu-->
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
                                                 data-kt-menu="true">
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
+                                                    <div class="menu-link px-3 tampilModalDetail" data-bs-toggle="modal"
+                                                        data-bs-target="#detailModal" data-id="<?= $menu['id']; ?>">Lihat
+                                                        Bahan</div>
+                                                </div>
+                                                <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
                                                     <a href="<?= BASEURL; ?>/menu/update/<?= $menu['id'] ?>"
@@ -287,7 +318,7 @@
                                 <div class="d-flex flex-column mb-8 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                        <span class="required">Foto Menu</span>
+                                        Foto Menu
                                     </label>
                                     <!--end::Label-->
                                     <div id="preview"
@@ -305,7 +336,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <input type="text" class="form-control form-control-solid" name="nama" id="nama"
-                                        placeholder="Cth: Nasi Goreng" oninput="toTitleCase(this)" required />
+                                        placeholder="Cth: Nasi Goreng" oninput="checkMenu(this.value)" required />
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
