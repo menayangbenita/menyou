@@ -50,38 +50,6 @@
     }
 </style>
 
-<script>
-    document.getElementById('kt_modal_new_target_form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        var namaMenu = document.getElementById('nama').value;
-        var form = this;
-        
-        checkMenu(namaMenu, function(menuExists) {
-            if (menuExists) {
-                alert('Menu sudah ada dengan status aktif.');
-            } else {
-                form.submit();
-            }
-        });
-    });
-
-    // Fungsi untuk melakukan pengecekan ke server
-    function checkMenu(namaMenu, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "<?= BASEURL ?>/menu/cekMenu", true); // URL yang akan memproses pengecekan
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                callback(response.exists);
-            }
-        };
-        xhr.send("nama=" + encodeURIComponent(namaMenu));
-    }
-</script>
-
-
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
     <!--begin::Content wrapper-->

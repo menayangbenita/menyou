@@ -31,7 +31,7 @@ class Menu extends Controller
 
             $cekMenu = $this->model($this->model_name)->cekMenu($data->nama);
             if ($cekMenu) {
-                Flasher::setFlash('Menu dengan nama <b> ' . $data->nama . ' </b> sudah ada! Silakan cek kembali.', 'warning');
+                Flasher::setFlash('Menu dengan nama&nbsp<b>' . $data->nama . ' </b>&nbspsudah ada! Silakan cek kembali.', 'warning');
                 redirectTo('/menu');
                 return;
             }
