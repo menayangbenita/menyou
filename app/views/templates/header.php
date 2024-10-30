@@ -1154,7 +1154,7 @@
                                             </a>
                                             <!--end:Menu link-->
                                             <!--begin:Menu link-->
-                                            <a href="<?= BASEURL ?>/absensi" class="menu-link">
+                                            <a href="<?= BASEURL ?>/absensiExcel" class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
                                                 </span>

@@ -12,6 +12,11 @@ class User_model
 		$this->db = new Database();
 	}
 
+	public function getAllKaryawan()
+	{
+		$this->db->query("SELECT * FROM {$this->table} WHERE role = 'karyawan'");
+		return $this->db->fetchAll();
+	}
 	public function getAllUser($activated = false, $order_by_status = true)
 	{
 		$this->db->query(
@@ -23,9 +28,9 @@ class User_model
 				outlet.pajak AS `pajak_outlet`, 
 				outlet.manager_id AS `manager_id`, 
 				{$this->table}.* FROM {$this->table}
-			LEFT JOIN `outlet` ON outlet.uuid = {$this->table}.outlet_uuid" 
-			.($activated ? " WHERE {$this->table}.active = 1" : '').
-			" ORDER BY {$this->table}.active DESC, ".($order_by_status ? "{$this->table}.status DESC, " : '')."
+			LEFT JOIN `outlet` ON outlet.uuid = {$this->table}.outlet_uuid"
+				. ($activated ? " WHERE {$this->table}.active = 1" : '') .
+				" ORDER BY {$this->table}.active DESC, " . ($order_by_status ? "{$this->table}.status DESC, " : '') . "
 			CASE 
 				WHEN {$this->table}.`role` = 'Owner' THEN 1 
 				WHEN {$this->table}.`role` = 'Manager' THEN 2 
@@ -34,7 +39,7 @@ class User_model
 		);
 		return $this->db->fetchAll();
 	}
-	
+
 
 	public function getUser($username, $password)
 	{
@@ -149,7 +154,7 @@ class User_model
 		$this->db->bind('id', Uuid::uuid4()->toString());
 
 		$this->db->execute();
-		return $this->db->rowCount(); 
+		return $this->db->rowCount();
 	}
 
 	public function update($id, $data, $isAdmin = false)
@@ -169,7 +174,7 @@ class User_model
 		$this->db->bind('email', $data['email']);
 		$this->db->bind('role', ($isAdmin ? $data['role'] : $old['role']));
 		$this->db->bind('id', $id);
-		
+
 		$this->db->execute();
 		return $this->db->rowCount();
 	}
@@ -180,7 +185,7 @@ class User_model
 			return 0;
 
 		$this->db->query(
-      		"UPDATE {$this->table}
+			"UPDATE {$this->table}
 				SET `password` = :password
 			WHERE id = :id"
 		);
@@ -240,5 +245,41 @@ class User_model
 		$this->db->execute();
 		return $this->db->rowCount();
 	}
+	public function updateGlobalToken($token)
+	{
+		$expiry = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
+		$this->db->query(
+			"UPDATE global_tokens 
+			 SET token = :token, 
+				 expiry = :expiry 
+			 WHERE id = 1" // Menggunakan satu entri global
+		);
+
+		$this->db->bind('token', $token);
+		$this->db->bind('expiry', $expiry);
+
+		$this->db->execute();
+
+		// Log jumlah baris yang terpengaruh
+		error_log('Update Global Token RowCount: ' . $this->db->rowCount());
+
+		return $this->db->rowCount(); // Mengembalikan jumlah baris yang terpengaruh
+	}
+
+	public function getGlobalToken()
+	{
+		$this->db->query("SELECT token, expiry FROM global_tokens WHERE id = 1");
+		$this->db->execute();
+		return $this->db->fetch(PDO::FETCH_ASSOC); // Mengembalikan satu baris sebagai array asosiatif
+	}
+
+
+	public function searchKaryawan($nama)
+	{
+		$query = "SELECT id FROM {$this->table} WHERE username = :username AND role = 'karyawan'";
+		$this->db->query($query);
+		$this->db->bind('username', $nama);
+		return $this->db->fetch();
+	}
 }

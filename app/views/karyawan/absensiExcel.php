@@ -22,20 +22,14 @@
                                 <!--begin::Title-->
                                 <h1
                                     class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                                    Absensi Excel 1</h1>
+                                    Kehadiran Karyawan</h1>
                                 <!--end::Title-->
                                 <!--begin::Breadcrumb-->
                                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                                     <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">Human Resource</li>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <li class="breadcrumb-item">
-                                        <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                                    <li class="breadcrumb-item text-muted">
+                                        <?= date('F', mktime(0, 0, 0, $data['filter']['bulan'], 10)), '&nbsp', $data['filter']['tahun']; ?>
                                     </li>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <li class="breadcrumb-item text-muted">Absensi Excel 1</li>
                                     <!--end::Item-->
                                 </ul>
                                 <!--end::Breadcrumb-->
@@ -44,10 +38,29 @@
                     </div>
                     <!--end::Page title-->
                     <!--begin::Actions-->
-                    <div class="d-flex align-items-center gap-2 gap-lg-3">
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">Impor
-                            Data dari Excel</a>
-                    </div>
+                    <form class="d-flex align-items-center gap-2 gap-lg-3" method="post">
+                        <div class="w-150px">
+                            <select class="form-select form-select-solid" name="bulan" id="bulan">
+                                <?php $months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] ?>
+                                <?php foreach ($months as $i => $month): ?>
+                                    <option value="<?= $i + 1 ?>" <?= ($i == $data['filter']['bulan'] - 1) ? ' selected' : '' ?>>
+                                        <?= $month ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="w-150px">
+                            <select class="form-select form-select-solid" name="tahun" id="tahun">
+                                <?php for ($i = date('Y') - 5; $i <= date('Y'); $i++): ?>
+                                    <option value="<?= $i ?>" <?= ($i == $data['filter']['tahun']) ? ' selected' : '' ?>>
+                                        <?= $i ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+                        <div class="w-125px">
+                            <button type="submit" class="btn btn-primary w-100">Cari</button>
+                        </div>
+                    </form>
                     <!--end::Actions-->
                 </div>
                 <!--end::Toolbar wrapper-->
@@ -64,18 +77,20 @@
                     <!--begin::Card header-->
                     <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                         <div class="d-flex justify-content-center align-items-center">
-                            <h3 class="card-title align-items-start flex-column">
-                                <span
-                                    class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0 mb-2 me-3">Rekap
-                                    Kehadiran Karyawan</span>
-                                <span class="text-gray-500 mt-1 fw-semibold fs-6">September 2024</span>
-                            </h3>
+                            <form action="<?= BASEURL; ?>/AbsensiExcel/import" method="post"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
+                                <input type="file" name="file" id="btn_excel" style="display:none">
+                                <button type="button" class="btn btn-light-primary mb-0"
+                                    onclick="importexcel('#btn_excel')">
+                                    Import Data Dari Excel
+                                </button>
+                                <button type="submit" class="btn btn-primary mb-0">
+                                    Kirim
+                                </button>
+                            </form>
                         </div>
                         <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                            <!--begin::Daterangepicker-->
-                            <input class="form-control form-control-solid w-100 mw-250px"
-                                placeholder="Pilih rentang tanggal" id="kt_ecommerce_report_views_daterangepicker" />
-                            <!--end::Daterangepicker-->
                             <!--begin::Export dropdown-->
                             <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
                                 data-kt-menu-placement="bottom-end">
@@ -120,46 +135,41 @@
                         <table class="table align-middle table-row-dashed fs-6 gy-5"
                             id="kt_ecommerce_report_views_table">
                             <thead>
-                                <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                <th rowspan="2" class="w-10px pe-2 align-middle">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                            <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                                data-kt-check-target="#kt_ecommerce_products_table .form-check-input"
-                                                value="1" />
-                                        </div>
-                                    </th>
-                                    <th rowspan="2" class="min-w-150px align-middle">Nama Karyawan</th>
-                                    <th colspan="<?= $data['hari'] ?>" class="text-center min-w-75px align-middle">
-                                        Tanggal</th>
-                                    <th rowspan="2" class="text-center min-w-75px align-middle">Total Hadir</th>
-                                    <th rowspan="2" class="text-center min-w-100px align-middle">Total Terlambat</th>
-                                    <th rowspan="2" class="text-center min-w-100px align-middle">Total Menit Terlambat
-                                    </th>
-                                    <th rowspan="2" class="text-center min-w-100px align-middle">Total Jam Kerja</th>
-                                    <th rowspan="2" class="text-end min-w-70px align-middle">Aksi</th>
+                                <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0 align-middle">
+                                    <th rowspan="2" class="min-w-200px text-wrap">Nama</th>
+                                    <th colspan="<?= $data['hari'] ?>" class="min-w-150px">Tanggal</th>
+                                    <th rowspan="2" class="text-center min-w-150px">Total Hadir</th>
+                                    <th rowspan="2" class="text-center min-w-150px">Total Terlambat</th>
+                                    <th rowspan="2" class="text-center min-w-150px">Total Menit Terlambat</th>
+                                    <th rowspan="2" class="text-center min-w-150px">Total Jam Kerja</th>
                                 </tr>
-                                <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                <tr class="text-center text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                     <?php for ($i = 1; $i <= $data['hari']; $i++) { ?>
-                                        <th
-                                            class="text-center min-w-50px">
-                                            <?= $i; ?></th>
+                                        <th class="min-w-50px"><?= $i; ?></th>
                                     <?php } ?>
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
-                                <tr class="fw-bold align-middle">
-                                    <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="<?= $reward_punishment['id']; ?>" />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Ale
-                                    </td>
-                                    <td>
-                                        Hadir
-                                    </td>
-                                </tr>
+                                <?php foreach ($data['result'] as $row): ?>
+                                    <tr class="fw-bold align-middle">
+                                        <td class=""><?= $row['karyawan']; ?></td>
+                                        <?php for ($i = 1; $i <= $data['hari']; $i++) { ?>
+                                            <?php
+                                            $status_id = $row['tgl_' . $i];
+                                            $terlambat = $row['terlambat_' . $i];
+                                            $status_text = ($status_id == 2) ? 'Terlambat' : status($status_id);
+                                            $status_class = ($status_id == 2) ? 'text-warning' : getClass($status_id);
+                                            ?>
+                                            <td class="<?= $status_class; ?>" <?php if ($status_id == 2) echo 'data-bs-toggle="tooltip" data-bs-placement="top" title="Terlambat ' . $terlambat . ' menit"'?>>
+                                                <?= $status_text; ?>
+                                            </td>
+                                        <?php } ?>
+                                        <td class="text-center"><?= $row['total_hadir']; ?></td>
+                                        <td class="text-center"><?= $row['total_terlambat']; ?></td>
+                                        <td class="text-center"><?= $row['total_menit_terlambat']; ?> menit</td>
+                                        <td class="text-center"><?= $row['total_jam_kerja']; ?></td>
+                                    </tr>
+                                <?php endforeach ?>
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -169,112 +179,72 @@
                 <!--end::Products-->
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <div class="modal-content rounded">
-                        <div class="modal-header pb-0 border-0 justify-content-end">
-                            <!--begin::Close-->
-                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                <i class="ki-outline ki-cross fs-1"></i>
-                            </div>
-                            <!--end::Close-->
-                        </div>
-                        <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                            <!--begin::Heading-->
-                            <div class="mb-13 text-center">
-                                <!--begin::Title-->
-                                <h1 class="mb-3" id="modalLabel">Tambah Data Reward & Punishment</h1>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Heading-->
-                            <form action="<?= BASEURL ?>/rewardpunishment/insert" method="post">
-                                <?= csrf() ?>
-                                <div class="row g-9 mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Nama Karyawan</label>
-                                        <select class="form-select form-select-solid" id="karyawan_id"
-                                            name="karyawan_id" required>
-                                            <option>--Pilih Karyawan--</option>
-                                            <?php foreach ($data['karyawan'] as $karyawan): ?>
-                                                <option value="<?= $karyawan['id'] ?>"
-                                                    data-email="<?= $karyawan['email'] ?>"
-                                                    data-posisi="<?= $karyawan['posisi'] ?>"
-                                                    data-alamat="<?= $karyawan['alamat'] ?>">
-                                                    <?= $karyawan['nama'] ?>
-                                                </option>
-                                            <?php endforeach ?>
-                                        </select>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Email</label>
-                                        <input type="email" class="form-control form-control-solid" id="email"
-                                            placeholder="Cth: sales@menune.com" disabled readonly>
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <div class="row g-9 mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Posisi</label>
-                                        <input type="text" class="form-control form-control-solid" id="posisi"
-                                            placeholder="Cth: Kasir" disabled readonly>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Alamat Rumah</label>
-                                        <input type="text" class="form-control form-control-solid" id="alamat"
-                                            placeholder="Cth: Jl. Merbabu No.12" disabled readonly>
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--begin::Input group-->
-                                <div class="d-flex flex-column mb-8 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                        <span class="required">Keterangan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <textarea name="keterangan" class="form-control form-control-solid" id="keterangan"
-                                        rows="2" placeholder="Cth: Terlambat" required></textarea>
-                                </div>
-                                <!--end::Input group-->
-                                <div class="row g-9 mb-15">
-                                    <!--begin::Col-->
-                                    <div class="col-md-4 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Besaran</label>
-                                        <input type="number" class="form-control form-control-solid" id="besaran"
-                                            name="besaran" placeholder="Cth: 100000" required>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-4 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Jumlah</label>
-                                        <input type="number" class="form-control form-control-solid" id="jumlah"
-                                            name="jumlah" placeholder="Cth: 3" value="1" required>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-4 fv-row">
-                                        <label class="required fs-6 fw-semibold mb-2">Total</label>
-                                        <input type="number" class="form-control form-control-solid" id="total"
-                                            value="0" disabled>
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <div class="text-center">
-                                    <button type="button" class="btn btn-secondary mb-1"
-                                        data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-primary mb-1">Simpan</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+            function status($id)
+            {
+                $arr = [
+                    0 => 'alpha',
+                    1 => 'hadir',
+                    2 => 'terlambat',
+                    3 => 'izin',
+                ];
+
+                return $arr[$id];
+            }
+
+            function getClass($id)
+            {
+                $bg = [
+                    0 => ' text-danger', // Alpha
+                    1 => ' text-success', // Hadir
+                    2 => ' text-success', // terlambat
+                    3 => ' text-secondary' // Hadir
+                ];
+
+                return $bg[$id];
+            }
+            ?>
+
+            <!-- Initialize Bootstrap Tooltip -->
+
+            <!-- Initialize Bootstrap Tooltip -->
+            <script>
+                function showTooltip(element) {
+                    var terlambat = element.getAttribute('data-terlambat');
+                    if (terlambat && terlambat != 0) {
+                        var tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip-custom';
+                        tooltip.innerHTML = 'Terlambat ' + terlambat + ' menit';
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.backgroundColor = '#333';
+                        tooltip.style.color = '#fff';
+                        tooltip.style.padding = '5px';
+                        tooltip.style.borderRadius = '5px';
+                        tooltip.style.zIndex = '9999';
+                        document.body.appendChild(tooltip);
+
+                        var rect = element.getBoundingClientRect();
+                        tooltip.style.left = rect.left + window.scrollX + 'px';
+                        tooltip.style.top = rect.top + window.scrollY - tooltip.offsetHeight + 'px';
+
+                        element.tooltipElement = tooltip;
+                    }
+                }
+
+                function hideTooltip(element) {
+                    if (element.tooltipElement) {
+                        document.body.removeChild(element.tooltipElement);
+                        element.tooltipElement = null;
+                    }
+                }
+            </script>
+
+            <script>
+                function importexcel(id) {
+                    const btn = document.querySelector(id);
+                    btn.click();
+                }
+            </script>
 
             <!--begin::Javascript-->
             <script>var hostUrl = "assets/";</script>
